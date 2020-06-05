@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f0cb18e3cad471b8d5dc0541879c16f" Name="Diagram1">
+        <EntityTypeShape EntityType="ESDatabaseModel.Product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Brand" Width="1.5" PointX="4.875" PointY="1" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Category" Width="1.5" PointX="3.375" PointY="3.875" />
+        <AssociationConnector Association="ESDatabaseModel.FK_Products_Brand" />
+        <AssociationConnector Association="ESDatabaseModel.FK_Products_Categories" />
+        <EntityTypeShape EntityType="ESDatabaseModel.MegaMenu" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Adminstrator" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Customer" Width="1.5" PointX="3.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Order" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ESDatabaseModel.OrderItem" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Staff" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Store" Width="1.5" PointX="7.75" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
