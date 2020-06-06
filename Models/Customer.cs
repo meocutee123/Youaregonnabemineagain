@@ -14,6 +14,12 @@ namespace Electronic_Store.Models
     
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int CustomerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -22,5 +28,9 @@ namespace Electronic_Store.Models
         public string Password { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string ProfileImg { get; set; }
+        public Nullable<bool> IsEnailVerified { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

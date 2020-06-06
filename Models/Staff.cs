@@ -14,6 +14,12 @@ namespace Electronic_Store.Models
     
     public partial class Staff
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Staff()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int StaffID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -22,7 +28,12 @@ namespace Electronic_Store.Models
         public string Address { get; set; }
         public string Password { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public Nullable<int> ManagerID { get; set; }
+        public int ManagerID { get; set; }
         public string ProfileImg { get; set; }
+        public int StoreID { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Store Store { get; set; }
     }
 }

@@ -173,6 +173,9 @@
     <Compile Include="Models\Staff.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Stock.cs">
+      <DependentUpon>TTElectronicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Store.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>

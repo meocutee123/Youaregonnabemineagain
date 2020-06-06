@@ -12,14 +12,13 @@ namespace Electronic_Store.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderItem
+    public partial class Stock
     {
-        public int OrderID { get; set; }
+        public int StoreID { get; set; }
         public int ProductID { get; set; }
-        public Nullable<long> Quanlity { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public Nullable<long> Quantity { get; set; }
     
-        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Store Store { get; set; }
     }
 }

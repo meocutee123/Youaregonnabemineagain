@@ -11,21 +11,28 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Web;
-
+    
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.OrderItems = new HashSet<OrderItem>();
+            this.Stocks = new HashSet<Stock>();
+        }
+    
         public int ProductID { get; set; }
         public string Name { get; set; }
         public int BrandID { get; set; }
         public int CategoryID { get; set; }
         public Nullable<decimal> Price { get; set; }
-        [DisplayName("Image")]
         public string ProductImg { get; set; }
-        
+    
         public virtual Brand Brand { get; set; }
-        
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Stock> Stocks { get; set; }
     }
 }
