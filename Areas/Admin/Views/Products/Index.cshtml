@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(model => item.ProductImg);
+            <img src="@Url.Content(item.ProductImg)" height="50" />
 
         </td>
         <td>

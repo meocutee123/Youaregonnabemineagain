@@ -32,7 +32,7 @@ namespace Electronic_Store.Models
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
-        public virtual Staff Staff { get; set; }
         public virtual Store Store { get; set; }
+        public virtual Staff Staff { get; set; }
     }
 }

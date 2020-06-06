@@ -53,9 +53,9 @@ namespace Electronic_Store.Areas.Admin.Controllers
             {
                 string postedFileName = System.IO.Path.GetFileName(BrandImg.FileName);
                 //Lưu hình đại diện về Server
-                var path = Server.MapPath("~/Assets/images/" + postedFileName);
+                var path = Server.MapPath("/Assets/images/" + postedFileName);
                 BrandImg.SaveAs(path);
-                brand.BrandImg = path;
+                brand.BrandImg = "/Assets/images/" + postedFileName;
 
                 db.Brands.Add(brand);
                 db.SaveChanges();   

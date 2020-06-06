@@ -94,7 +94,7 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="250" />
-          <Property Name="Phone" Type="varbinary" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Password" Type="varchar" MaxLength="100" />
           <Property Name="CreatedDate" Type="date" Nullable="false" />
@@ -320,7 +320,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <EntitySet Name="MegaMenus" EntityType="ESDatabaseModel.MegaMenu" />
           <EntitySet Name="Orders" EntityType="ESDatabaseModel.Order" />
           <EntitySet Name="Products" EntityType="ESDatabaseModel.Product" />
-          <EntitySet Name="Staffs" EntityType="ESDatabaseModel.Staff" />
           <EntitySet Name="Stores" EntityType="ESDatabaseModel.Store" />
           <EntitySet Name="OrderItems" EntityType="ESDatabaseModel.OrderItem" />
           <EntitySet Name="Stocks" EntityType="ESDatabaseModel.Stock" />
@@ -340,10 +339,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orders_Staffs" Association="ESDatabaseModel.FK_Orders_Staffs">
-            <End Role="Staff" EntitySet="Staffs" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
           <AssociationSet Name="FK_Orders_Stores" Association="ESDatabaseModel.FK_Orders_Stores">
             <End Role="Store" EntitySet="Stores" />
             <End Role="Order" EntitySet="Orders" />
@@ -356,13 +351,18 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
             <End Role="Product" EntitySet="Products" />
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Staffs_Stores" Association="ESDatabaseModel.FK_Staffs_Stores">
-            <End Role="Store" EntitySet="Stores" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
           <AssociationSet Name="FK_Stocks_ToTable" Association="ESDatabaseModel.FK_Stocks_ToTable">
             <End Role="Store" EntitySet="Stores" />
             <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <EntitySet Name="Staffs" EntityType="ESDatabaseModel.Staff" />
+          <AssociationSet Name="FK_Orders_Staffs" Association="ESDatabaseModel.FK_Orders_Staffs">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staffs_Stores" Association="ESDatabaseModel.FK_Staffs_Stores">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Staff" EntitySet="Staffs" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Adminstrator">
@@ -427,8 +427,8 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Customer" Relationship="ESDatabaseModel.FK_Orders_Customers" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="OrderItems" Relationship="ESDatabaseModel.FK_OrderItems_Orders" FromRole="Order" ToRole="OrderItem" />
-          <NavigationProperty Name="Staff" Relationship="ESDatabaseModel.FK_Orders_Staffs" FromRole="Order" ToRole="Staff" />
           <NavigationProperty Name="Store" Relationship="ESDatabaseModel.FK_Orders_Stores" FromRole="Order" ToRole="Store" />
+          <NavigationProperty Name="Staff" Relationship="ESDatabaseModel.FK_Orders_Staffs" FromRole="Order" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -445,24 +445,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <NavigationProperty Name="OrderItems" Relationship="ESDatabaseModel.FK_OrderItems_Products" FromRole="Product" ToRole="OrderItem" />
           <NavigationProperty Name="Stocks" Relationship="ESDatabaseModel.FK_Stocks_ToTable_1" FromRole="Product" ToRole="Stock" />
         </EntityType>
-        <EntityType Name="Staff">
-          <Key>
-            <PropertyRef Name="StaffID" />
-          </Key>
-          <Property Name="StaffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="Binary" MaxLength="50" FixedLength="false" />
-          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ManagerID" Type="Int32" Nullable="false" />
-          <Property Name="ProfileImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="StoreID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Orders" Relationship="ESDatabaseModel.FK_Orders_Staffs" FromRole="Staff" ToRole="Order" />
-          <NavigationProperty Name="Store" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Staff" ToRole="Store" />
-        </EntityType>
         <EntityType Name="Store">
           <Key>
             <PropertyRef Name="StoreID" />
@@ -472,8 +454,8 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="ESDatabaseModel.FK_Orders_Stores" FromRole="Store" ToRole="Order" />
-          <NavigationProperty Name="Staffs" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Store" ToRole="Staff" />
           <NavigationProperty Name="Stocks" Relationship="ESDatabaseModel.FK_Stocks_ToTable" FromRole="Store" ToRole="Stock" />
+          <NavigationProperty Name="Staffs" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Store" ToRole="Staff" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -546,18 +528,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Orders_Staffs">
-          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="1" />
-          <End Type="ESDatabaseModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="StaffID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="StaffID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Orders_Stores">
           <End Type="ESDatabaseModel.Store" Role="Store" Multiplicity="1" />
           <End Type="ESDatabaseModel.Order" Role="Order" Multiplicity="*" />
@@ -594,18 +564,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Staffs_Stores">
-          <End Type="ESDatabaseModel.Store" Role="Store" Multiplicity="1" />
-          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Store">
-              <PropertyRef Name="StoreID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="StoreID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Stocks_ToTable">
           <End Type="ESDatabaseModel.Store" Role="Store" Multiplicity="1" />
           <End Type="ESDatabaseModel.Stock" Role="Stock" Multiplicity="*" />
@@ -614,6 +572,48 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
               <PropertyRef Name="StoreID" />
             </Principal>
             <Dependent Role="Stock">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ManagerID" Type="Int32" Nullable="false" />
+          <Property Name="ProfileImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="ESDatabaseModel.FK_Orders_Staffs" FromRole="Staff" ToRole="Order" />
+          <NavigationProperty Name="Store" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Staff" ToRole="Store" />
+        </EntityType>
+        <Association Name="FK_Orders_Staffs">
+          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="1" />
+          <End Type="ESDatabaseModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="StaffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staffs_Stores">
+          <End Type="ESDatabaseModel.Store" Role="Store" Multiplicity="1" />
+          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Staff">
               <PropertyRef Name="StoreID" />
             </Dependent>
           </ReferentialConstraint>
@@ -700,23 +700,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Staffs">
-            <EntityTypeMapping TypeName="ESDatabaseModel.Staff">
-              <MappingFragment StoreEntitySet="Staffs">
-                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
-                <ScalarProperty Name="ProfileImg" ColumnName="ProfileImg" />
-                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Stores">
             <EntityTypeMapping TypeName="ESDatabaseModel.Store">
               <MappingFragment StoreEntitySet="Stores">
@@ -743,6 +726,23 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="ESDatabaseModel.Staff">
+              <MappingFragment StoreEntitySet="Staffs">
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="ProfileImg" ColumnName="ProfileImg" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

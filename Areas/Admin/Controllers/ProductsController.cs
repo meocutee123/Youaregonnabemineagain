@@ -56,9 +56,9 @@ namespace Electronic_Store.Areas.Admin.Controllers
             {
 
                 string postedFileName = Path.GetFileName(ProductImg.FileName);
-                var path = Server.MapPath("~/Assets/images/" + postedFileName);
+                var path = Server.MapPath("/Assets/images/" + postedFileName);
                 ProductImg.SaveAs(path);
-                product.ProductImg = path;
+                product.ProductImg = "/Assets/images/" + postedFileName;
 
                 db.Products.Add(product);
                 db.SaveChanges();
