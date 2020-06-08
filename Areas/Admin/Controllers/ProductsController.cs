@@ -92,10 +92,16 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg")] Product product, HttpPostedFileBase ProductImg)
         {
             if (ModelState.IsValid)
             {
+                string postedFileName = Path.GetFileName(ProductImg.FileName);
+                var path = Server.MapPath("/Assets/images/" + postedFileName);
+                ProductImg.SaveAs(path);
+                product.ProductImg = "/Assets/images/" + postedFileName;
+
+
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
