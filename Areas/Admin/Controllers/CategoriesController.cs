@@ -12,7 +12,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ESDatabaseEntities db = new ESDatabaseEntities();
+        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
 
         // GET: Admin/Categories
         public ActionResult Index()

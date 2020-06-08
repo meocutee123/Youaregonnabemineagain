@@ -11,8 +11,7 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Store
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +21,7 @@ namespace Electronic_Store.Models
             this.Stocks = new HashSet<Stock>();
             this.Staffs = new HashSet<Staff>();
         }
-        [DisplayName("Store")]
+    
         public int StoreID { get; set; }
         public string StoreName { get; set; }
         public string Address { get; set; }

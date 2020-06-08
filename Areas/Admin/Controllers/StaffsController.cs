@@ -10,9 +10,10 @@ using Electronic_Store.Models;
 
 namespace Electronic_Store.Areas.Admin.Controllers
 {
+    [Authorize]
     public class StaffsController : Controller
     {
-        private ESDatabaseEntities db = new ESDatabaseEntities();
+        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
 
         // GET: Admin/Staffs
         public ActionResult Index()

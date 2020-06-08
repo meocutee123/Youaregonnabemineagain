@@ -26,15 +26,8 @@
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ManagerID)
-        </th>
+
+
         <th>
             @Html.DisplayNameFor(model => model.ProfileImg)
         </th>
@@ -61,15 +54,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ManagerID)
-        </td>
+
         <td>
             <img src="@Url.Content(item.ProfileImg)" height="100"/>
         </td>

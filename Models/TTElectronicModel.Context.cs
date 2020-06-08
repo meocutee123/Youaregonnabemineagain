@@ -28,7 +28,6 @@ namespace Electronic_Store.Models
         public virtual DbSet<Adminstrator> Adminstrators { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<MegaMenu> MegaMenus { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -36,5 +35,6 @@ namespace Electronic_Store.Models
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }

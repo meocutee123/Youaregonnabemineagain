@@ -12,7 +12,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
 {
     public class CustomersController : Controller
     {
-        private ESDatabaseEntities db = new ESDatabaseEntities();
+        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
 
         // GET: Admin/Customers
         public ActionResult Index()
@@ -46,16 +46,10 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password,CreatedDate,ProfileImg,IsEnailVerified")] Customer customer, HttpPostedFileBase ProfileImg)
+        public ActionResult Create([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password, ConfirmPassword, CreatedDate,ProfileImg")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
-                //Lưu hình đại diện về Server
-                var path = Server.MapPath("/Assets/images/Customers" + postedFileName);
-                ProfileImg.SaveAs(path);
-                customer.ProfileImg = "/Assets/images/Customers" + postedFileName;
-
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -84,7 +78,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password,CreatedDate,ProfileImg,IsEnailVerified")] Customer customer)
+        public ActionResult Edit([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password,CreatedDate,ProfileImg")] Customer customer)
         {
             if (ModelState.IsValid)
             {
