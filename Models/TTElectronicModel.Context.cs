@@ -36,5 +36,6 @@ namespace Electronic_Store.Models
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Conntact> Conntacts { get; set; }
     }
 }

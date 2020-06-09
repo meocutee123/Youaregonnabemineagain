@@ -2,6 +2,16 @@
 @{
     ViewBag.Title = "Home Page";
 }
+@section styles{
+    <link href="/Assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Assets/css/jquery.countdown.css" />
+    <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+}
 <!-- banner -->
 <div class="banner">
     <div class="container">
@@ -1201,14 +1211,14 @@
         <div class="sliderfig">
             <ul id="flexiselDemo1">
                 @*@foreach (var item in Model)
-                {
+                    {
 
-                    <li>
-                        <img src="@Url.Content(item.BrandImg)" alt=" " class="img-responsive" />
-                    </li>
-                    
+                        <li>
+                            <img src="@Url.Content(item.BrandImg)" alt=" " class="img-responsive" />
+                        </li>
 
-                }*@
+
+                    }*@
 
             </ul>
         </div>

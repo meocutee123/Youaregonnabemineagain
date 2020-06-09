@@ -11,7 +11,6 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Customer
@@ -23,21 +22,15 @@ namespace Electronic_Store.Models
         }
     
         public int CustomerID { get; set; }
-        [Required(ErrorMessage = "This field is required!")]
         public string FirstName { get; set; }
-        [Required(ErrorMessage = "This field is required!")]
         public string LastName { get; set; }
-        [Required(ErrorMessage = "This field is required!")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "This field is required!")]
         public string Address { get; set; }
-        [Required(ErrorMessage = "This field is required!")]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
-        [DisplayName("Confirm password")]
         [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string ProfileImg { get; set; }
     

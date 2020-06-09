@@ -184,6 +184,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Conntact.cs">
+      <DependentUpon>TTElectronicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
@@ -230,6 +233,9 @@
     <Content Include="App_Data\ESDatabase_log.ldf">
       <DependentUpon>ESDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="Assets\Contact\css\font-awesome.css" />
+    <Content Include="Assets\Contact\css\style.css" />
+    <Content Include="Assets\Contact\images\c11-bg.jpg" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\css\fasthover.css" />
     <Content Include="Assets\css\flexslider.css" />
@@ -402,6 +408,11 @@
     <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Assets\Contact\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\Contact\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\Contact\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\Contact\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Assets\Contact\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -428,6 +439,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

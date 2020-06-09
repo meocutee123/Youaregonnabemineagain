@@ -18,23 +18,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
            function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
     <!-- Custom Theme files -->
-    <link href="/Assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/Assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/Assets/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/Assets/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- //Custom Theme files -->
-    <!-- font-awesome icons -->
-    <link href="/Assets/css/font-awesome.css" rel="stylesheet">
-    <!-- //font-awesome icons -->
-    <!-- js -->
+    @Styles.Render("~/Assets/css/css")
+    @RenderSection("styles", required: false)
+    
     <script src="/Assets/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="/Assets/css/jquery.countdown.css" /> <!-- countdown -->
-    <!-- //js -->
-    <!-- web fonts -->
-    <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    <!-- //web fonts -->
-    <!-- start-smooth-scrolling -->
+
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -43,16 +31,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             });
         });
     </script>
-    <!-- //end-smooth-scrolling -->
+
 </head>
 <body>
-    <!-- for bootstrap working -->
+
     <script type="text/javascript" src="/Assets/js/bootstrap-3.1.1.min.js"></script>
-    <!-- //for bootstrap working -->
-    <!-- header modal -->
-   
-    <!-- header modal -->
-    <!-- header -->
+
     <div class="header" id="home1">
         <div class="container">
             <div class="w3l_login">
@@ -160,10 +144,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </nav>
         </div>
     </div>
-    <!-- //navigation -->
+
     @RenderBody()
-    <!-- //footer -->
-    <!-- cart-js -->
+
     <script src="/Assets/js/minicart.js"></script>
     <script>
         w3ls.render();
@@ -180,6 +163,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         });
     </script>
     @RenderSection("Scripts", false)
-    <!-- //cart-js -->
+
 </body>
 </html>

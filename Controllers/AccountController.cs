@@ -10,6 +10,25 @@ namespace Electronic_Store.Controllers
 {
     public class AccountController : Controller
     {
+
+        public ActionResult Resgistration()
+        {
+            return View();
+        }
+        
+        public ActionResult Registration(Customer customer)
+        {
+            using (ESDatabaseEntities db = new ESDatabaseEntities())
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+                    return RedirectToAction("Login");
+                }
+                return View(customer);
+            }
+        }
         // GET: Account
         public ActionResult Login()
         {

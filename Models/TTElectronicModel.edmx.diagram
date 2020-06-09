@@ -26,6 +26,7 @@
         <AssociationConnector Association="ESDatabaseModel.FK_Staffs_Stores" />
         <EntityTypeShape EntityType="ESDatabaseModel.Customer" Width="1.5" PointX="8.375" PointY="7" />
         <AssociationConnector Association="ESDatabaseModel.FK_Orders_Customers" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Conntact" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
