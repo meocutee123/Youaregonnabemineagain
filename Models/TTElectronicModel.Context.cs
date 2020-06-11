@@ -33,9 +33,9 @@ namespace Electronic_Store.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
-        public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Conntact> Conntacts { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
     }
 }

@@ -24,12 +24,16 @@ namespace Electronic_Store.Models
         public int CustomerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [Required]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        [EmailAddress(ErrorMessage = "Invalid email address!")]
         public string Email { get; set; }
         public string Address { get; set; }
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+        [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
-
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string ProfileImg { get; set; }
     

@@ -10,115 +10,107 @@ using Electronic_Store.Models;
 
 namespace Electronic_Store.Areas.Admin.Controllers
 {
-    public class CustomersController : Controller
+    public class StoresController : Controller
     {
-        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
+        private ESDatabaseEntities db = new ESDatabaseEntities();
 
-        // GET: Admin/Customers
+        // GET: Admin/Stores
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            return View(db.Stores.ToList());
         }
 
-        // GET: Admin/Customers/Details/5
+        // GET: Admin/Stores/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            Store store = db.Stores.Find(id);
+            if (store == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(store);
         }
 
-        // GET: Admin/Customers/Create
+        // GET: Admin/Stores/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Customers/Create
+        // POST: Admin/Stores/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password, ConfirmPassword, CreatedDate,ProfileImg")] Customer customer)
+        public ActionResult Create([Bind(Include = "StoreID,StoreName,Address,Phone")] Store store)
         {
-
             if (ModelState.IsValid)
             {
-               
-                db.Customers.Add(customer);
+                db.Stores.Add(store);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(customer);
+            return View(store);
         }
 
-        // GET: Admin/Customers/Edit/5
+        // GET: Admin/Stores/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            Store store = db.Stores.Find(id);
+            if (store == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(store);
         }
 
-        // POST: Admin/Customers/Edit/5
+        // POST: Admin/Stores/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password,CreatedDate,ProfileImg")] Customer customer, HttpPostedFileBase ProfileImg)
+        public ActionResult Edit([Bind(Include = "StoreID,StoreName,Address,Phone")] Store store)
         {
             if (ModelState.IsValid)
             {
-                string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
-                //Lưu hình đại diện về Server
-                var path = Server.MapPath("/Assets/images/" + postedFileName);
-                ProfileImg.SaveAs(path);
-                customer.ProfileImg = "/Assets/images/" + postedFileName;
-
-                db.Entry(customer).State = EntityState.Modified;
+                db.Entry(store).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(customer);
+            return View(store);
         }
 
-        // GET: Admin/Customers/Delete/5
+        // GET: Admin/Stores/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            Store store = db.Stores.Find(id);
+            if (store == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(store);
         }
 
-        // POST: Admin/Customers/Delete/5
+        // POST: Admin/Stores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
+            Store store = db.Stores.Find(id);
+            db.Stores.Remove(store);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

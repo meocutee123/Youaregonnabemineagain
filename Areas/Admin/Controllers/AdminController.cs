@@ -52,5 +52,42 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 ViewBag.TB = "Empty";
             return View(staffs.ToList());
         }
+
+        [HttpGet]
+
+        public ActionResult TimKiemMH(string Name = "", string Brand = "", string Category = "", string PriceMin = "", string PriceMax = "")
+        {
+            string min = PriceMin, max = PriceMax;
+            
+            ViewBag.Name = Name;
+            ViewBag.Brand = Brand;
+
+            if (PriceMin == "")
+            {
+                ViewBag.PriceMin = "";
+                min = "0";
+            }
+            else
+            {
+                ViewBag.PriceMin = PriceMin;
+                min = PriceMin;
+            }
+            if (max == "")
+            {
+                max = Int32.MaxValue.ToString();
+                ViewBag.PriceMax = "";// Int32.MaxValue.ToString(); 
+            }
+            else
+            {
+                ViewBag.PriceMax = PriceMax;
+                max = PriceMax;
+            }
+            
+
+            var staffs = db.Products.SqlQuery("MatHang_TimKiem'" + Name + "','" + Brand + "','" + Category + "','" + min + "','" + max + "'");
+            if (staffs.Count() == 0)
+                ViewBag.TB = "Empty";
+            return View(staffs.ToList());
+        }
     }
 }

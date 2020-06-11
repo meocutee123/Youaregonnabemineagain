@@ -116,9 +116,11 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
 warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDATABASE.MDF.dbo.Stocks' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Stocks">
           <Key>
+            <PropertyRef Name="StockID" />
             <PropertyRef Name="StoreID" />
             <PropertyRef Name="ProductID" />
           </Key>
+          <Property Name="StockID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StoreID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="bigint" />
@@ -273,6 +275,7 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           </EntitySet>
           <EntitySet Name="Stocks" EntityType="Self.Stocks" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [Stocks].[StockID] AS [StockID], 
     [Stocks].[StoreID] AS [StoreID], 
     [Stocks].[ProductID] AS [ProductID], 
     [Stocks].[Quantity] AS [Quantity]
@@ -332,7 +335,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <EntitySet Name="Products" EntityType="ESDatabaseModel.Product" />
           <EntitySet Name="Stores" EntityType="ESDatabaseModel.Store" />
           <EntitySet Name="OrderItems" EntityType="ESDatabaseModel.OrderItem" />
-          <EntitySet Name="Stocks" EntityType="ESDatabaseModel.Stock" />
           <AssociationSet Name="FK_Products_Brand" Association="ESDatabaseModel.FK_Products_Brand">
             <End Role="Brand" EntitySet="Brands" />
             <End Role="Product" EntitySet="Products" />
@@ -353,14 +355,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_Stocks_ToTable_1" Association="ESDatabaseModel.FK_Stocks_ToTable_1">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Stock" EntitySet="Stocks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Stocks_ToTable" Association="ESDatabaseModel.FK_Stocks_ToTable">
-            <End Role="Store" EntitySet="Stores" />
-            <End Role="Stock" EntitySet="Stocks" />
-          </AssociationSet>
           <EntitySet Name="Customers" EntityType="ESDatabaseModel.Customer" />
           <AssociationSet Name="FK_Orders_Customers" Association="ESDatabaseModel.FK_Orders_Customers">
             <End Role="Customer" EntitySet="Customers" />
@@ -375,6 +369,15 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <AssociationSet Name="FK_Staffs_Stores" Association="ESDatabaseModel.FK_Staffs_Stores">
             <End Role="Store" EntitySet="Stores" />
             <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <EntitySet Name="Stocks" EntityType="ESDatabaseModel.Stock" />
+          <AssociationSet Name="FK_Stocks_ToTable_1" Association="ESDatabaseModel.FK_Stocks_ToTable_1">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stocks_ToTable" Association="ESDatabaseModel.FK_Stocks_ToTable">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Adminstrator">
@@ -451,8 +454,8 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="ESDatabaseModel.FK_Orders_Stores" FromRole="Store" ToRole="Order" />
-          <NavigationProperty Name="Stocks" Relationship="ESDatabaseModel.FK_Stocks_ToTable" FromRole="Store" ToRole="Stock" />
           <NavigationProperty Name="Staffs" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Store" ToRole="Staff" />
+          <NavigationProperty Name="Stocks" Relationship="ESDatabaseModel.FK_Stocks_ToTable" FromRole="Store" ToRole="Stock" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -465,17 +468,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Order" Relationship="ESDatabaseModel.FK_OrderItems_Orders" FromRole="OrderItem" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="ESDatabaseModel.FK_OrderItems_Products" FromRole="OrderItem" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Stock">
-          <Key>
-            <PropertyRef Name="StoreID" />
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="StoreID" Type="Int32" Nullable="false" />
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int64" />
-          <NavigationProperty Name="Product" Relationship="ESDatabaseModel.FK_Stocks_ToTable_1" FromRole="Stock" ToRole="Product" />
-          <NavigationProperty Name="Store" Relationship="ESDatabaseModel.FK_Stocks_ToTable" FromRole="Stock" ToRole="Store" />
         </EntityType>
         <Association Name="FK_Products_Brand">
           <End Type="ESDatabaseModel.Brand" Role="Brand" Multiplicity="1" />
@@ -534,30 +526,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
             </Principal>
             <Dependent Role="OrderItem">
               <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Stocks_ToTable_1">
-          <End Type="ESDatabaseModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="ESDatabaseModel.Stock" Role="Stock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="Stock">
-              <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Stocks_ToTable">
-          <End Type="ESDatabaseModel.Store" Role="Store" Multiplicity="1" />
-          <End Type="ESDatabaseModel.Stock" Role="Stock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Store">
-              <PropertyRef Name="StoreID" />
-            </Principal>
-            <Dependent Role="Stock">
-              <PropertyRef Name="StoreID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -636,6 +604,43 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
               <PropertyRef Name="StoreID" />
             </Principal>
             <Dependent Role="Staff">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="StockID" />
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="StockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int64" />
+          <NavigationProperty Name="Product" Relationship="ESDatabaseModel.FK_Stocks_ToTable_1" FromRole="Stock" ToRole="Product" />
+          <NavigationProperty Name="Store" Relationship="ESDatabaseModel.FK_Stocks_ToTable" FromRole="Stock" ToRole="Store" />
+        </EntityType>
+        <Association Name="FK_Stocks_ToTable_1">
+          <End Type="ESDatabaseModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="ESDatabaseModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stocks_ToTable">
+          <End Type="ESDatabaseModel.Store" Role="Store" Multiplicity="1" />
+          <End Type="ESDatabaseModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Stock">
               <PropertyRef Name="StoreID" />
             </Dependent>
           </ReferentialConstraint>
@@ -727,15 +732,6 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Stocks">
-            <EntityTypeMapping TypeName="ESDatabaseModel.Stock">
-              <MappingFragment StoreEntitySet="Stocks">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="ESDatabaseModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
@@ -776,6 +772,16 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="ESDatabaseModel.Stock">
+              <MappingFragment StoreEntitySet="Stocks">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="StockID" ColumnName="StockID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

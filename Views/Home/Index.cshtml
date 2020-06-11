@@ -9,13 +9,13 @@
     <link href="/Assets/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/Assets/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/Assets/css/font-awesome.css" rel="stylesheet">
-    <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/Assets/js/bootstrap-3.1.1.min.js"></script>
     <link rel="stylesheet" href="/Assets/css/jquery.countdown.css" />
     <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 }
 <!-- header modal -->
-<div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
+@*<div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -98,7 +98,7 @@
 </div>
 <script>
     $('#myModal88').modal('show');
-</script>
+</script>*@
 <!-- header modal -->
 <!-- banner -->
 <div class="banner">
@@ -1039,8 +1039,8 @@
             <div class="timer_wrap">
                 <div id="counter"> </div>
             </div>
-            <script src="js/jquery.countdown.js"></script>
-            <script src="js/script.js"></script>
+            <script src="/Assets/js/jquery.countdown.js"></script>
+            <script src="/Assets/js/script.js"></script>
         </div>
         <div class="clearfix"> </div>
     </div>
@@ -1104,7 +1104,7 @@
                         </article>
                     </div>
                 </div>
-                <script src="js/jquery.wmuSlider.js"></script>
+                <script src="~/Assets/js/jquery.wmuSlider.js"></script>
                 <script>
                     $('.example1').wmuSlider();
                 </script>
@@ -1264,11 +1264,8 @@
                     <li>
                         <img src="@Url.Content(brand.BrandImg)" alt=" " class="img-responsive" />
                     </li>
-                    
-
 
                 }
-
             </ul>
         </div>
         <script type="text/javascript">

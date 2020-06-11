@@ -14,6 +14,7 @@ namespace Electronic_Store.Models
     
     public partial class Stock
     {
+        public int StockID { get; set; }
         public int StoreID { get; set; }
         public int ProductID { get; set; }
         public Nullable<long> Quantity { get; set; }

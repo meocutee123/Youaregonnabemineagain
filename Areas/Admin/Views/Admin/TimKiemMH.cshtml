@@ -1,6 +1,6 @@
-﻿@model List<Electronic_Store.Models.Staff>
+﻿
 @{
-    ViewBag.Title = "TimKiemNC";
+    ViewBag.Title = "TimKiemMH";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     var grid = new WebGrid(Model, canPage: true, defaultSort: "TenNV", rowsPerPage: 5);
     @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
@@ -47,7 +47,7 @@
 </head>
 <body>
     <div>
-        @using (Html.BeginForm("TimKiemNC", "Admin", FormMethod.Get))
+        @using (Html.BeginForm("TimKiemMH", "Admin", FormMethod.Get))
         {
             @Html.AntiForgeryToken()
 
@@ -55,49 +55,32 @@
             <table class="table1" align="center">
 
                 <tr>
-                    <td>Họ tên</td>
+                    <td>Tên</td>
                     <td>
-                        <input type="text" name="FullName" value="@ViewBag.hoTen" />
+                        <input type="text" name="Name" value="@ViewBag.Name" />
                     </td>
 
                 </tr>
 
                 <tr>
-                    <td>Giới tính</td>
+                    <td>Giá từ</td>
                     <td>
-                        @if (@ViewBag.gioiTinh == null)
-                        {
-                            <input type="radio" name="Gender" value="1" /><text>Nam</text>
-                            <input type="radio" name="Gender" value="0" /><text>Nữ</text>
-                        }
-                        else if (@ViewBag.gioiTinh == "1")
-                        {
-                            <input type="radio" name="Gender" checked value="1" /><text>Nam</text>
-                            <input type="radio" name="Gender" value="0" /><text>Nữ</text>
-                        }
-                        else
-                        {
-                            <input type="radio" name="Gender" value="1" /><text>Nam</text>
-                            <input type="radio" name="Gender" checked value="0" /><text>Nữ</text>
-                        }
-
-
-                    </td>
-
-                </tr>
-                <tr>
-                    <td>Lương từ</td>
-                    <td>
-                        <input type="text" name="luongMin" value="@ViewBag.luongMin" />
-                        Đến<input type="text" name="luongMax" value="@ViewBag.luongMax" />
+                        <input type="text" name="PriceMin" value="@ViewBag.PriceMin" />
+                        Đến<input type="text" name="PriceMax" value="@ViewBag.PriceMax" />
                     </td>
 
                 </tr>
 
                 <tr>
-                    <td>Địa chỉ</td>
+                    <td>Thương hiệu</td>
                     <td>
-                        <input type="text" name="Address" value="@ViewBag.diaChi" />
+                        <input type="text" name="Brand" value="@ViewBag.Brand" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Thể loại</td>
+                    <td>
+                        <input type="text" name="Category" value="@ViewBag.Category" />
                     </td>
                 </tr>
 
@@ -107,7 +90,7 @@
                         <input type="submit" name="submit" value="Tìm kiếm" style="margin-left: 5px;width:100px;
                 background-color: blue;color:white" />
                         <input type="button" name="Nhapmoi" value="Nhập mới" style="margin-left: 5px;width:100px;
-                background-color: blue;color:white" onclick="location.href='@Url.Action("TimKiemNC", "Admin/TimKiemNC")'" />
+                background-color: blue;color:white" onclick="location.href='@Url.Action("TimKiemMH", "Admin/TimKiemMH")'" />
 
                     </td>
                 </tr>
@@ -125,14 +108,13 @@
             columns: new[]  // colums in grid
             {
                 grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
-                grid.Column("FirstName","Họ nhân viên"  ),
-                grid.Column("LastName","Tên nhân viên"),
-                grid.Column("Gender","Giới tính",format: (@item) => @item.Gender==true?"Nam":"Nữ"),
-                grid.Column("Salary","Tiền lương",format:@<text> @item.Salary.ToString("#,##0")</text>),
-                grid.Column("Address","Địa chỉ")
-                
-            }
-    )
+                grid.Column("Name","Name"  ),
+                grid.Column("Brand.Name","Brand"),
+                grid.Column("Category.Name","Category"),
+                grid.Column("Price","Giá",format:@<text> @item.Price.ToString("#,##0")</text>)
+
+}
+)
     </div>
 </body>
 </html>

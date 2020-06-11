@@ -8,117 +8,118 @@ using System.Web;
 using System.Web.Mvc;
 using Electronic_Store.Models;
 
-namespace Electronic_Store.Areas.Admin.Controllers
+namespace Electronic_Store.Areas.Sales.Controllers
 {
-    public class CustomersController : Controller
+    public class StocksController : Controller
     {
-        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
+        private ESDatabaseEntities db = new ESDatabaseEntities();
 
-        // GET: Admin/Customers
+        // GET: Sales/Stocks
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            var stocks = db.Stocks.Include(s => s.Product).Include(s => s.Store);
+            return View(stocks.ToList());
         }
 
-        // GET: Admin/Customers/Details/5
+        // GET: Sales/Stocks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            Stock stock = db.Stocks.Find(id);
+            if (stock == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(stock);
         }
 
-        // GET: Admin/Customers/Create
+        // GET: Sales/Stocks/Create
         public ActionResult Create()
         {
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name");
+            ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName");
             return View();
         }
 
-        // POST: Admin/Customers/Create
+        // POST: Sales/Stocks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password, ConfirmPassword, CreatedDate,ProfileImg")] Customer customer)
+        public ActionResult Create([Bind(Include = "StoreID,ProductID,Quantity")] Stock stock)
         {
-
             if (ModelState.IsValid)
             {
-               
-                db.Customers.Add(customer);
+                db.Stocks.Add(stock);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(customer);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", stock.ProductID);
+            ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", stock.StoreID);
+            return View(stock);
         }
 
-        // GET: Admin/Customers/Edit/5
+        // GET: Sales/Stocks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            Stock stock = db.Stocks.Find(id);
+            if (stock == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", stock.ProductID);
+            ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", stock.StoreID);
+            return View(stock);
         }
 
-        // POST: Admin/Customers/Edit/5
+        // POST: Sales/Stocks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password,CreatedDate,ProfileImg")] Customer customer, HttpPostedFileBase ProfileImg)
+        public ActionResult Edit([Bind(Include = "StoreID,ProductID,Quantity")] Stock stock)
         {
             if (ModelState.IsValid)
             {
-                string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
-                //Lưu hình đại diện về Server
-                var path = Server.MapPath("/Assets/images/" + postedFileName);
-                ProfileImg.SaveAs(path);
-                customer.ProfileImg = "/Assets/images/" + postedFileName;
-
-                db.Entry(customer).State = EntityState.Modified;
+                db.Entry(stock).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(customer);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", stock.ProductID);
+            ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", stock.StoreID);
+            return View(stock);
         }
 
-        // GET: Admin/Customers/Delete/5
+        // GET: Sales/Stocks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            Stock stock = db.Stocks.Find(id);
+            if (stock == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(stock);
         }
 
-        // POST: Admin/Customers/Delete/5
+        // POST: Sales/Stocks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
+            Stock stock = db.Stocks.Find(id);
+            db.Stocks.Remove(stock);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
