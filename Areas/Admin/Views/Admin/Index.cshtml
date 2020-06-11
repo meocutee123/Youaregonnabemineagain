@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Admin page<h2>
-
+<h2>Admin page</h2>
+@Html.ActionLink("Index brands", "Index", "Brands", new {area = "Admin"}, null)

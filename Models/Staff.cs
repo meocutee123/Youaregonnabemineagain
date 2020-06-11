@@ -31,6 +31,8 @@ namespace Electronic_Store.Models
         public Nullable<int> ManagerID { get; set; }
         public string ProfileImg { get; set; }
         public int StoreID { get; set; }
+        public Nullable<bool> Gender { get; set; }
+        public Nullable<decimal> Salary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

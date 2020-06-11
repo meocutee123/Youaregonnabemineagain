@@ -10,10 +10,9 @@ using Electronic_Store.Models;
 
 namespace Electronic_Store.Areas.Admin.Controllers
 {
-    [Authorize]
     public class StaffsController : Controller
     {
-        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
+        private ESDatabaseEntities db = new ESDatabaseEntities();
 
         // GET: Admin/Staffs
         public ActionResult Index()
@@ -49,16 +48,10 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password,CreatedDate,ManagerID,ProfileImg,StoreID")] Staff staff, HttpPostedFileBase ProfileImg)
+        public ActionResult Create([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
         {
             if (ModelState.IsValid)
             {
-                string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
-                //Lưu hình đại diện về Server
-                var path = Server.MapPath("/Assets/images/Staffs" + postedFileName);
-                ProfileImg.SaveAs(path);
-                staff.ProfileImg = "/Assets/images/Staffs" + postedFileName;
-
                 db.Staffs.Add(staff);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -89,7 +82,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password,CreatedDate,ManagerID,ProfileImg,StoreID")] Staff staff)
+        public ActionResult Edit([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
         {
             if (ModelState.IsValid)
             {

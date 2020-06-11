@@ -21,7 +21,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     @Styles.Render("~/Assets/css/css")
     @RenderSection("styles", required: false)
     
-    <script src="/Assets/js/jquery.min.js"></script>
+    
 
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
@@ -87,7 +87,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
                 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.html" class="act">Home</a></li>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <!-- Mega Menu -->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
@@ -130,7 +130,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </div>
                             </ul>
                         </li>
-                        <li><a href="about.html">About Us</a></li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li class="w3pages">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -138,7 +138,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <li><a href="codes.html">Short Codes</a></li>
                             </ul>
                         </li>
-                        <li><a href="mail.html">Mail Us</a></li>
+                        <li>@Html.ActionLink("Contact","Contact", "Home")</li>
                     </ul>
                 </div>
             </nav>

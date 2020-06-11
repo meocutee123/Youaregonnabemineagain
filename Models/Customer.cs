@@ -27,7 +27,6 @@ namespace Electronic_Store.Models
         public string Email { get; set; }
         public string Address { get; set; }
         public string Password { get; set; }
-        [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 

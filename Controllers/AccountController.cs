@@ -1,6 +1,7 @@
 ﻿using Electronic_Store.Models;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,7 +11,13 @@ namespace Electronic_Store.Controllers
 {
     public class AccountController : Controller
     {
-
+        public ActionResult Index()
+        {
+            dynamic dy = new ExpandoObject();
+            dy.Resgistration = Resgistration();
+            dy.Login = Login();
+            return View(dy);
+        }
         public ActionResult Resgistration()
         {
             return View();
@@ -56,5 +63,31 @@ namespace Electronic_Store.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult Index2()
+        {
+            dynamic dy = new ExpandoObject();
+            dy.listCustomer = GetCustomers();
+            dy.listProduct = GetProducts();
+            return View(dy);
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            ESDatabaseEntities eS = new ESDatabaseEntities();
+            List<Customer> lCustomer = eS.Customers.ToList();
+            return lCustomer;
+
+        }
+        public List<Product> GetProducts()
+        {
+            ESDatabaseEntities eS = new ESDatabaseEntities();
+            List<Product> lProduct = eS.Products.ToList();
+            return lProduct;
+
+        }
+
+
+
     }
 }

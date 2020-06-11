@@ -169,6 +169,9 @@
     <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\StaffsController.cs" />
+    <Compile Include="Areas\Sales\Controllers\OrderItemsController.cs" />
+    <Compile Include="Areas\Sales\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Sales\SalesAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Crypto.cs" />
@@ -202,6 +205,7 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SignInSignUpModel.cs" />
     <Compile Include="Models\Staff.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
@@ -233,6 +237,58 @@
     <Content Include="App_Data\ESDatabase_log.ldf">
       <DependentUpon>ESDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Assets\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Assets\css\font-awesome.css" />
+    <Content Include="Areas\Admin\Assets\css\font.css" />
+    <Content Include="Areas\Admin\Assets\css\jqvmap.css" />
+    <Content Include="Areas\Admin\Assets\css\lightbox.css" />
+    <Content Include="Areas\Admin\Assets\css\minimal.css" />
+    <Content Include="Areas\Admin\Assets\css\monthly.css" />
+    <Content Include="Areas\Admin\Assets\css\morris.css" />
+    <Content Include="Areas\Admin\Assets\css\style-responsive.css" />
+    <Content Include="Areas\Admin\Assets\css\style.css" />
+    <Content Include="Areas\Admin\Assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Admin\Assets\images\1.png" />
+    <Content Include="Areas\Admin\Assets\images\2.png" />
+    <Content Include="Areas\Admin\Assets\images\3.png" />
+    <Content Include="Areas\Admin\Assets\images\bg.jpg" />
+    <Content Include="Areas\Admin\Assets\images\close.png" />
+    <Content Include="Areas\Admin\Assets\images\g1.jpg" />
+    <Content Include="Areas\Admin\Assets\images\g2.jpg" />
+    <Content Include="Areas\Admin\Assets\images\g3.jpg" />
+    <Content Include="Areas\Admin\Assets\images\g4.jpg" />
+    <Content Include="Areas\Admin\Assets\images\g5.jpg" />
+    <Content Include="Areas\Admin\Assets\images\g6.jpg" />
+    <Content Include="Areas\Admin\Assets\images\g7.jpg" />
+    <Content Include="Areas\Admin\Assets\images\g8.jpg" />
+    <Content Include="Areas\Admin\Assets\images\g9.jpg" />
+    <Content Include="Areas\Admin\Assets\images\mail.png" />
+    <Content Include="Areas\Admin\Assets\images\minimal.png" />
+    <Content Include="Areas\Admin\Assets\images\nav-expand.png" />
+    <Content Include="Areas\Admin\Assets\images\next.png" />
+    <Content Include="Areas\Admin\Assets\images\pass.png" />
+    <Content Include="Areas\Admin\Assets\images\prev.png" />
+    <Content Include="Areas\Admin\Assets\images\search-icon.png" />
+    <Content Include="Areas\Admin\Assets\js\bootstrap.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.dcjqaccordion.2.7.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.fileupload.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.min.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.nicescroll.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.scrollTo.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.slimscroll.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.vmap.asia.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.vmap.australia.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.vmap.europe.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.vmap.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.vmap.sampledata.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery.vmap.world.js" />
+    <Content Include="Areas\Admin\Assets\js\jquery2.0.3.min.js" />
+    <Content Include="Areas\Admin\Assets\js\lightbox-plus-jquery.min.js" />
+    <Content Include="Areas\Admin\Assets\js\monthly.js" />
+    <Content Include="Areas\Admin\Assets\js\morris.js" />
+    <Content Include="Areas\Admin\Assets\js\raphael-min.js" />
+    <Content Include="Areas\Admin\Assets\js\script.js" />
+    <Content Include="Areas\Admin\Assets\js\scripts.js" />
     <Content Include="Assets\Contact\css\font-awesome.css" />
     <Content Include="Assets\Contact\css\style.css" />
     <Content Include="Assets\Contact\images\c11-bg.jpg" />
@@ -397,11 +453,6 @@
     <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Staffs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Staffs\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Staffs\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Staffs\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Staffs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
@@ -413,6 +464,30 @@
     <Content Include="Assets\Contact\fonts\fontawesome-webfont.woff" />
     <Content Include="Assets\Contact\fonts\fontawesome-webfont.woff2" />
     <Content Include="Assets\Contact\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Admin\Assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Admin\Assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Admin\Assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Admin\Assets\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Sales\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Admin\TimKiemNC.cshtml" />
+    <Content Include="Areas\Admin\Views\Staffs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Staffs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Staffs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Staffs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Staffs\Index.cshtml" />
+    <Content Include="Areas\Sales\Views\Orders\Create.cshtml" />
+    <Content Include="Areas\Sales\Views\Orders\Delete.cshtml" />
+    <Content Include="Areas\Sales\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\Sales\Views\Orders\Edit.cshtml" />
+    <Content Include="Areas\Sales\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\Sales\Views\OrderItems\Create.cshtml" />
+    <Content Include="Areas\Sales\Views\OrderItems\Delete.cshtml" />
+    <Content Include="Areas\Sales\Views\OrderItems\Details.cshtml" />
+    <Content Include="Areas\Sales\Views\OrderItems\Edit.cshtml" />
+    <Content Include="Areas\Sales\Views\OrderItems\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -440,10 +515,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Account\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Model\" />
+    <Folder Include="Areas\Sales\Data\" />
+    <Folder Include="Areas\Sales\Views\Shared\" />
     <Folder Include="Assets\images\Customers\" />
     <Folder Include="Assets\images\Staffs\" />
   </ItemGroup>
