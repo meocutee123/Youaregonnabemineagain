@@ -19,7 +19,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-        <a class="navbar-brand" href="#">Navbar</a>
+        @Html.ActionLink("Tân Tân Electronic", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,19 +27,19 @@
         <div class="collapse navbar-collapse" id="navbarsExample09">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    @Html.ActionLink("Home", "Index", "Admin", new { area = "Admin" }, new {@class="nav-link"})
+                    @Html.ActionLink("Home", "Index", "Admin", new { area = "Admin" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("Customer", "Index", "Customers", new { area = "Admin" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Brands", "Index", "Brands", new { area = "Admin" }, new {@class="nav-link"})
+                    @Html.ActionLink("Brands", "Index", "Brands", new { area = "Admin" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("Products", "Index", "Products", new { area = "Admin" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Category", "Index", "Categories", new { area = "Admin" }, new {@class="nav-link"})
+                    @Html.ActionLink("Category", "Index", "Categories", new { area = "Admin" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("Staff", "Index", "Staffs", new { area = "Admin" }, new { @class = "nav-link" })
@@ -50,17 +50,17 @@
                 <li class="nav-item">
                     @Html.ActionLink("Order", "Index", "Orders", new { area = "Admin" }, new { @class = "nav-link" })
                 </li>
-                
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown09">
-                        @Html.ActionLink("Product", "TimKiemMH", "Admin", new { area = "Admin" }, new{@class = "dropdown-item"})
-                        @Html.ActionLink("Customer", "TimKiemNC", "Admin", new { area = "Admin" }, new{@class = "dropdown-item"})
+                        @Html.ActionLink("Product", "TimKiemMH", "Admin", new { area = "Admin" }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Customer", "TimKiemNC", "Admin", new { area = "Admin" }, new { @class = "dropdown-item" })
 
                     </div>
                 </li>
             </ul>
-            
+
         </div>
     </nav>
     

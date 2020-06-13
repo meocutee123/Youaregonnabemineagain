@@ -2,88 +2,55 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    string gt = "";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Salary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Store.StoreName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<h2>Staffs</h2>
+<p>@Html.ActionLink("Create new", "Create")</p>
+<table class="table table-fluid" id="myTable">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-
-            <td>
-                @{ if (item.Gender == true)
-                    {
-                        gt = "Nam";
+            <th>Customer firstname</th>
+            <th>Customer lastname</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Profile image</th>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                    @if (item.Gender != true) { 
+                        <td>Nữ</td>
                     }
                     else
                     {
-                        gt = "Nữ";
+                        <td>Nam</td>
                     }
-                }@gt
-            </td>
+                <td>@item.Address</td>
+                <td>
+                    @if (item.ProfileImg != null)
+                    {
+                        <img src="@Url.Content(item.ProfileImg)" alt="Emty" style="height: 50px" />
+                    }
+                    else
+                    {
+                        <img src="~/Assets/images/Staffs/anonymous.png" alt="Emty" style="height: 50px" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StaffID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.StaffID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.StaffID })
+                </td>
+            </tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Store.StoreName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.StaffID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.StaffID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.StaffID })
-            </td>
-        </tr>
-    }
+        }
 
+    </tbody>
 </table>
+

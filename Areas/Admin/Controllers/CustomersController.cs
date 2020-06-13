@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,6 +19,13 @@ namespace Electronic_Store.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View(db.Customers.ToList());
+        }
+
+        [HttpPost]
+        public JsonResult CheckMail(string email)
+        {
+            bool result = !db.Customers.ToList().Exists(model => model.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase));
+            return Json(result);
         }
 
         // GET: Admin/Customers/Details/5
@@ -88,15 +96,14 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 //Lưu hình đại diện về Server
                 var path = Server.MapPath("~/Assets/images/Customers/" + postedFileName);
                 ProfileImg.SaveAs(path);
-                customer.ProfileImg = "~/Assets/images/Customers" + postedFileName;
+                customer.ProfileImg = "~/Assets/images/Customers/" + postedFileName;
 
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(customer);
-
-
         }
 
         // GET: Admin/Customers/Delete/5

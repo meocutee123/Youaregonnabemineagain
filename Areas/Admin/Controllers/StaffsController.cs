@@ -48,7 +48,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
+        public ActionResult Create([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
+        public ActionResult Edit([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
         {
             if (ModelState.IsValid)
             {
