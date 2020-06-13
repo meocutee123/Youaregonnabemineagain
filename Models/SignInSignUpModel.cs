@@ -7,6 +7,6 @@ namespace Electronic_Store.Models
 {
     public class SignInSignUpModel
     {
-        
+        public Customer customer { get; set; }
     }
 }

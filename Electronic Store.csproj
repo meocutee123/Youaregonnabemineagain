@@ -239,16 +239,12 @@
     <Content Include="App_Data\ESDatabase_log.ldf">
       <DependentUpon>ESDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Assets\css\bootstrap-grid.css" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap-grid.min.css" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap-reboot.css" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap-reboot.min.css" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap.css" />
     <Content Include="Areas\Admin\Assets\css\bootstrap.min.css" />
-    <Content Include="Areas\Admin\Assets\css\font-awesome.css" />
-    <Content Include="Areas\Admin\Assets\css\font.css" />
-    <Content Include="Areas\Admin\Assets\css\jqvmap.css" />
-    <Content Include="Areas\Admin\Assets\css\lightbox.css" />
-    <Content Include="Areas\Admin\Assets\css\minimal.css" />
-    <Content Include="Areas\Admin\Assets\css\monthly.css" />
-    <Content Include="Areas\Admin\Assets\css\morris.css" />
-    <Content Include="Areas\Admin\Assets\css\style-responsive.css" />
-    <Content Include="Areas\Admin\Assets\css\style.css" />
     <Content Include="Areas\Admin\Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Areas\Admin\Assets\images\1.png" />
     <Content Include="Areas\Admin\Assets\images\2.png" />
@@ -271,29 +267,10 @@
     <Content Include="Areas\Admin\Assets\images\pass.png" />
     <Content Include="Areas\Admin\Assets\images\prev.png" />
     <Content Include="Areas\Admin\Assets\images\search-icon.png" />
+    <Content Include="Areas\Admin\Assets\js\bootstrap.bundle.js" />
+    <Content Include="Areas\Admin\Assets\js\bootstrap.bundle.min.js" />
     <Content Include="Areas\Admin\Assets\js\bootstrap.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.dcjqaccordion.2.7.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.fileupload.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.min.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.nicescroll.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.scrollTo.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.slimscroll.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.vmap.asia.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.vmap.australia.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.vmap.europe.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.vmap.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.vmap.sampledata.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery.vmap.world.js" />
-    <Content Include="Areas\Admin\Assets\js\jquery2.0.3.min.js" />
-    <Content Include="Areas\Admin\Assets\js\lightbox-plus-jquery.min.js" />
-    <Content Include="Areas\Admin\Assets\js\monthly.js" />
-    <Content Include="Areas\Admin\Assets\js\morris.js" />
-    <Content Include="Areas\Admin\Assets\js\raphael-min.js" />
-    <Content Include="Areas\Admin\Assets\js\script.js" />
-    <Content Include="Areas\Admin\Assets\js\scripts.js" />
-    <Content Include="Assets\Contact\css\font-awesome.css" />
-    <Content Include="Assets\Contact\css\style.css" />
-    <Content Include="Assets\Contact\images\c11-bg.jpg" />
+    <Content Include="Areas\Admin\Assets\js\bootstrap.min.js" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\css\fasthover.css" />
     <Content Include="Assets\css\flexslider.css" />
@@ -461,11 +438,6 @@
     <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
-    <Content Include="Assets\Contact\fonts\fontawesome-webfont.eot" />
-    <Content Include="Assets\Contact\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Assets\Contact\fonts\fontawesome-webfont.woff" />
-    <Content Include="Assets\Contact\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Assets\Contact\fonts\FontAwesome.otf" />
     <Content Include="Areas\Admin\Assets\fonts\fontawesome-webfont.eot" />
     <Content Include="Areas\Admin\Assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="Areas\Admin\Assets\fonts\fontawesome-webfont.woff" />
@@ -501,6 +473,16 @@
     <Content Include="Areas\Sales\Views\Stocks\Edit.cshtml" />
     <Content Include="Areas\Sales\Views\Stocks\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\TimKiemMH.cshtml" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap-grid.css.map" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap-grid.min.css.map" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap-reboot.css.map" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap.css.map" />
+    <Content Include="Areas\Admin\Assets\css\bootstrap.min.css.map" />
+    <Content Include="Areas\Admin\Assets\js\bootstrap.bundle.js.map" />
+    <Content Include="Areas\Admin\Assets\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Areas\Admin\Assets\js\bootstrap.js.map" />
+    <Content Include="Areas\Admin\Assets\js\bootstrap.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -529,6 +511,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Account\Index2.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

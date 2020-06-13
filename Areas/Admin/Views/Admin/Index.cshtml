@@ -1,7 +1,20 @@
-﻿
+﻿@using Electronic_Store.Models
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h2>Admin page</h2>
-@Html.ActionLink("Index brands", "Index", "Brands", new {area = "Admin"}, null)
+<h2>Products</h2>
+<table class="table table-fluid" id="myTable">
+    <thead>
+        <tr><th>Product name</th><th>Price</th><th>Brand</th></tr>
+    </thead>
+    <tbody>
+        @foreach (Product product in Model.listProduct)
+        {
+            <tr><td>@product.Name</td><td>@product.Price</td><td>@product.BrandID</td></tr>
+        }
+
+    </tbody>
+</table>
+
+

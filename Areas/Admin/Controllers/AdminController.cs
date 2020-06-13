@@ -1,6 +1,7 @@
 ﻿using Electronic_Store.Models;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,12 +10,28 @@ namespace Electronic_Store.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
-        // GET: Admin/Admin
-        public ActionResult Index()
+        readonly ESDatabaseEntities db = new ESDatabaseEntities();
+
+        public ActionResult Index() 
         {
-            return View();
+            dynamic dynamic = new ExpandoObject();
+            dynamic.listProduct = Products();
+            dynamic.listBrand = Brands();
+
+            return View(dynamic);
         }
+        public List<Product> Products()
+        {
+            List<Product> lProducts = db.Products.ToList();
+            return lProducts;
+        }
+        public List<Brand> Brands()
+        {
+            List<Brand> lBrands = db.Brands.ToList();
+            return lBrands;
+        }
+
+
         [HttpGet]
 
         public ActionResult TimKiemNC(string FullName = "", string Gender = "", string luongMin = "", string luongMax = "", string Address = "")
@@ -22,7 +39,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             string min = luongMin, max = luongMax;
             if (Gender != "1" && Gender != "0")
                 Gender = null;
-           
+
             ViewBag.hoTen = FullName;
             ViewBag.gioiTinh = Gender;
             if (luongMin == "")
@@ -46,7 +63,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 max = luongMax;
             }
             ViewBag.diaChi = Address;
-            
+
             var staffs = db.Staffs.SqlQuery("NhanVien_TimKiem'" + FullName + "','" + Gender + "','" + min + "','" + max + "',N'" + Address + "'");
             if (staffs.Count() == 0)
                 ViewBag.TB = "Empty";
@@ -58,7 +75,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         public ActionResult TimKiemMH(string Name = "", string Brand = "", string Category = "", string PriceMin = "", string PriceMax = "")
         {
             string min = PriceMin, max = PriceMax;
-            
+
             ViewBag.Name = Name;
             ViewBag.Brand = Brand;
 
@@ -82,7 +99,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 ViewBag.PriceMax = PriceMax;
                 max = PriceMax;
             }
-            
+
 
             var staffs = db.Products.SqlQuery("MatHang_TimKiem'" + Name + "','" + Brand + "','" + Category + "','" + min + "','" + max + "'");
             if (staffs.Count() == 0)

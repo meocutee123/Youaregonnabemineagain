@@ -2,57 +2,39 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Products</h2>
+<table class="table table-fluid" id="myTable">
+    <thead>
+        <tr>
+            <th>Product name</th>
+            <th>Price</th>
+            <th>Brand</th>
+            <th>Image</th>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Brand.Name</td>
+                <td>
+                    <img src="@Url.Content(item.ProductImg)" style="height: 50px" />
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                </td>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductImg)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Brand.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
-        </th>
-        <th></th>
-    </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            <img src="@Url.Content(item.ProductImg)" height="50" />
-
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Brand.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
-        </td>
-    </tr>
-}
-
+    </tbody>
 </table>
+

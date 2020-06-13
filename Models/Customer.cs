@@ -28,6 +28,7 @@ namespace Electronic_Store.Models
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
         [EmailAddress(ErrorMessage = "Invalid email address!")]
         public string Email { get; set; }
+        [Required]
         public string Address { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
