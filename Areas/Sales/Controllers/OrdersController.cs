@@ -21,7 +21,11 @@ namespace Electronic_Store.Areas.Sales.Controllers
             return View(orders.ToList());
         }
 
-        // GET: Sales/Orders/Details/5
+        //public ActionResult Details()
+        // {
+        //     return View();
+        // }
+        //GET: Sales/Orders/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)

@@ -58,8 +58,6 @@
           <Property Name="MenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="250" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDATABASE.MDF.dbo.OrderItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderItems">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -254,6 +252,20 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="MatHang_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Brand" Type="nvarchar" Mode="In" />
+          <Parameter Name="Category" Type="varchar" Mode="In" />
+          <Parameter Name="PriceMin" Type="varchar" Mode="In" />
+          <Parameter Name="PriceMax" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="NhanVien_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Gender" Type="nvarchar" Mode="In" />
+          <Parameter Name="LuongMin" Type="varchar" Mode="In" />
+          <Parameter Name="LuongMax" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="ESDatabaseModelStoreContainer">
           <EntitySet Name="Adminstrators" EntityType="Self.Adminstrators" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
@@ -261,18 +273,11 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <EntitySet Name="Conntacts" EntityType="Self.Conntacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MegaMenu" EntityType="Self.MegaMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staffs" EntityType="Self.Staffs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [OrderItems].[OrderID] AS [OrderID], 
-    [OrderItems].[ProductID] AS [ProductID], 
-    [OrderItems].[Quanlity] AS [Quanlity], 
-    [OrderItems].[Price] AS [Price]
-    FROM [dbo].[OrderItems] AS [OrderItems]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Stocks" EntityType="Self.Stocks" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Stocks].[StockID] AS [StockID], 
@@ -379,6 +384,20 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
             <End Role="Store" EntitySet="Stores" />
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
+          <FunctionImport Name="MatHang_TimKiem">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Brand" Mode="In" Type="String" />
+            <Parameter Name="Category" Mode="In" Type="String" />
+            <Parameter Name="PriceMin" Mode="In" Type="String" />
+            <Parameter Name="PriceMax" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NhanVien_TimKiem">
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="LuongMin" Mode="In" Type="String" />
+            <Parameter Name="LuongMax" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Adminstrator">
           <Key>
@@ -785,6 +804,8 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="MatHang_TimKiem" FunctionName="ESDatabaseModel.Store.MatHang_TimKiem" />
+          <FunctionImportMapping FunctionImportName="NhanVien_TimKiem" FunctionName="ESDatabaseModel.Store.NhanVien_TimKiem" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

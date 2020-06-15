@@ -18,7 +18,13 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+    <style>
+        .container {
+            margin-top: 56px;
+        }
+        
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-light bg-success rounded fixed-top">
         @Html.ActionLink("Tân Tân Electronic", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,7 +54,7 @@
                     @Html.ActionLink("Store", "Index", "Stores", new { area = "Admin" }, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Order", "Index", "Orders", new { area = "Admin" }, new { @class = "nav-link" })
+                    @Html.ActionLink("Order", "Index", "Orders", new { area = "Sales" }, new { @class = "nav-link" })
                 </li>
 
                 <li class="nav-item dropdown">

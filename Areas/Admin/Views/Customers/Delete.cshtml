@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Delete</h2>
@@ -10,6 +11,14 @@
 <div>
     <h4>Customer</h4>
     <hr />
+    @if (Model.ProfileImg != null)
+    {
+        <img src = "@Url.Content(Model.ProfileImg)" style = "height:100px" />
+    }
+    else
+    {
+        <img src="~/Assets/images/Staffs/anonymous.png" alt="Emty" style="height: 100px" />
+    }
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -59,19 +68,10 @@
             @Html.DisplayFor(model => model.CreatedDate)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProfileImg)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProfileImg)
-        </dd>
-
-        
-
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

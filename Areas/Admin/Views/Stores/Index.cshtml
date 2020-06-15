@@ -2,45 +2,36 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Stores</h2>
+@Html.ActionLink("Create new", "Create")
+<table class="table table-fluid" id="myTable">
+    <thead>
+        <tr>
+            <th>Store name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.StoreName</td>
+                <td>@item.Address</td>
+                <td>@item.Phone</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StoreID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.StoreID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.StoreID })
+                </td>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StoreName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th></th>
-    </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StoreID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StoreID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StoreID })
-        </td>
-    </tr>
-}
-
+    </tbody>
 </table>
+

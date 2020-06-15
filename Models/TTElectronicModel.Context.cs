@@ -12,6 +12,8 @@ namespace Electronic_Store.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ESDatabaseEntities : DbContext
     {
@@ -37,5 +39,55 @@ namespace Electronic_Store.Models
         public virtual DbSet<Conntact> Conntacts { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
+    
+        public virtual int MatHang_TimKiem(string name, string brand, string category, string priceMin, string priceMax)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var brandParameter = brand != null ?
+                new ObjectParameter("Brand", brand) :
+                new ObjectParameter("Brand", typeof(string));
+    
+            var categoryParameter = category != null ?
+                new ObjectParameter("Category", category) :
+                new ObjectParameter("Category", typeof(string));
+    
+            var priceMinParameter = priceMin != null ?
+                new ObjectParameter("PriceMin", priceMin) :
+                new ObjectParameter("PriceMin", typeof(string));
+    
+            var priceMaxParameter = priceMax != null ?
+                new ObjectParameter("PriceMax", priceMax) :
+                new ObjectParameter("PriceMax", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MatHang_TimKiem", nameParameter, brandParameter, categoryParameter, priceMinParameter, priceMaxParameter);
+        }
+    
+        public virtual int NhanVien_TimKiem(string fullName, string gender, string luongMin, string luongMax, string address)
+        {
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("FullName", fullName) :
+                new ObjectParameter("FullName", typeof(string));
+    
+            var genderParameter = gender != null ?
+                new ObjectParameter("Gender", gender) :
+                new ObjectParameter("Gender", typeof(string));
+    
+            var luongMinParameter = luongMin != null ?
+                new ObjectParameter("LuongMin", luongMin) :
+                new ObjectParameter("LuongMin", typeof(string));
+    
+            var luongMaxParameter = luongMax != null ?
+                new ObjectParameter("LuongMax", luongMax) :
+                new ObjectParameter("LuongMax", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NhanVien_TimKiem", fullNameParameter, genderParameter, luongMinParameter, luongMaxParameter, addressParameter);
+        }
     }
 }

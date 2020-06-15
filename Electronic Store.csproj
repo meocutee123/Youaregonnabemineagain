@@ -207,7 +207,6 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SignInSignUpModel.cs" />
     <Compile Include="Models\Staff.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
@@ -454,7 +453,6 @@
     <Content Include="Areas\Admin\Views\Staffs\Index.cshtml" />
     <Content Include="Areas\Sales\Views\Orders\Create.cshtml" />
     <Content Include="Areas\Sales\Views\Orders\Delete.cshtml" />
-    <Content Include="Areas\Sales\Views\Orders\Details.cshtml" />
     <Content Include="Areas\Sales\Views\Orders\Edit.cshtml" />
     <Content Include="Areas\Sales\Views\Orders\Index.cshtml" />
     <Content Include="Areas\Sales\Views\OrderItems\Create.cshtml" />
@@ -483,6 +481,7 @@
     <Content Include="Areas\Admin\Assets\js\bootstrap.bundle.min.js.map" />
     <Content Include="Areas\Admin\Assets\js\bootstrap.js.map" />
     <Content Include="Areas\Admin\Assets\js\bootstrap.min.js.map" />
+    <Content Include="Areas\Sales\Views\Orders\Details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

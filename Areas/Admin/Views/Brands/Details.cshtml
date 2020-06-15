@@ -2,11 +2,12 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Details</h2>
 
-<div>
+<div class="container col-md-7">
     <h4>Brand</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -23,7 +24,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BrandImg)
+            <img src="@Url.Content(Model.BrandImg)" />
         </dd>
 
     </dl>

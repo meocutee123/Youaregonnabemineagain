@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Details</h2>
@@ -11,6 +11,23 @@
     <h4>Order</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            Customer name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+
+        <dt>
+            Staff name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Staff.FirstName)
+            @Html.DisplayFor(model => model.Staff.LastName)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.OrderDate)
         </dt>
@@ -31,9 +48,14 @@
             @Html.DisplayNameFor(model => model.OrderStatus)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.OrderStatus)
-        </dd>
+        @if (Model.OrderStatus != true)
+        {
+            <dd>UnPaid</dd>
+        }
+        else
+        {
+            <dd>Paid</dd>
+        }
 
         <dt>
             @Html.DisplayNameFor(model => model.Total)
@@ -51,21 +73,7 @@
             @Html.DisplayFor(model => model.Store.StoreName)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.FirstName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Customer.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Staff.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Staff.FirstName)
-        </dd>
 
     </dl>
 </div>

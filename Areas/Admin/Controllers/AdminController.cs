@@ -16,19 +16,34 @@ namespace Electronic_Store.Areas.Admin.Controllers
         {
             dynamic dynamic = new ExpandoObject();
             dynamic.listProduct = Products();
-            dynamic.listBrand = Brands();
+            dynamic.listBrand = OrderItems();
 
             return View(dynamic);
         }
         public List<Product> Products()
         {
-            List<Product> lProducts = db.Products.ToList();
-            return lProducts;
+            List<Product> products = db.Products.ToList();
+            return products;
         }
-        public List<Brand> Brands()
+        public List<OrderItem> OrderItems()
         {
-            List<Brand> lBrands = db.Brands.ToList();
-            return lBrands;
+            List<OrderItem> orderItems = db.OrderItems.ToList();
+            return orderItems;
+        }
+        public List<Customer> Customers()
+        {
+            List<Customer> customers = db.Customers.ToList();
+            return customers;
+        }
+        public List<Staff> Staffs()
+        {
+            List<Staff> staffs = db.Staffs.ToList();
+            return staffs;
+        }
+        public List<Store> Stores()
+        {
+            List<Store> stores = db.Stores.ToList();
+            return stores;
         }
 
 
