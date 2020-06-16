@@ -1,20 +1,9 @@
-﻿@using Electronic_Store.Models
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h2>Products</h2>
-<table class="table table-fluid" id="myTable">
-    <thead>
-        <tr><th>Product name</th><th>Price</th><th>Brand</th></tr>
-    </thead>
-    <tbody>
-        @foreach (Product product in Model.listProduct)
-        {
-            <tr><td>@product.Name</td><td>@product.Price</td><td>@product.BrandID</td></tr>
-        }
+<h2>Admin page!</h2>
+<p>Nothing special</p>
 
-    </tbody>
-</table>
 
 

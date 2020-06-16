@@ -22,7 +22,6 @@
         .container {
             margin-top: 56px;
         }
-        
     </style>
     <nav class="navbar navbar-expand-lg navbar-light bg-success rounded fixed-top">
         @Html.ActionLink("Tân Tân Electronic", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
@@ -61,18 +60,31 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown09">
                         @Html.ActionLink("Product", "TimKiemMH", "Admin", new { area = "Admin" }, new { @class = "dropdown-item" })
-                        @Html.ActionLink("Customer", "TimKiemNC", "Admin", new { area = "Admin" }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Staffs", "TimKiemNC", "Admin", new { area = "Admin" }, new { @class = "dropdown-item" })
 
                     </div>
                 </li>
             </ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <span class="Navbar-text">Welcome: @User.Identity.Name</span>
+                @Html.ActionLink("Logout", "Logout", "Login", new { area = "Admin" }, new { @class = "ml-3" })
+            }
 
         </div>
     </nav>
-    
     <div class="container">
         @RenderBody()
     </div>
+    <footer class="jumbotron mt-3">
+        <h1 class="display-4">Hello, out there!</h1>
+        <p class="lead">Does anybody want a wife? I'm single. I got no kids. I could cook, kind of ..</p>
+        <hr class="my-4">
+        <p class="text-center">COPPYRIGHT © 2020.</p>
+        <p class="text-center">All rights reserved.</p>
+        
+    </footer>
+
 
     <script>
         $(document).ready(function () {
@@ -80,4 +92,5 @@
         });
     </script>
 </body>
+
 </html>

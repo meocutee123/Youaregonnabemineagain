@@ -14,13 +14,14 @@ namespace Electronic_Store.Areas.Admin.Controllers
     public class BrandsController : Controller
     {
         private readonly ESDatabaseEntities db = new ESDatabaseEntities();
-
+        [Authorize]
+        [AllowAnonymous]
         // GET: Admin/Brands
         public ActionResult Index()
         {
             return View(db.Brands.ToList());
         }
-
+        [Authorize]
         // GET: Admin/Brands/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,7 +36,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             return View(brand);
         }
-
+        [Authorize]
         // GET: Admin/Brands/Create
         public ActionResult Create()
         {
@@ -60,7 +61,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
 
             return View(brand);
         }
-
+        [Authorize]
         // GET: Admin/Brands/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -75,7 +76,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             return View(brand);
         }
-
+        [Authorize]
         // POST: Admin/Brands/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -97,7 +98,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             return View(brand);
         }
-
+        [Authorize]
         // GET: Admin/Brands/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -112,7 +113,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             return View(brand);
         }
-
+        [Authorize]
         // POST: Admin/Brands/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

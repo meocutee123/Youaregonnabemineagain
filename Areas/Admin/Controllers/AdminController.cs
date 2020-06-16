@@ -1,62 +1,35 @@
 ﻿using Electronic_Store.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Electronic_Store.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
         readonly ESDatabaseEntities db = new ESDatabaseEntities();
-
+        [Authorize]
         public ActionResult Index() 
         {
-            dynamic dynamic = new ExpandoObject();
-            dynamic.listProduct = Products();
-            dynamic.listBrand = OrderItems();
 
-            return View(dynamic);
+            return View();
         }
-        public List<Product> Products()
-        {
-            List<Product> products = db.Products.ToList();
-            return products;
-        }
-        public List<OrderItem> OrderItems()
-        {
-            List<OrderItem> orderItems = db.OrderItems.ToList();
-            return orderItems;
-        }
-        public List<Customer> Customers()
-        {
-            List<Customer> customers = db.Customers.ToList();
-            return customers;
-        }
-        public List<Staff> Staffs()
-        {
-            List<Staff> staffs = db.Staffs.ToList();
-            return staffs;
-        }
-        public List<Store> Stores()
-        {
-            List<Store> stores = db.Stores.ToList();
-            return stores;
-        }
-
-
         [HttpGet]
-
+        [Authorize]
         public ActionResult TimKiemNC(string FullName = "", string Gender = "", string luongMin = "", string luongMax = "", string Address = "")
         {
-            string min = luongMin, max = luongMax;
+            string max = luongMax;
             if (Gender != "1" && Gender != "0")
                 Gender = null;
 
             ViewBag.hoTen = FullName;
             ViewBag.gioiTinh = Gender;
+            string min;
             if (luongMin == "")
             {
                 ViewBag.luongMin = "";
@@ -86,14 +59,14 @@ namespace Electronic_Store.Areas.Admin.Controllers
         }
 
         [HttpGet]
-
+        [Authorize]
         public ActionResult TimKiemMH(string Name = "", string Brand = "", string Category = "", string PriceMin = "", string PriceMax = "")
         {
-            string min = PriceMin, max = PriceMax;
+            string max = PriceMax;
 
             ViewBag.Name = Name;
             ViewBag.Brand = Brand;
-
+            string min;
             if (PriceMin == "")
             {
                 ViewBag.PriceMin = "";

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "TimKiemMH";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    var grid = new WebGrid(Model, canPage: true, defaultSort: "TenNV", rowsPerPage: 5);
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "TenNV", rowsPerPage: 2);
     @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
 
 }
@@ -111,7 +111,7 @@
                 grid.Column("Name","Name"  ),
                 grid.Column("Brand.Name","Brand"),
                 grid.Column("Category.Name","Category"),
-                grid.Column("Price","Giá",format:@<text> @item.Price.ToString("#,##0")</text>)
+                grid.Column("Price","Price",format:@<text> @item.Price.ToString("#,##0")</text>)
 
 }
 )
