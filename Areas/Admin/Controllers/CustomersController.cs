@@ -14,20 +14,20 @@ namespace Electronic_Store.Areas.Admin.Controllers
     public class CustomersController : Controller
     {
         private readonly ESDatabaseEntities db = new ESDatabaseEntities();
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Customers
         public ActionResult Index()
         {
             return View(db.Customers.ToList());
         }
 
-        [HttpPost]
-        public JsonResult CheckMail(string email)
-        {
-            bool result = !db.Customers.ToList().Exists(model => model.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase));
-            return Json(result);
-        }
-
+        //[HttpPost]
+        //public JsonResult CheckMail(string email)
+        //{
+        //    bool result = !db.Customers.ToList().Exists(model => model.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase));
+        //    return Json(result);
+        //}
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Customers/Details/5
         public ActionResult Details(int? id)
         {
@@ -42,7 +42,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             return View(customer);
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Customers/Create
         public ActionResult Create()
         {
@@ -67,7 +67,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
 
             return View(customer);
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Customers/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -105,7 +105,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
 
             return View(customer);
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Customers/Delete/5
         public ActionResult Delete(int? id)
         {

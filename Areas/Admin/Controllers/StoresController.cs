@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Electronic_Store.Models;
 
 namespace Electronic_Store.Areas.Admin.Controllers
@@ -13,13 +14,13 @@ namespace Electronic_Store.Areas.Admin.Controllers
     public class StoresController : Controller
     {
         private ESDatabaseEntities db = new ESDatabaseEntities();
-
+        [Authorize]
         // GET: Admin/Stores
         public ActionResult Index()
         {
             return View(db.Stores.ToList());
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Stores/Details/5
         public ActionResult Details(int? id)
         {
@@ -34,7 +35,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             return View(store);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Stores/Create
         public ActionResult Create()
         {
@@ -57,7 +58,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
 
             return View(store);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Stores/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -88,7 +89,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             return View(store);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Stores/Delete/5
         public ActionResult Delete(int? id)
         {

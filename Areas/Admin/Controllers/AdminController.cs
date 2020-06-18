@@ -13,14 +13,14 @@ namespace Electronic_Store.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         readonly ESDatabaseEntities db = new ESDatabaseEntities();
-        [Authorize]
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Index() 
         {
 
             return View();
         }
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult TimKiemNC(string FullName = "", string Gender = "", string luongMin = "", string luongMax = "", string Address = "")
         {
             string max = luongMax;
@@ -59,7 +59,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult TimKiemMH(string Name = "", string Brand = "", string Category = "", string PriceMin = "", string PriceMax = "")
         {
             string max = PriceMax;

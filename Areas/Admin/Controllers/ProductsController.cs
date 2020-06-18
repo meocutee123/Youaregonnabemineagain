@@ -14,14 +14,14 @@ namespace Electronic_Store.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly ESDatabaseEntities db = new ESDatabaseEntities();
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Products
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
             return View(products.ToList());
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Products/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,7 +36,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             return View(product);
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Products/Create
         public ActionResult Create()
         {
@@ -69,7 +69,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
             return View(product);
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Products/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -110,7 +110,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
             return View(product);
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Admin/Products/Delete/5
         public ActionResult Delete(int? id)
         {

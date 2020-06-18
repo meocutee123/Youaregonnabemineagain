@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="AdminID" />
           </Key>
-          <Property Name="AdminID" Type="int" Nullable="false" />
+          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AdminName" Type="varchar" MaxLength="100" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="Role" Type="nvarchar" MaxLength="50" />
@@ -109,9 +109,8 @@
           <Property Name="StoreID" Type="int" Nullable="false" />
           <Property Name="Gender" Type="bit" />
           <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDATABASE.MDF.dbo.Stocks' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Stocks">
           <Key>
             <PropertyRef Name="StockID" />
@@ -277,15 +276,8 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staffs" EntityType="Self.Staffs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stocks" EntityType="Self.Stocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Stocks" EntityType="Self.Stocks" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Stocks].[StockID] AS [StockID], 
-    [Stocks].[StoreID] AS [StoreID], 
-    [Stocks].[ProductID] AS [ProductID], 
-    [Stocks].[Quantity] AS [Quantity]
-    FROM [dbo].[Stocks] AS [Stocks]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_OrderItems_Orders" Association="Self.FK_OrderItems_Orders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderItems" EntitySet="OrderItems" />
@@ -602,6 +594,7 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Orders" Relationship="ESDatabaseModel.FK_Orders_Staffs" FromRole="Staff" ToRole="Order" />
           <NavigationProperty Name="Store" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Staff" ToRole="Store" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Orders_Staffs">
           <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="1" />
@@ -778,6 +771,7 @@ warning 6002: The table/view 'D:\MVC APPLICATION\ELECTRONIC STORE\APP_DATA\ESDAT
           <EntitySetMapping Name="Staffs">
             <EntityTypeMapping TypeName="ESDatabaseModel.Staff">
               <MappingFragment StoreEntitySet="Staffs">
+                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="StoreID" ColumnName="StoreID" />

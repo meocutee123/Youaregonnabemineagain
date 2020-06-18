@@ -13,14 +13,14 @@ namespace Electronic_Store.Areas.Admin.Controllers
     public class StaffsController : Controller
     {
         private ESDatabaseEntities db = new ESDatabaseEntities();
-
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Staffs
         public ActionResult Index()
         {
             var staffs = db.Staffs.Include(s => s.Store);
             return View(staffs.ToList());
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Staffs/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,7 +35,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             return View(staff);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Staffs/Create
         public ActionResult Create()
         {
@@ -48,10 +48,15 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
+        public ActionResult Create([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff, HttpPostedFileBase ProfileImg)
         {
             if (ModelState.IsValid)
             {
+                string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
+                //Lưu hình đại diện về Server
+                var path = Server.MapPath("~/Assets/images/Staffs/" + postedFileName);
+                ProfileImg.SaveAs(path);
+                staff.ProfileImg = "~/Assets/images/Staffs/" + postedFileName;
                 db.Staffs.Add(staff);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -60,7 +65,41 @@ namespace Electronic_Store.Areas.Admin.Controllers
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", staff.StoreID);
             return View(staff);
         }
+        [Authorize(Roles = "Admin")]
+        public ActionResult EditRole(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Staff staff = db.Staffs.Find(id);
+            if (staff == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", staff.StoreID);
+            return View(staff);
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditRole([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentStaff = db.Staffs.FirstOrDefault(s => s.StaffID == staff.StaffID);
+                if (currentStaff == null)
+                {
+                    return HttpNotFound();
+                }
+                currentStaff.StoreID = staff.StoreID;
+                currentStaff.Role = staff.Role;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(staff);
+        }
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Staffs/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -82,10 +121,16 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
+        public ActionResult Edit([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff, HttpPostedFileBase ProfileImg)
         {
             if (ModelState.IsValid)
             {
+                string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
+                //Lưu hình đại diện về Server
+                var path = Server.MapPath("~/Assets/images/Staffs/" + postedFileName);
+                ProfileImg.SaveAs(path);
+                staff.ProfileImg = "~/Assets/images/Staffs/" + postedFileName;
+
                 db.Entry(staff).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -93,7 +138,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", staff.StoreID);
             return View(staff);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Staffs/Delete/5
         public ActionResult Delete(int? id)
         {

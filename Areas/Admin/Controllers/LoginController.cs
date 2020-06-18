@@ -17,6 +17,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         {
             return View();
         }
+
         public ActionResult Login()
         {
             return View();
@@ -40,7 +41,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Invalid user/pass");
+                ModelState.AddModelError("", "Invalid adminname and password");
                 return View();
             }
             

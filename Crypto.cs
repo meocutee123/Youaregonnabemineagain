@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace The_Hummingbird_Project
+namespace Electronic_Store  
 {
     public static class Crypto
     {

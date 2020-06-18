@@ -14,7 +14,7 @@
         <hr />
         @if (Model.ProfileImg != null)
         {
-            < img src = "@Url.Content(Model.ProfileImg)" style = "height:100px" />
+            <img src="@Url.Content(Model.ProfileImg)" style="height:100px" />
         }
         else
         {
@@ -22,18 +22,11 @@
         }
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
+                Full name
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.FirstName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
-
-            <dd>
                 @Html.DisplayFor(model => model.LastName)
             </dd>
 
@@ -90,9 +83,14 @@
                 @Html.DisplayNameFor(model => model.Gender)
             </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Gender)
-            </dd>
+            @if (Model.Gender != true)
+            {
+                <dd>Nữ</dd>
+            }
+            else
+            {
+                <dd>Nam</dd>
+            }
 
             <dt>
                 @Html.DisplayNameFor(model => model.Salary)
