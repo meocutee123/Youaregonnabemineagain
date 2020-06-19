@@ -24,7 +24,6 @@ namespace Electronic_Store.Controllers
         [HttpPost]
         public ActionResult Registration(Customer customer)
         {
-            string message = "";
             // Model Validation 
             if (ModelState.IsValid)
             {
@@ -38,20 +37,17 @@ namespace Electronic_Store.Controllers
 
 
                 customer.Password = Crypto.Hash(customer.Password);
-                customer.ConfirmPassword = Crypto.Hash(customer.ConfirmPassword); //
+                customer.ConfirmPassword = Crypto.Hash(customer.ConfirmPassword);
 
                 using (ESDatabaseEntities dc = new ESDatabaseEntities())
                 {
                     dc.Customers.Add(customer);
                     dc.SaveChanges();
                 }
-            }
-            else
-            {
-                message = "Invalid Request";
+
+                ViewBag.Message = "Account created successfully!";
             }
 
-            ViewBag.Message = message;
             return View("Login");
         }
         [HttpGet]
@@ -64,12 +60,12 @@ namespace Electronic_Store.Controllers
         [HttpPost]
         public ActionResult Login(Customer customer)
         {
-            using (var context = new ESDatabaseEntities())
+            using (var db = new ESDatabaseEntities())
             {
-                var v = context.Customers.Where(a => a.Email == customer.Email).FirstOrDefault();
+                var v = db.Customers.Where(a => a.Email == customer.Email).FirstOrDefault();
                 if (v != null)
                 {
-                    if (string.Compare(Crypto.Hash(v.Password), customer.Password) == 0)
+                    if (string.Compare(Crypto.Hash(customer.Password), v.Password) == 0)
                     {
                         FormsAuthentication.SetAuthCookie(customer.Email, false);
                         return RedirectToAction("Index", "Home");
@@ -77,7 +73,7 @@ namespace Electronic_Store.Controllers
                     else
                     {
                         ModelState.AddModelError("", "Invalid username and password");
-                        return View();
+                        return View("Login");
                     }
                 } 
             }

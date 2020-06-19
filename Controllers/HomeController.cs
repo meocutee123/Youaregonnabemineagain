@@ -34,9 +34,7 @@ namespace Electronic_Store.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return View(db.Staffs.ToList());
         }
 
         public ActionResult Contact()

@@ -1,108 +1,159 @@
 ﻿@model Electronic_Store.Models.Customer
-
-@{ 
-    Layout = null;
+@{
+    ViewBag.Title = "Home Page";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Login V1</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="/Assets/Login/images/icons/favicon.ico" />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/Assets/Login/vendor/bootstrap/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/Assets/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/Assets/Login/vendor/animate/animate.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/Assets/Login/vendor/css-hamburgers/hamburgers.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/Assets/Login/vendor/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="/Assets/Login/css/util.css">
-    <link rel="stylesheet" type="text/css" href="/Assets/Login/css/main.css">
-    <!--===============================================================================================-->
-</head>
-<body>
+@section styles{
+    <link href="/Assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/Assets/css/font-awesome.css" rel="stylesheet">
+    <script type="text/javascript" src="/Assets/js/bootstrap-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="/Assets/css/jquery.countdown.css" />
+    <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+}
+<!-- header modal -->
+<div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        @Html.AntiForgeryToken()
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Don't Wait, Login now!</h4>
+            </div>
+            <div class="modal-body modal-body-sub">
+                <div class="row">
+                    <div class="col-md-8 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em;">
+                        <div class="sap_tabs">
+                            <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                                <ul>
+                                    <li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
+                                    <li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
+                                </ul>
+                                
+                                <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                                    <div class="facts">
+                                        <div class="register">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <span class="text-success font-weight-bold">@ViewBag.Message</span>
+                                            <form action="@Url.Action("Login","Account")" method="post">
 
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <div class="login100-pic js-tilt" data-tilt>
-                    <img src="/Assets/Login/images/img-01.png" alt="IMG">
+                                                <input name="Email" placeholder="Email Address" type="text" required="">
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                <input name="Password" placeholder="Password" type="password" required="">
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                <div class="sign-up">
+                                                    <input type="submit" value="Sign in" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
+                                    <div class="facts">
+                                        <div class="register">
+                                            
+                                            <form action="@Url.Action("Registration", "Account")" method="post">
+
+                                                <input placeholder="First Name" name="FirstName" type="text" required="">
+                                                <input placeholder="Last Name" name="LastName" style="margin: 1em 0 0" type="text" required="">
+                                                <input placeholder="Email Address" name="Email" type="email" required="">
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                <input placeholder="Address" name="Address" style="margin: 1em 0 0" type="text" required="">
+                                                <input placeholder="Password" name="Password" type="password" required="">
+                                                <input placeholder="Confirm Password" name="ConfirmPassword" type="password" required="">
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                <div class="sign-up">
+                                                    <input type="submit" value="Create Account" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script src="~/Assets/js/easyResponsiveTabs.js" type="text/javascript"></script>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#horizontalTab').easyResponsiveTabs({
+                                    type: 'default', //Types: default, vertical, accordion
+                                    width: 'auto', //auto or any width like 600px
+                                    fit: true   // 100% fit in a container
+                                });
+                            });
+                        </script>
+                        <div id="OR" class="hidden-xs">OR</div>
+                    </div>
+                    <div class="col-md-4 modal_body_right modal_body_right1">
+                        <div class="row text-center sign-with">
+                            <div class="col-md-12">
+                                <h3 class="other-nw">Sign in with</h3>
+                            </div>
+                            <div class="col-md-12">
+                                <ul class="social">
+                                    <li class="social_facebook"><a href="#" class="entypo-facebook"></a></li>
+                                    <li class="social_dribbble"><a href="#" class="entypo-dribbble"></a></li>
+                                    <li class="social_twitter"><a href="#" class="entypo-twitter"></a></li>
+                                    <li class="social_behance"><a href="#" class="entypo-behance"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                @Html.AntiForgeryToken()
-                <form class="login100-form validate-form" method="post">
-                    <span class="login100-form-title">
-                        Member Login
-                    </span>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="Email" placeholder="Email">
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="Password" placeholder="Password">
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                        </span>
-                    </div>
-
-                    <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
-                            Login
-                        </button>
-                    </div>
-
-                    <div class="text-center p-t-12">
-                        <span class="txt1">
-                            Forgot
-                        </span>
-                        <a class="txt2" href="#">
-                            Username / Password?
-                        </a>
-                    </div>
-
-                    <div class="text-center p-t-136">
-                        <a class="txt2" href="~/Account/Registration">
-                            Create your Account
-                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
+</div>
+<script>
+    $('#myModal88').modal('show');
+</script>
+<!-- header modal -->
+<!-- banner -->
+<div class="banner">
+    <div class="container">
+        <h3>Electronic Store, <span>Special Offers</span></h3>
+    </div>
+</div>
+<!-- //banner -->
+<!-- banner-bottom -->
+<div class="banner-bottom">
+    <div class="container">
+        <div class="col-md-5 wthree_banner_bottom_left">
+            <div class="video-img">
+                <a class="play-icon popup-with-zoom-anim" href="#small-dialog">
+                    <span class="glyphicon glyphicon-expand" aria-hidden="true"></span>
+                </a>
+            </div>
+            <!-- pop-up-box -->
+            <script src="~/Assets/js/jquery.magnific-popup.js" type="text/javascript"></script>
+            <!--//pop-up-box -->
+            <div id="small-dialog" class="mfp-hide">
+                <iframe src="https://www.youtube.com/embed/ZQa6GUVnbNM"></iframe>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $('.popup-with-zoom-anim').magnificPopup({
+                        type: 'inline',
+                        fixedContentPos: false,
+                        fixedBgPos: true,
+                        overflowY: 'auto',
+                        closeBtnInside: true,
+                        preloader: false,
+                        midClick: true,
+                        removalDelay: 300,
+                        mainClass: 'my-mfp-zoom-in'
+                    });
 
+                });
+            </script>
+        </div>
 
+        <div class="clearfix"> </div>
+    </div>
+</div>
 
-
-    <!--===============================================================================================-->
-    <script src="/Assets/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="/Assets/Login/vendor/bootstrap/js/popper.js"></script>
-    <script src="/Assets/Login/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="/Assets/Login/vendor/select2/select2.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="/Assets/Login/vendor/tilt/tilt.jquery.min.js"></script>
-    <script>
-        $('.js-tilt').tilt({
-            scale: 1.1
-        })
-    </script>
-    <!--===============================================================================================-->
-    <script src="/Assets/Login/js/main.js"></script>
-
-</body>
-</html>
