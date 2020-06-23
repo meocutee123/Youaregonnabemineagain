@@ -7,109 +7,100 @@
 
 <h2>Details</h2>
 
-<div class="container col-md-7">
+<div class="container">
+    <h4>Staff</h4>
+    <hr />
+    <div class="row">
 
-    <div>
-        <h4>Staff</h4>
-        <hr />
-        @if (Model.ProfileImg != null)
-        {
-            <img src="@Url.Content(Model.ProfileImg)" style="height:100px" />
-        }
-        else
-        {
-            <img src="~/Assets/images/Staffs/anonymous.png" alt="Emty" style="height: 100px" />
-        }
-        <dl class="dl-horizontal">
-            <dt>
-                Full name
-            </dt>
+        <div class="col-md-3">
 
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Phone)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Phone)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Address)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Password)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Password)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CreatedDate)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ManagerID)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ManagerID)
-            </dd>
-
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Gender)
-            </dt>
-
-            @if (Model.Gender != true)
+            @if (Model.ProfileImg != null)
             {
-                <dd>Nữ</dd>
+                <img src="@Url.Content(Model.ProfileImg)" style="height:200px" />
             }
             else
             {
-                <dd>Nam</dd>
+                <img src="~/Assets/images/Staffs/anonymous.png" alt="Emty" style="height: 200px" />
             }
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Salary)
-            </dt>
+        </div>
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    Full name
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Salary)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Store.StoreName)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Store.StoreName)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
 
-        </dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ManagerID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ManagerID)
+                </dd>
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </dt>
+
+                @if (Model.Gender != true)
+                {
+                    <dd>Nữ</dd>
+                }
+                else
+                {
+                    <dd>Nam</dd>
+                }
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Salary)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Salary)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Store.StoreName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Store.StoreName)
+                </dd>
+
+            </dl>
+        </div>
     </div>
+
 </div>
 
 <p>

@@ -7,62 +7,57 @@
 
 <h2>Details</h2>
 
-<div>
+<div class="container">
     <h4>Customer</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Full name
-        </dt>
+    <div class="row">
+        <div class="col-md-4">
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+            @if (Model.ProfileImg != null)
+            {
+                <img src="@Url.Content(Model.ProfileImg)" style="height:100px" />
+            }
+            else
+            {
+                <img src="~/Assets/images/Staffs/anonymous.png" alt="Emty" style="height: 200px" />
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+        </div>
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    Full name
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProfileImg)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProfileImg)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
 
 
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
 
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+            </dl>
+
+
+        </div>
+
+    </div>
+  
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerID }) |
