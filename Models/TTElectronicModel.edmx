@@ -111,6 +111,15 @@
           <Property Name="Salary" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Role" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Statisticals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="From" Type="date" />
+          <Property Name="To" Type="date" />
+          <Property Name="Total" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Stocks">
           <Key>
             <PropertyRef Name="StockID" />
@@ -276,6 +285,7 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staffs" EntityType="Self.Staffs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statisticals" EntityType="Self.Statisticals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stocks" EntityType="Self.Stocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_OrderItems_Orders" Association="Self.FK_OrderItems_Orders">
@@ -390,6 +400,7 @@
             <Parameter Name="LuongMax" Mode="In" Type="String" />
             <Parameter Name="Address" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Statisticals" EntityType="ESDatabaseModel.Statistical" />
         </EntityContainer>
         <EntityType Name="Adminstrator">
           <Key>
@@ -657,6 +668,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Statistical">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="From" Type="DateTime" Precision="0" />
+          <Property Name="To" Type="DateTime" Precision="0" />
+          <Property Name="Total" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -800,6 +820,16 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="MatHang_TimKiem" FunctionName="ESDatabaseModel.Store.MatHang_TimKiem" />
           <FunctionImportMapping FunctionImportName="NhanVien_TimKiem" FunctionName="ESDatabaseModel.Store.NhanVien_TimKiem" />
+          <EntitySetMapping Name="Statisticals">
+            <EntityTypeMapping TypeName="ESDatabaseModel.Statistical">
+              <MappingFragment StoreEntitySet="Statisticals">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

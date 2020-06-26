@@ -15,16 +15,15 @@ namespace Electronic_Store.Areas.Sales.Controllers
         private ESDatabaseEntities db = new ESDatabaseEntities();
 
         // GET: Sales/Orders
+        [Authorize(Roles ="Admin, Moderator")]
+
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Store).Include(o => o.Customer).Include(o => o.Staff);
             return View(orders.ToList());
         }
 
-        //public ActionResult Details()
-        // {
-        //     return View();
-        // }
+
         //GET: Sales/Orders/Details/5
         public ActionResult Details(int? id)
         {
@@ -41,23 +40,24 @@ namespace Electronic_Store.Areas.Sales.Controllers
         }
 
         // GET: Sales/Orders/Create
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Create()
         {
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName");
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FirstName");
-            ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "FirstName");
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName");
+            ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "FullName");
             return View();
         }
 
         // POST: Sales/Orders/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderID,CustomerID,StaffID,OrderDate,ShippedDate,StoreID,OrderStatus,Total")] Order order)
+        public ActionResult Create([Bind(Include = "OrderID,CustomerID,StaffID," +
+            "OrderDate,ShippedDate,StoreID,OrderStatus,Total")] Order order)
         {
             if (ModelState.IsValid)
             {
+                order.OrderDate = DateTime.Now;
                 db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -68,7 +68,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
             ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "FirstName", order.StaffID);
             return View(order);
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Sales/Orders/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -105,7 +105,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
             ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "FirstName", order.StaffID);
             return View(order);
         }
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Sales/Orders/Delete/5
         public ActionResult Delete(int? id)
         {

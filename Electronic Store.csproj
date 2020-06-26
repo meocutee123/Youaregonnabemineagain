@@ -216,6 +216,9 @@
     <Compile Include="Models\Staff.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Statistical.cs">
+      <DependentUpon>TTElectronicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Stock.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
@@ -498,8 +501,6 @@
     <Content Include="Areas\Sales\Views\Orders\Index.cshtml" />
     <Content Include="Areas\Sales\Views\OrderItems\Create.cshtml" />
     <Content Include="Areas\Sales\Views\OrderItems\Delete.cshtml" />
-    <Content Include="Areas\Sales\Views\OrderItems\Details.cshtml" />
-    <Content Include="Areas\Sales\Views\OrderItems\Edit.cshtml" />
     <Content Include="Areas\Sales\Views\OrderItems\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Stores\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Stores\Delete.cshtml" />

@@ -34,7 +34,9 @@ namespace Electronic_Store.Controllers
 
         public ActionResult About()
         {
-            return View(db.Staffs.ToList());
+            var data = (from p in db.Staffs
+                        select p).Take(4);
+            return View(data.ToList());
         }
 
         public ActionResult Contact()

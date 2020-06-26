@@ -48,11 +48,15 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BrandID,Name,BrandImg")] Brand brand)
+        public ActionResult Create([Bind(Include = "BrandID,Name,BrandImg")] Brand brand, HttpPostedFileBase BrandImg)
         {
             if (ModelState.IsValid)
             {
-               
+                string postedFileName = System.IO.Path.GetFileName(BrandImg.FileName);
+                //Lưu hình đại diện về Server
+                var path = Server.MapPath("/Assets/images/" + postedFileName);
+                BrandImg.SaveAs(path);
+                brand.BrandImg = "/Assets/images/" + postedFileName;
 
                 db.Brands.Add(brand);
                 db.SaveChanges();   

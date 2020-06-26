@@ -6,8 +6,8 @@
 }
 
 <h2>Orders items</h2>
-@Html.ActionLink("Create new", "Create")
-<table class="table table-fluid" id="myTable">
+<p>Customer name: </p>
+<table class="table table-fluid" id="">
     <thead>
         <tr>
             <th>Order ID</th>
@@ -26,10 +26,6 @@
                 <td>@item.Product.Name</td>
                 <td>@item.Quanlity</td>
                 <td>@item.Price</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.OrderID })
-                </td>
             </tr>
 
         }

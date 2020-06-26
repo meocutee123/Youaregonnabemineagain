@@ -75,9 +75,14 @@ namespace Electronic_Store.Controllers
                         ModelState.AddModelError("", "Invalid username and password");
                         return View("Login");
                     }
-                } 
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username and password");
+                    return View("Login");
+                }
             }
-            return View("Index");
+            
         }
 
         [Authorize]

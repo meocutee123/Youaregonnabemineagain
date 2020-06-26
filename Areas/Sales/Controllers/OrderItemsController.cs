@@ -12,13 +12,22 @@ namespace Electronic_Store.Areas.Sales.Controllers
 {
     public class OrderItemsController : Controller
     {
-        private ESDatabaseEntities db = new ESDatabaseEntities();
+        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
 
         // GET: Sales/OrderItems
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var orderItems = db.OrderItems.Include(o => o.Order).Include(o => o.Product);
-            return View(orderItems.ToList());
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var orderItem = db.OrderItems.Where(c => c.OrderID == id);
+            if (orderItem == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(orderItem.ToList());
         }
 
         // GET: Sales/OrderItems/Details/5
@@ -49,50 +58,25 @@ namespace Electronic_Store.Areas.Sales.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderID,ProductID,Quanlity,Price")] OrderItem orderItem)
+        public ActionResult Create([Bind(Include = "OrderID,ProductID,Quanlity,Price")] OrderItem orderItem, int? id)
         {
             if (ModelState.IsValid)
             {
+            
+                var isExist = IsProductExist(orderItem.ProductID);
+                if (isExist)
+                {
+                    ModelState.AddModelError("", "Product already exist");
+                    return View(orderItem);
+                }
+                orderItem.OrderID = Convert.ToInt32(id);
                 db.OrderItems.Add(orderItem);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.Message = "Added successfully!";
+                
+                return RedirectToAction("Create","OrderItems");  
             }
 
-            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderItem.OrderID);
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderItem.ProductID);
-            return View(orderItem);
-        }
-
-        // GET: Sales/OrderItems/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            OrderItem orderItem = db.OrderItems.Find(id);
-            if (orderItem == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderItem.OrderID);
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderItem.ProductID);
-            return View(orderItem);
-        }
-
-        // POST: Sales/OrderItems/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderID,ProductID,Quanlity,Price")] OrderItem orderItem)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(orderItem).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
             ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderItem.OrderID);
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderItem.ProductID);
             return View(orderItem);
@@ -131,6 +115,15 @@ namespace Electronic_Store.Areas.Sales.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [NonAction]
+        public bool IsProductExist(int ProductID)
+        {
+            using (ESDatabaseEntities dc = new ESDatabaseEntities())
+            {
+                var v = dc.Products.Where(a => a.ProductID == ProductID).FirstOrDefault();
+                return v != null;
+            }
         }
     }
 }

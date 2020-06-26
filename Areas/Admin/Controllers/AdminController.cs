@@ -19,6 +19,8 @@ namespace Electronic_Store.Areas.Admin.Controllers
 
             return View();
         }
+
+
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public ActionResult TimKiemNC(string FullName = "", string Gender = "", string luongMin = "", string luongMax = "", string Address = "")
@@ -60,10 +62,10 @@ namespace Electronic_Store.Areas.Admin.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public ActionResult TimKiemMH(string Name = "", string Brand = "", string Category = "", string PriceMin = "", string PriceMax = "")
+        public ActionResult TimKiemMH(string Name = "", string Brand = "",
+            string Category = "", string PriceMin = "", string PriceMax = "")
         {
             string max = PriceMax;
-
             ViewBag.Name = Name;
             ViewBag.Brand = Brand;
             string min;
@@ -87,9 +89,8 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 ViewBag.PriceMax = PriceMax;
                 max = PriceMax;
             }
-
-
-            var staffs = db.Products.SqlQuery("MatHang_TimKiem'" + Name + "','" + Brand + "','" + Category + "','" + min + "','" + max + "'");
+            var staffs = db.Products.SqlQuery("MatHang_TimKiem'" + Name + "','"
+                + Brand + "','" + Category + "','" + min + "','" + max + "'");
             if (staffs.Count() == 0)
                 ViewBag.TB = "Empty";
             return View(staffs.ToList());

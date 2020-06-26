@@ -11,16 +11,12 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Conntact
+    
+    public partial class Statistical
     {
         public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Message { get; set; }
-        [Required]
-        public string Email { get; set; }
+        public Nullable<System.DateTime> From { get; set; }
+        public Nullable<System.DateTime> To { get; set; }
+        public string Total { get; set; }
     }
 }

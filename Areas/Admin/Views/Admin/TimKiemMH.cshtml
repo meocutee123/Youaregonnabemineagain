@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "TimKiemMH";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    var grid = new WebGrid(Model, canPage: true, defaultSort: "TenNV", rowsPerPage: 2);
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "TenNV", rowsPerPage: 5);
     @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
 
 }
@@ -71,18 +71,6 @@
 
                 </tr>
 
-                <tr>
-                    <td>Thương hiệu</td>
-                    <td>
-                        <input type="text" name="Brand" value="@ViewBag.Brand" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Thể loại</td>
-                    <td>
-                        <input type="text" name="Category" value="@ViewBag.Category" />
-                    </td>
-                </tr>
 
                 <tr>
                     <td></td>

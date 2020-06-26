@@ -35,9 +35,9 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CustomerID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }, new{@class = "btn btn-primary"}) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CustomerID }, new { @class = "btn btn-secondary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
 

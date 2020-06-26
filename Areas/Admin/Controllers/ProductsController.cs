@@ -46,11 +46,10 @@ namespace Electronic_Store.Areas.Admin.Controllers
         }
 
         // POST: Admin/Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg")] Product product, HttpPostedFileBase ProductImg)
+        public ActionResult Create([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg")]
+        Product product, HttpPostedFileBase ProductImg)
         {
             if (ModelState.IsValid)
             {
@@ -88,11 +87,10 @@ namespace Electronic_Store.Areas.Admin.Controllers
         }
 
         // POST: Admin/Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg")] Product product, HttpPostedFileBase ProductImg)
+        public ActionResult Edit([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg")]
+        Product product, HttpPostedFileBase ProductImg)
         {
             if (ModelState.IsValid)
             {
@@ -110,8 +108,9 @@ namespace Electronic_Store.Areas.Admin.Controllers
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
             return View(product);
         }
-        [Authorize(Roles = "Admin, Moderator")]
+
         // GET: Admin/Products/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

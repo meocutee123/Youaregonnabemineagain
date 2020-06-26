@@ -11,7 +11,8 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,7 +27,9 @@ namespace Electronic_Store.Models
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<System.DateTime> ShippedDate { get; set; }
         public int StoreID { get; set; }
+        [Required]
         public Nullable<bool> OrderStatus { get; set; }
+        [Required]
         public Nullable<decimal> Total { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

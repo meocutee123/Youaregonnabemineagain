@@ -50,11 +50,10 @@ namespace Electronic_Store.Areas.Admin.Controllers
         }
 
         // POST: Admin/Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password, ConfirmPassword, CreatedDate,ProfileImg")] Customer customer)
+        public ActionResult Create([Bind(Include = "CustomerID,FirstName,LastName,Email" +
+            ",Address,Password, ConfirmPassword, CreatedDate,ProfileImg")] Customer customer)
         {
 
             if (ModelState.IsValid)

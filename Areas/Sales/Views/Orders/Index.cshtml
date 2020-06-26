@@ -23,8 +23,11 @@
         {
             <tr>
                 <td>@item.OrderID</td>
-                <td>@item.Customer.LastName</td>
-                <td>@item.OrderDate</td>
+                <td>
+                    @item.Customer.FirstName
+                                @item.Customer.LastName
+                            </td>
+                <td>@(item.OrderDate?.ToString("MM/dd/yyyy"))</td>
                 
                     @if(item.OrderStatus != true)
                     {
@@ -38,7 +41,9 @@
                 <td>@item.Total</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.OrderID })
+                    @Html.ActionLink("Details", "Index", "OrderItems", new { id = item.OrderID }, null)|
+                    @Html.ActionLink("Add items", "Create", "OrderItems", new { id = item.OrderID }, null)
+
                 </td>
             </tr>
             

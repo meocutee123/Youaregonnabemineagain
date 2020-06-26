@@ -11,12 +11,15 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class OrderItem
     {
         public int OrderID { get; set; }
         public int ProductID { get; set; }
+        [Required]
         public Nullable<long> Quanlity { get; set; }
+        [Required]
         public Nullable<decimal> Price { get; set; }
     
         public virtual Order Order { get; set; }

@@ -25,18 +25,26 @@ namespace Electronic_Store.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(Adminstrator adminstrator, string returnUrl)
         {
-            var dataItem = db.Adminstrators.Where(x => x.AdminName == adminstrator.AdminName && x.Password == adminstrator.Password).First();
+            var dataItem = db.Adminstrators.Where(x => x.AdminName == adminstrator.AdminName).FirstOrDefault();
             if (dataItem != null)
             {
-                FormsAuthentication.SetAuthCookie(dataItem.AdminName, false);
-                if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                if (string.Compare(adminstrator.Password, dataItem.Password) == 0)
                 {
-                    return Redirect(returnUrl);
+                    FormsAuthentication.SetAuthCookie(dataItem.AdminName, false);
+                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
                 }
                 else
                 {
-                    return RedirectToAction("Index","Admin");
+                    ModelState.AddModelError("", "Invalid adminname and password");
+                    return View();
                 }
             }
             else
@@ -45,11 +53,12 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 return View();
             }
             
+
         }
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login","Login");
+            return RedirectToAction("Login", "Login");
         }
     }
 }

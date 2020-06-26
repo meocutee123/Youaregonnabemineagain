@@ -43,10 +43,10 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.StaffID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.StaffID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.StaffID }) |
-                    @Html.ActionLink("Edit role", "EditRole", new { id = item.StaffID })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StaffID }, new{@class = "btn btn-md btn-primary"}) |
+                    @Html.ActionLink("Details", "Details", new { id = item.StaffID }, new { @class = "btn btn-md btn-success" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.StaffID }, new { @class = "btn btn-md btn-danger" }) |
+                    @Html.ActionLink("Edit role", "EditRole", new { id = item.StaffID }, new { @class = "btn btn-md btn-secondary" })
                 </td>
             </tr>
 
