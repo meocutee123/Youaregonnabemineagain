@@ -12,7 +12,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
 {
     public class StaffsController : Controller
     {
-        private ESDatabaseEntities db = new ESDatabaseEntities();
+        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
         [Authorize(Roles = "Admin")]
         // GET: Admin/Staffs
         public ActionResult Index()
@@ -48,20 +48,30 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff, HttpPostedFileBase ProfileImg)
+        public ActionResult Create([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password," +
+            " ConfirmPassword,CreatedDate,ManagerID," +
+            "ProfileImg,StoreID,Gender,Salary")] Staff staff, HttpPostedFileBase ProfileImg)
         {
             if (ModelState.IsValid)
             {
-                string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
-                //Lưu hình đại diện về Server
-                var path = Server.MapPath("~/Assets/images/Staffs/" + postedFileName);
-                ProfileImg.SaveAs(path);
-                staff.ProfileImg = "~/Assets/images/Staffs/" + postedFileName;
-                db.Staffs.Add(staff);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var isExist = IsEmailExist(staff.Email);
+                if (!isExist)
+                {
+                    string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
+                    //Lưu hình đại diện về Server
+                    var path = Server.MapPath("~/Assets/images/Staffs/" + postedFileName);
+                    ProfileImg.SaveAs(path);
+                    staff.ProfileImg = "~/Assets/images/Staffs/" + postedFileName;
+                    staff.CreatedDate = DateTime.Now;
+                    db.Staffs.Add(staff);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                    
+                } else
+                {
+                    ModelState.AddModelError("", "Email already exist");
+                }
             }
-
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", staff.StoreID);
             return View(staff);
         }
@@ -172,6 +182,15 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [NonAction]
+        public bool IsEmailExist(string Email)
+        {
+            using (ESDatabaseEntities dc = new ESDatabaseEntities())
+            {
+                var v = dc.Customers.Where(a => a.Email == Email).FirstOrDefault();
+                return v != null;
+            }
         }
     }
 }

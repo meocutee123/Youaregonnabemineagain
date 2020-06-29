@@ -58,7 +58,14 @@ namespace Electronic_Store.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-               
+                var isExist = IsEmailExist(customer.Email);
+                if (isExist)
+                {
+                    ModelState.AddModelError("", "Email already exist");
+                    return View(customer);
+                }
+                customer.Password = Crypto.Hash(customer.Password);
+                customer.ConfirmPassword = Crypto.Hash(customer.ConfirmPassword);
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -138,6 +145,15 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [NonAction]
+        public bool IsEmailExist(string Email)
+        {
+            using (ESDatabaseEntities dc = new ESDatabaseEntities())
+            {
+                var v = dc.Customers.Where(a => a.Email == Email).FirstOrDefault();
+                return v != null;
+            }
         }
     }
 }

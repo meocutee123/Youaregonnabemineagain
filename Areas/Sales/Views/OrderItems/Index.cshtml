@@ -6,7 +6,7 @@
 }
 
 <h2>Orders items</h2>
-<p>Customer name: </p>
+<p>Customer name: @ViewBag.CustomerName </p>
 <table class="table table-fluid" id="">
     <thead>
         <tr>
@@ -14,7 +14,8 @@
             <th>Product name</th>
             <th>Quantity</th>
             <th>Price</th>
-            
+            <th>Total</th>
+
             <td></td>
         </tr>
     </thead>
@@ -26,6 +27,7 @@
                 <td>@item.Product.Name</td>
                 <td>@item.Quanlity</td>
                 <td>@item.Price</td>
+                <td>@(item.Price*item.Quanlity)</td>
             </tr>
 
         }

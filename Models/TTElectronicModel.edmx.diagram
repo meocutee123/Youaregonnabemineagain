@@ -27,7 +27,7 @@
         <EntityTypeShape EntityType="ESDatabaseModel.Stock" Width="1.5" PointX="4.875" PointY="5.125" />
         <AssociationConnector Association="ESDatabaseModel.FK_Stocks_ToTable_1" />
         <AssociationConnector Association="ESDatabaseModel.FK_Stocks_ToTable" />
-        <EntityTypeShape EntityType="ESDatabaseModel.Statistical" Width="1.5" PointX="7" PointY="8.625" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Statistical" Width="1.5" PointX="8.5" PointY="9.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

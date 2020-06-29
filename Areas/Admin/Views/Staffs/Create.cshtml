@@ -13,7 +13,9 @@
         <form class="form-horizontal">
             <h2>Create staff</h2>
             <div class="row">
+                
                 <div class="col-md-5">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         <label for="firstName" class="col-sm-3 control-label">First Name</label>
                         <div class="col-sm-9">

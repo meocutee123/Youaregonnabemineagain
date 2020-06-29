@@ -12,6 +12,7 @@ namespace Electronic_Store.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Management;
 
     public partial class Staff
     {
@@ -20,14 +21,12 @@ namespace Electronic_Store.Models
         {
             this.Orders = new HashSet<Order>();
         }
+
         public string FullName
         {
-            get
-            {
-                return string.Format("{0} {1}", FirstName, LastName);
-            }
+            get { return string.Format("{0} {1}", FirstName, LastName); }
         }
-
+    
         public int StaffID { get; set; }
         [Required]
         public string FirstName { get; set; }
@@ -35,8 +34,8 @@ namespace Electronic_Store.Models
         public string LastName { get; set; }
         [Required]
         public string Email { get; set; }
-        [Required]
         public string Phone { get; set; }
+        [Required]
         public string Address { get; set; }
         [Required]
         public string Password { get; set; }
@@ -45,9 +44,11 @@ namespace Electronic_Store.Models
         public string ConfirmPassword { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<int> ManagerID { get; set; }
+        [Required]
         public string ProfileImg { get; set; }
         public int StoreID { get; set; }
         public Nullable<bool> Gender { get; set; }
+        [Required]
         public Nullable<decimal> Salary { get; set; }
         public string Role { get; set; }
     

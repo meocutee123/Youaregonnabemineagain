@@ -26,6 +26,7 @@ namespace Electronic_Store.Models
         public int StoreID { get; set; }
         [Required]
         public string StoreName { get; set; }
+        [Required]
         public string Address { get; set; }
         [Required]
         public string Phone { get; set; }

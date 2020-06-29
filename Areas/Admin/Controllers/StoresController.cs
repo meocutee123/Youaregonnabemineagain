@@ -13,7 +13,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
 {
     public class StoresController : Controller
     {
-        private ESDatabaseEntities db = new ESDatabaseEntities();
+        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
         [Authorize]
         // GET: Admin/Stores
         public ActionResult Index()

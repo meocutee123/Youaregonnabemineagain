@@ -12,15 +12,26 @@ namespace Electronic_Store.Areas.Sales.Controllers
 {
     public class OrdersController : Controller
     {
-        private ESDatabaseEntities db = new ESDatabaseEntities();
+        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
 
         // GET: Sales/Orders
         [Authorize(Roles ="Admin, Moderator")]
 
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Store).Include(o => o.Customer).Include(o => o.Staff);
-            return View(orders.ToList());
+            var orders = db.Orders.Include(o => o.Store).Include(o => o.Customer).Include(o => o.Staff).Include(d => d.OrderItems).ToList();
+            foreach(var order in orders)
+            {
+                decimal Total = 0;
+                foreach(var orderItem in order.OrderItems)
+                {
+                    decimal quantityDecimal = orderItem.Quanlity ?? 0;
+                    decimal priceDecimal = orderItem.Price ?? 0;
+                    Total += quantityDecimal * priceDecimal;
+                }
+                order.Total = Total;
+            }
+            return View(orders);
         }
 
 

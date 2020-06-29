@@ -24,6 +24,7 @@ namespace Electronic_Store.Models
         public int BrandID { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
         public string BrandImg { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

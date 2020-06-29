@@ -28,6 +28,7 @@ namespace Electronic_Store.Models
         public int BrandID { get; set; }
         public int CategoryID { get; set; }
         public Nullable<decimal> Price { get; set; }
+        [Required]
         public string ProductImg { get; set; }
     
         public virtual Brand Brand { get; set; }
