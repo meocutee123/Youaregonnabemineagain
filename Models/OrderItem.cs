@@ -21,7 +21,6 @@ namespace Electronic_Store.Models
         public Nullable<long> Quanlity { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> Total { get; set; }
-
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

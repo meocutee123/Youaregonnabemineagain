@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3f0cb18e3cad471b8d5dc0541879c16f" Name="Diagram1" ZoomLevel="90">
+      <Diagram DiagramId="3f0cb18e3cad471b8d5dc0541879c16f" Name="Diagram1" ZoomLevel="77">
         <EntityTypeShape EntityType="ESDatabaseModel.Adminstrator" Width="1.5" PointX="9.375" PointY="4.125" />
         <EntityTypeShape EntityType="ESDatabaseModel.Brand" Width="1.5" PointX="2.75" PointY="3.875" />
         <EntityTypeShape EntityType="ESDatabaseModel.Category" Width="1.5" PointX="2.75" PointY="5.875" />
         <EntityTypeShape EntityType="ESDatabaseModel.MegaMenu" Width="1.5" PointX="9.5" PointY="2.375" />
-        <EntityTypeShape EntityType="ESDatabaseModel.Order" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Order" Width="1.5" PointX="2.5" PointY="8.625" />
         <EntityTypeShape EntityType="ESDatabaseModel.Product" Width="1.5" PointX="0.625" PointY="4.5" />
         <EntityTypeShape EntityType="ESDatabaseModel.Store" Width="1.5" PointX="4.875" PointY="7.625" />
         <EntityTypeShape EntityType="ESDatabaseModel.OrderItem" Width="1.5" PointX="5.25" PointY="11.375" />
@@ -20,15 +20,18 @@
         <AssociationConnector Association="ESDatabaseModel.FK_OrderItems_Products" />
         <EntityTypeShape EntityType="ESDatabaseModel.Customer" Width="1.5" PointX="0.625" PointY="10" />
         <AssociationConnector Association="ESDatabaseModel.FK_Orders_Customers" />
-        <EntityTypeShape EntityType="ESDatabaseModel.Conntact" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="ESDatabaseModel.Staff" Width="1.5" PointX="7" PointY="5.125" />
-        <AssociationConnector Association="ESDatabaseModel.FK_Orders_Staffs" />
-        <AssociationConnector Association="ESDatabaseModel.FK_Staffs_Stores" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Conntact" Width="1.5" PointX="7.375" PointY="0.875" />
         <EntityTypeShape EntityType="ESDatabaseModel.Stock" Width="1.5" PointX="4.875" PointY="5.125" />
         <AssociationConnector Association="ESDatabaseModel.FK_Stocks_ToTable_1" />
         <AssociationConnector Association="ESDatabaseModel.FK_Stocks_ToTable" />
         <EntityTypeShape EntityType="ESDatabaseModel.Statistical" Width="1.5" PointX="8.5" PointY="9.5" />
-      </Diagram>
+        <EntityTypeShape EntityType="ESDatabaseModel.Division" Width="1.5" PointX="9.25" PointY="12.375" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Staff" Width="1.5" PointX="11.5" PointY="8.875" />
+        <AssociationConnector Association="ESDatabaseModel.FK_Division_Staffs" />
+        <AssociationConnector Association="ESDatabaseModel.FK_Staffs_Divisions" />
+        <AssociationConnector Association="ESDatabaseModel.FK_Orders_Staffs" />
+        <AssociationConnector Association="ESDatabaseModel.FK_Staffs_Stores" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

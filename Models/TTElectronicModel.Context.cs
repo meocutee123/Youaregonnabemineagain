@@ -37,9 +37,10 @@ namespace Electronic_Store.Models
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Conntact> Conntacts { get; set; }
-        public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<Statistical> Statisticals { get; set; }
+        public virtual DbSet<Division> Divisions { get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
     
         public virtual int MatHang_TimKiem(string name, string brand, string category, string priceMin, string priceMax)
         {

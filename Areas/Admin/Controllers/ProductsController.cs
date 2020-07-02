@@ -54,14 +54,24 @@ namespace Electronic_Store.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
 
-                string postedFileName = Path.GetFileName(ProductImg.FileName);
-                var path = Server.MapPath("/Assets/images/" + postedFileName);
-                ProductImg.SaveAs(path);
-                product.ProductImg = "/Assets/images/" + postedFileName;
+                var isExist = IsProductNameExist(product.Name);
+                if (!isExist)
+                {
+                    string postedFileName = Path.GetFileName(ProductImg.FileName);
+                    var path = Server.MapPath("/Assets/images/" + postedFileName);
+                    ProductImg.SaveAs(path);
+                    product.ProductImg = "/Assets/images/" + postedFileName;
 
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Product already exists");
+                }
+
             }
 
             ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "Name", product.BrandID);
@@ -143,6 +153,16 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [NonAction]
+        public bool IsProductNameExist(string Name)
+        {
+            using (ESDatabaseEntities dc = new ESDatabaseEntities())
+            {
+                var v = dc.Products.Where(a => a.Name == Name).FirstOrDefault();
+                return v != null;
+            }
         }
     }
 }

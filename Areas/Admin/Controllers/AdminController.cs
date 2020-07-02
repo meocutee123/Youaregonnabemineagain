@@ -52,7 +52,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 ViewBag.luongMax = luongMax;
                 max = luongMax;
             }
-            ViewBag.diaChi = Address;
+            ViewBag.Address = Address;
 
             var staffs = db.Staffs.SqlQuery("NhanVien_TimKiem'" + FullName + "','" + Gender + "','" + min + "','" + max + "',N'" + Address + "'");
             if (staffs.Count() == 0)
@@ -67,6 +67,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         {
             string max = PriceMax;
             ViewBag.Name = Name;
+            ViewBag.Catedory = Category;
             ViewBag.Brand = Brand;
             string min;
             if (PriceMin == "")

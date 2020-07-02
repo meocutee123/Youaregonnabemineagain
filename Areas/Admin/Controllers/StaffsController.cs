@@ -40,6 +40,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName");
+            ViewBag.DivisionID = new SelectList(db.Divisions, "DivisionID", "Name");
             return View();
         }
 
@@ -73,6 +74,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 }
             }
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", staff.StoreID);
+            ViewBag.DivisionID = new SelectList(db.Divisions, "DivisionID", "Name", staff.DivisionID);
             return View(staff);
         }
         [Authorize(Roles = "Admin")]
@@ -88,6 +90,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", staff.StoreID);
+            ViewBag.DivisionID = new SelectList(db.Divisions, "DivisionID", "Name", staff.DivisionID);
             return View(staff);
         }
 
@@ -123,6 +126,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", staff.StoreID);
+            ViewBag.DivisionID = new SelectList(db.Divisions, "DivisionID", "Name", staff.DivisionID);
             return View(staff);
         }
 
@@ -146,6 +150,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", staff.StoreID);
+            ViewBag.DivisionID = new SelectList(db.Divisions, "DivisionID", "Name", staff.DivisionID);
             return View(staff);
         }
         [Authorize(Roles = "Admin")]

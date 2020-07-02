@@ -13,39 +13,23 @@ namespace Electronic_Store.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Customer
+    public partial class Division
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public Division()
         {
-            this.Orders = new HashSet<Order>();
-        }
-        public string FullName
-        {
-            get
-            {
-                return string.Format("{0} {1}", FirstName, LastName);
-            }
+            this.Staffs = new HashSet<Staff>();
         }
     
-        public int CustomerID { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string FirstName { get; set; }
+        public string DivisionID { get; set; }
         [Required]
-        public string LastName { get; set; }
-        [Required]
-        public string Email { get; set; }
-        public string Address { get; set; }
-        [Required]
-        public string Password { get; set; }
-        [Required]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        
-        public string ProfileImg { get; set; }
+        public string Name { get; set; }
+        public int ManagerID { get; set; }
     
+        public virtual Staff Staff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Staff> Staffs { get; set; }
     }
 }

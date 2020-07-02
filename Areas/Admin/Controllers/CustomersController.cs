@@ -61,7 +61,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 var isExist = IsEmailExist(customer.Email);
                 if (isExist)
                 {
-                    ModelState.AddModelError("", "Email already exist");
+                    ModelState.AddModelError("", "Email already exists");
                     return View(customer);
                 }
                 customer.Password = Crypto.Hash(customer.Password);

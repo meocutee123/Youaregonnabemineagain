@@ -51,6 +51,15 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ProfileImg" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="Divisions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DivisionID" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ManagerID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="MegaMenu">
           <Key>
             <PropertyRef Name="MenuID" />
@@ -104,7 +113,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Password" Type="varchar" MaxLength="100" />
           <Property Name="CreatedDate" Type="date" Nullable="false" />
-          <Property Name="ManagerID" Type="int" />
+          <Property Name="DivisionID" Type="int" Nullable="false" />
           <Property Name="ProfileImg" Type="varchar(max)" />
           <Property Name="StoreID" Type="int" Nullable="false" />
           <Property Name="Gender" Type="bit" />
@@ -140,6 +149,18 @@
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Division_Staffs">
+          <End Role="Staffs" Type="Self.Staffs" Multiplicity="1" />
+          <End Role="Divisions" Type="Self.Divisions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staffs">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="Divisions">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderItems_Orders">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
@@ -224,6 +245,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Staffs_Divisions">
+          <End Role="Divisions" Type="Self.Divisions" Multiplicity="1" />
+          <End Role="Staffs" Type="Self.Staffs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Staffs">
+              <PropertyRef Name="DivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Staffs_Stores">
           <End Role="Stores" Type="Self.Stores" Multiplicity="1" />
           <End Role="Staffs" Type="Self.Staffs" Multiplicity="*" />
@@ -280,6 +313,7 @@
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Conntacts" EntityType="Self.Conntacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Divisions" EntityType="Self.Divisions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MegaMenu" EntityType="Self.MegaMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -288,6 +322,10 @@
           <EntitySet Name="Statisticals" EntityType="Self.Statisticals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stocks" EntityType="Self.Stocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Division_Staffs" Association="Self.FK_Division_Staffs">
+            <End Role="Staffs" EntitySet="Staffs" />
+            <End Role="Divisions" EntitySet="Divisions" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderItems_Orders" Association="Self.FK_OrderItems_Orders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderItems" EntitySet="OrderItems" />
@@ -315,6 +353,10 @@
           <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staffs_Divisions" Association="Self.FK_Staffs_Divisions">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="Staffs" EntitySet="Staffs" />
           </AssociationSet>
           <AssociationSet Name="FK_Staffs_Stores" Association="Self.FK_Staffs_Stores">
             <End Role="Stores" EntitySet="Stores" />
@@ -368,15 +410,6 @@
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
           <EntitySet Name="Conntacts" EntityType="ESDatabaseModel.Conntact" />
-          <EntitySet Name="Staffs" EntityType="ESDatabaseModel.Staff" />
-          <AssociationSet Name="FK_Orders_Staffs" Association="ESDatabaseModel.FK_Orders_Staffs">
-            <End Role="Staff" EntitySet="Staffs" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Staffs_Stores" Association="ESDatabaseModel.FK_Staffs_Stores">
-            <End Role="Store" EntitySet="Stores" />
-            <End Role="Staff" EntitySet="Staffs" />
-          </AssociationSet>
           <EntitySet Name="Stocks" EntityType="ESDatabaseModel.Stock" />
           <AssociationSet Name="FK_Stocks_ToTable_1" Association="ESDatabaseModel.FK_Stocks_ToTable_1">
             <End Role="Product" EntitySet="Products" />
@@ -401,7 +434,25 @@
             <Parameter Name="Address" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Statisticals" EntityType="ESDatabaseModel.Statistical" />
-        </EntityContainer>
+          <EntitySet Name="Divisions" EntityType="ESDatabaseModel.Division" />
+          <EntitySet Name="Staffs" EntityType="ESDatabaseModel.Staff" />
+          <AssociationSet Name="FK_Division_Staffs" Association="ESDatabaseModel.FK_Division_Staffs">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Division" EntitySet="Divisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staffs_Divisions" Association="ESDatabaseModel.FK_Staffs_Divisions">
+            <End Role="Division" EntitySet="Divisions" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Staffs" Association="ESDatabaseModel.FK_Orders_Staffs">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staffs_Stores" Association="ESDatabaseModel.FK_Staffs_Stores">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Adminstrator">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -476,8 +527,8 @@
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="ESDatabaseModel.FK_Orders_Stores" FromRole="Store" ToRole="Order" />
-          <NavigationProperty Name="Staffs" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Store" ToRole="Staff" />
           <NavigationProperty Name="Stocks" Relationship="ESDatabaseModel.FK_Stocks_ToTable" FromRole="Store" ToRole="Stock" />
+          <NavigationProperty Name="Staffs" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Store" ToRole="Staff" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -586,51 +637,6 @@
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Staff">
-          <Key>
-            <PropertyRef Name="StaffID" />
-          </Key>
-          <Property Name="StaffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ManagerID" Type="Int32" />
-          <Property Name="ProfileImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="StoreID" Type="Int32" Nullable="false" />
-          <Property Name="Gender" Type="Boolean" />
-          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Orders" Relationship="ESDatabaseModel.FK_Orders_Staffs" FromRole="Staff" ToRole="Order" />
-          <NavigationProperty Name="Store" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Staff" ToRole="Store" />
-          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_Orders_Staffs">
-          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="1" />
-          <End Type="ESDatabaseModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="StaffID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="StaffID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Staffs_Stores">
-          <End Type="ESDatabaseModel.Store" Role="Store" Multiplicity="1" />
-          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Store">
-              <PropertyRef Name="StoreID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="StoreID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Stock">
           <Key>
             <PropertyRef Name="StockID" />
@@ -677,6 +683,88 @@
           <Property Name="To" Type="DateTime" Precision="0" />
           <Property Name="Total" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
+        <EntityType Name="Division">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DivisionID" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Staff" Relationship="ESDatabaseModel.FK_Division_Staffs" FromRole="Division" ToRole="Staff" />
+          <NavigationProperty Name="Staffs" Relationship="ESDatabaseModel.FK_Staffs_Divisions" FromRole="Division" ToRole="Staff" />
+          </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DivisionID" Type="Int32" Nullable="false" />
+          <Property Name="ProfileImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Divisions" Relationship="ESDatabaseModel.FK_Division_Staffs" FromRole="Staff" ToRole="Division" />
+          <NavigationProperty Name="Division" Relationship="ESDatabaseModel.FK_Staffs_Divisions" FromRole="Staff" ToRole="Division" />
+          <NavigationProperty Name="Orders" Relationship="ESDatabaseModel.FK_Orders_Staffs" FromRole="Staff" ToRole="Order" />
+          <NavigationProperty Name="Store" Relationship="ESDatabaseModel.FK_Staffs_Stores" FromRole="Staff" ToRole="Store" />
+        </EntityType>
+        <Association Name="FK_Division_Staffs">
+          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="1" />
+          <End Type="ESDatabaseModel.Division" Role="Division" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="Division">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staffs_Divisions">
+          <End Type="ESDatabaseModel.Division" Role="Division" Multiplicity="1" />
+          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Division">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="DivisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Staffs">
+          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="1" />
+          <End Type="ESDatabaseModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="StaffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staffs_Stores">
+          <End Type="ESDatabaseModel.Store" Role="Store" Multiplicity="1" />
+          <End Type="ESDatabaseModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -788,26 +876,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Staffs">
-            <EntityTypeMapping TypeName="ESDatabaseModel.Staff">
-              <MappingFragment StoreEntitySet="Staffs">
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Salary" ColumnName="Salary" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
-                <ScalarProperty Name="ProfileImg" ColumnName="ProfileImg" />
-                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Stocks">
             <EntityTypeMapping TypeName="ESDatabaseModel.Stock">
               <MappingFragment StoreEntitySet="Stocks">
@@ -827,6 +895,36 @@
                 <ScalarProperty Name="To" ColumnName="To" />
                 <ScalarProperty Name="From" ColumnName="From" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Divisions">
+            <EntityTypeMapping TypeName="ESDatabaseModel.Division">
+              <MappingFragment StoreEntitySet="Divisions">
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="ESDatabaseModel.Staff">
+              <MappingFragment StoreEntitySet="Staffs">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="ProfileImg" ColumnName="ProfileImg" />
+                <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
