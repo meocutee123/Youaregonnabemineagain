@@ -11,14 +11,12 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Stock
     {
         public int StockID { get; set; }
         public int StoreID { get; set; }
         public int ProductID { get; set; }
-        [Required]
         public Nullable<long> Quantity { get; set; }
     
         public virtual Product Product { get; set; }

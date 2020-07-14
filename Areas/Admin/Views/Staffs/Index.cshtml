@@ -10,8 +10,8 @@
 <table class="table table-fluid" id="myTable">
     <thead>
         <tr>
-            <th>Customer firstname</th>
-            <th>Customer lastname</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
             <th>Gender</th>
             <th>Address</th>
             <th>Profile image</th>
@@ -24,13 +24,14 @@
             <tr>
                 <td>@item.FirstName</td>
                 <td>@item.LastName</td>
-                    @if (item.Gender != true) { 
-                        <td>Nữ</td>
-                    }
-                    else
-                    {
-                        <td>Nam</td>
-                    }
+                @if (item.Gender != true)
+                {
+                    <td>Nữ</td>
+                }
+                else
+                {
+                    <td>Nam</td>
+                }
                 <td>@item.Address</td>
                 <td>
                     @if (item.ProfileImg != null)
@@ -42,12 +43,19 @@
                         <img src="~/Assets/images/Staffs/anonymous.png" alt="Emty" style="height: 50px" />
                     }
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.StaffID }, new{@class = "btn btn-sm btn-primary"}) |
-                    @Html.ActionLink("Details", "Details", new { id = item.StaffID }, new { @class = "btn btn-sm btn-success" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.StaffID }, new { @class = "btn btn-sm btn-danger" }) |
-                    @Html.ActionLink("Edit role", "EditRole", new { id = item.StaffID }, new { @class = "btn btn-sm btn-secondary" })
-                </td>
+                @if (item.Status != true)
+                {
+                    <td class="text-danger font-weight-bolder">Deleted | @Html.ActionLink("Details", "Details", new { id = item.StaffID })</td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.StaffID })|
+                        @Html.ActionLink("Details", "Details", new { id = item.StaffID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.StaffID }) |
+                        @Html.ActionLink("Edit role", "EditRole", new { id = item.StaffID })
+                    </td>
+                }
             </tr>
 
         }

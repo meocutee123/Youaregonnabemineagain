@@ -18,5 +18,6 @@ namespace Electronic_Store.Models
         public string Name { get; set; }
         public string Message { get; set; }
         public string Email { get; set; }
+        public Nullable<System.DateTime> DateSent { get; set; }
     }
 }

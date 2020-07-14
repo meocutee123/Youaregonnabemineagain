@@ -8,13 +8,32 @@
 <h2>Details</h2>
 
 <div class="container">
-    <h4>Product</h4>
+    <div>
+        @if (Model.Status != false)
+        {
+
+            <h2 class="text-success">Active</h2>
+        }
+        else
+        {
+            <h2 class="text-danger">Deleted</h2>
+            <style>
+                .col-md-3 img {
+                    opacity: 0.3;
+                    filter: alpha(opacity=40);
+                }
+            </style>
+        }
+    </div>
+   
     <hr />
     <div class="row">
         <div class="col-md-3">
             <img src="@Url.Content(Model.ProductImg)" style="height:200px" />
         </div>
         <div class="col-md-6">
+
+
             <dl class="dl-horizontal">
                 <dt>
                     @Html.DisplayNameFor(model => model.Name)
@@ -50,9 +69,9 @@
 
             </dl>
         </div>
-       
+
     </div>
-   
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }, new { @class ="btn btn-md btn-primary"}) |

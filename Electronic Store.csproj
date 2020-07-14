@@ -208,6 +208,7 @@
     <Compile Include="Models\MegaMenu.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>TTElectronicModel.tt</DependentUpon>
     </Compile>

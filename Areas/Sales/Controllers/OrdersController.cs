@@ -20,6 +20,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Store).Include(o => o.Customer).Include(o => o.Staff).Include(d => d.OrderItems).ToList();
+            decimal totalbill = 0;
             foreach(var order in orders)
             {
                 decimal Total = 0;
@@ -28,9 +29,12 @@ namespace Electronic_Store.Areas.Sales.Controllers
                     decimal quantityDecimal = orderItem.Quanlity ?? 0;
                     decimal priceDecimal = orderItem.Price ?? 0;
                     Total += quantityDecimal * priceDecimal;
-                }
+                   
+                }        
                 order.Total = Total;
+
             }
+            Session["Message"] = "Mèo méo meo";
             return View(orders);
         }
 
@@ -64,20 +68,21 @@ namespace Electronic_Store.Areas.Sales.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OrderID,CustomerID,StaffID," +
-            "OrderDate,ShippedDate,StoreID,OrderStatus,Total")] Order order)
+            "OrderDate,ShippedDate,StoreID,OrderStatus,Total,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
                 order.OrderDate = DateTime.Now;
                 db.Orders.Add(order);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                
             }
-
-            ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", order.StoreID);
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FirstName", order.CustomerID);
-            ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "FirstName", order.StaffID);
-            return View(order);
+            var id = db.Orders.ToList().Select(n => n.OrderID).Max();
+            return RedirectToAction("Index", "OrderItems", new { id });
+            //ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", order.StoreID);
+            //ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FirstName", order.CustomerID);
+            //ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "FirstName", order.StaffID);
+            //return View(order);
         }
         [Authorize(Roles = "Admin, Moderator")]
         // GET: Sales/Orders/Edit/5
@@ -103,7 +108,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderID,CustomerID,StaffID,OrderDate,ShippedDate,StoreID,OrderStatus,Total")] Order order)
+        public ActionResult Edit([Bind(Include = "OrderID,CustomerID,StaffID,OrderDate,ShippedDate,StoreID,OrderStatus,Total,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -138,7 +143,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
+            order.Status = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

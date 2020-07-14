@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Electronic_Store.Models.OrderItem>
+﻿@model Electronic_Store.Models.OrderModel
 
 @{
     ViewBag.Title = "Index";
@@ -7,31 +7,101 @@
 
 <h2>Orders items</h2>
 <p>Customer name: @ViewBag.CustomerName </p>
+<div>
+     Trigger the modal with a button 
+    <button type="button" class="btn btn-info btn-sm mb-2" data-toggle="modal" data-target="#myModal">Add item</button>
+
+     Modal 
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+             Modal content
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add new item</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("Create","OrderItems"))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <span class="text-success"><b>@ViewBag.Message</b></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NonIEOrderItemsModel.ProductID, "ProductID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("ProductID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NonIEOrderItemsModel.ProductID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NonIEOrderItemsModel.Quanlity, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.NonIEOrderItemsModel.Quanlity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NonIEOrderItemsModel.Quanlity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="display: none;">
+                                @Html.LabelFor(model => model.NonIEOrderItemsModel.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input type="text" value="0" name="Price" class="form-control" />
+                                    @Html.EditorFor(model => model.NonIEOrderItemsModel.Price, new { htmlAttributes = new { @class = "form-control " } })
+                                    @Html.ValidationMessageFor(model => model.NonIEOrderItemsModel.Price, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-success btn-sm" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 <table class="table table-fluid" id="">
     <thead>
         <tr>
-            <th>Order ID</th>
             <th>Product name</th>
             <th>Quantity</th>
             <th>Price</th>
             <th>Total</th>
-
-            <td></td>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderItemsModel)
         {
             <tr>
-                <td>@item.OrderID</td>
                 <td>@item.Product.Name</td>
                 <td>@item.Quanlity</td>
                 <td>@item.Price</td>
-                <td>@(item.Price*item.Quanlity)</td>
+                <td class="totalBill">@(item.Price*item.Quanlity)</td>
             </tr>
 
         }
 
     </tbody>
+
 </table>
+
+<h2>Total bill: @Model.OrderItemsModel.Sum(i => i.Price*i.Quanlity)</h2>
+
 

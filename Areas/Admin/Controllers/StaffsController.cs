@@ -174,8 +174,13 @@ namespace Electronic_Store.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Staff staff = db.Staffs.Find(id);
-            db.Staffs.Remove(staff);
+
+            var currentStaff = db.Staffs.FirstOrDefault(s => s.StaffID == id);
+            if (currentStaff == null)
+            {
+                return HttpNotFound();
+            }
+            currentStaff.Status = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

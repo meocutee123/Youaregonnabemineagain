@@ -53,7 +53,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CustomerID,FirstName,LastName,Email" +
-            ",Address,Password, ConfirmPassword, CreatedDate,ProfileImg")] Customer customer)
+            ",Address,Password, ConfirmPassword, CreatedDate, ProfileImg, Status")] Customer customer)
         {
 
             if (ModelState.IsValid)
@@ -94,7 +94,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password, ConfirmPassword, CreatedDate,ProfileImg")] Customer customer, HttpPostedFileBase ProfileImg)
+        public ActionResult Edit([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password, ConfirmPassword, CreatedDate, ProfileImg, Status")] Customer customer, HttpPostedFileBase ProfileImg)
         {
             if (ModelState.IsValid)
             {
@@ -132,8 +132,13 @@ namespace Electronic_Store.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
+
+            var currentCustomer = db.Customers.FirstOrDefault(s => s.CustomerID == id);
+            if (currentCustomer == null)
+            {
+                return HttpNotFound();
+            }
+            currentCustomer.Status = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -31,14 +31,21 @@
                     }
                     else
                     {
-                        <img src="~/Assets/images/Customers/anonymous.jpg" alt="Emty" style="height: 50px"/>
+                        <img src="~/Assets/images/Customers/anonymous.jpg" alt="Emty" style="height: 50px" />
                     }
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }, new{@class = "btn btn-primary"}) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CustomerID }, new { @class = "btn btn-secondary" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID }, new { @class = "btn btn-danger" })
-                </td>
+                @if (item.Status != true)
+                {
+                    <td class="text-danger font-weight-bolder">Deleted | @Html.ActionLink("Details", "Details", new { id = item.CustomerID })</td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.CustomerID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
+                    </td>
+                }
             </tr>
 
         }

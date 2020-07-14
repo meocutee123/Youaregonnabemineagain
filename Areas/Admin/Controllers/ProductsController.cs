@@ -48,7 +48,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // POST: Admin/Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg")]
+        public ActionResult Create([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg, Description, Status")]
         Product product, HttpPostedFileBase ProductImg)
         {
             if (ModelState.IsValid)
@@ -62,6 +62,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                     ProductImg.SaveAs(path);
                     product.ProductImg = "/Assets/images/" + postedFileName;
 
+                    
                     db.Products.Add(product);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -99,7 +100,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // POST: Admin/Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg")]
+        public ActionResult Edit([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg, Description, Status")]
         Product product, HttpPostedFileBase ProductImg)
         {
             if (ModelState.IsValid)
@@ -109,7 +110,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 ProductImg.SaveAs(path);
                 product.ProductImg = "/Assets/images/" + postedFileName;
 
-
+                
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -140,10 +141,16 @@ namespace Electronic_Store.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+           
+                var currentProduct = db.Products.FirstOrDefault(s => s.ProductID == id);
+                if (currentProduct == null)
+                {
+                    return HttpNotFound();
+                }
+                currentProduct.Status = false;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)

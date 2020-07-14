@@ -25,6 +25,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
             var order = db.Orders.Where(c => c.OrderID == id).FirstOrDefault();
             ViewBag.CustomerName = order.Customer.FullName;
 
+
             if (orderItem == null)
             {
                 return HttpNotFound();
@@ -34,18 +35,30 @@ namespace Electronic_Store.Areas.Sales.Controllers
         }
 
         // GET: Sales/OrderItems/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details([Bind(Include = "OrderID,ProductID,Quanlity,Price")] OrderItem orderItem, int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderItem orderItem = db.OrderItems.Find(id);
-            if (orderItem == null)
+            OrderItem OrderID = db.OrderItems.Find(id);
+            if (OrderID == null)
             {
                 return HttpNotFound();
             }
-            return View(orderItem);
+            if (ModelState.IsValid)
+            {
+                var product = db.Products.Where(d => d.ProductID == orderItem.ProductID).FirstOrDefault();
+                orderItem.OrderID = Convert.ToInt32(id);
+                orderItem.Price = product.Price;
+                db.OrderItems.Add(orderItem);
+                db.SaveChanges();
+                ViewBag.Message = "Added successfully!";
+                ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderItem.OrderID);
+                ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderItem.ProductID);
+                return View();
+            }
+            return View(OrderID);
         }
 
         // GET: Sales/OrderItems/Create
@@ -61,8 +74,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderID,ProductID,Quanlity,Price")]
-        OrderItem orderItem, int? id)
+        public ActionResult Create([Bind(Include = "OrderID,ProductID,Quanlity,Price")] OrderItem orderItem, int? id)
         {
 
             if (ModelState.IsValid)
@@ -77,7 +89,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
                 ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderItem.ProductID);
                 return View();
             }
-            ModelState.Values.SelectMany(v => v.Errors).ToList().ForEach(x => System.Diagnostics.Debug.WriteLine(x.ErrorMessage + "\n"));
+            //ModelState.Values.SelectMany(v => v.Errors).ToList().ForEach(x => System.Diagnostics.Debug.WriteLine(x.ErrorMessage + "\n"));
 
             return View(orderItem);
         }

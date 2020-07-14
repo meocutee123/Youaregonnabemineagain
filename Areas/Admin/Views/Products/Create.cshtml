@@ -5,77 +5,91 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
+<h4>Create product</h4>
+<hr />
+<div class="container row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
 
-<div class="container col-md-7">
-    @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
+            <div class="form-horizontal">
 
-        <div class="form-horizontal">
-            <h4>Create product</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-sm-3" })
-                <div class="col-sm-9">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.BrandID, "Brand", htmlAttributes: new { @class = "control-label col-sm-3" })
-                <div class="row ml-1">
-                    <div class="col-sm-8">
-                        @Html.DropDownList("BrandID", null, htmlAttributes: new { @class = "form-control" }) 
-                        @Html.ValidationMessageFor(model => model.BrandID, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-sm-2">
-                        @Html.ActionLink("+", "Create", "Brands", null, new { @class ="btn btn-sm btn-success"})
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.CategoryID, "Category", htmlAttributes: new { @class = "control-label col-sm-3" })
-                <div class="row ml-1">
-                    <div class="col-sm-8">
-                        @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" }) 
-                        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BrandID, "Brand", htmlAttributes: new { @class = "control-label col-sm-3" })
+                    <div class="row ml-1">
+                        <div class="col-sm-8">
+                            @Html.DropDownList("BrandID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BrandID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.ActionLink("+", "Create", "Brands", null, new { @class = "btn btn-sm btn-success" })
+                        </div>
                     </div>
-                    <div class="col-sm-2">
-                        @Html.ActionLink("+", "Create", "Categories", null, new { @class = "btn btn-sm btn-success" } )
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryID, "Category", htmlAttributes: new { @class = "control-label col-sm-3" })
+                    <div class="row ml-1">
+                        <div class="col-sm-8">
+                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.ActionLink("+", "Create", "Categories", null, new { @class = "btn btn-sm btn-success" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-sm-3" })
-                <div class="col-sm-9">
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ProductImg, htmlAttributes: new { @class = "control-label col-sm-3" })
-                <div class="col-sm-9">
-                    <input type="file" name="ProductImg" required />
-                </div>
-            </div>
 
-            <div class="form-group col-sm-9">
-                <div class="col-md-offset-2">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
+
+            </div>
+        }
+
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductImg, htmlAttributes: new { @class = "control-label col-sm-3" })
+            <div class="col-sm-9">
+                <input type="file" name="ProductImg" required />
             </div>
         </div>
-    }
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, "Description", htmlAttributes: new { @class = "control-label col-sm-3" })
+            <div class="row ml-1">
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" }, style = "width: 300px; height: 200px;" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-</div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        </div>
+        <div class="form-group col-sm-9">
+            <div class="col-md-offset-2">
+                <input type="submit" value="Create" class="btn btn-primary" />|@Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
 </div>

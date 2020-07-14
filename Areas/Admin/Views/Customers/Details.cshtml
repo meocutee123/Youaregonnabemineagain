@@ -8,7 +8,23 @@
 <h2>Details</h2>
 
 <div class="container">
-    <h4>Customer</h4>
+    <div>
+        @if (Model.Status != false)
+        {
+
+            <h2 class="text-success">Active</h2>
+        }
+        else
+        {
+            <h2 class="text-danger">Deleted</h2>
+            <style>
+                .col-md-4 img {
+                    opacity: 0.3;
+                    filter: alpha(opacity=40);
+                }
+            </style>
+        }
+    </div>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -57,7 +73,7 @@
         </div>
 
     </div>
-  
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerID }) |

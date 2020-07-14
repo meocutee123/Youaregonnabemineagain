@@ -11,8 +11,7 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Division
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +21,7 @@ namespace Electronic_Store.Models
         }
     
         public int Id { get; set; }
-        [Required]
         public string DivisionID { get; set; }
-        [Required]
         public string Name { get; set; }
         public int ManagerID { get; set; }
     

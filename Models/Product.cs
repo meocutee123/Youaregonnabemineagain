@@ -11,8 +11,7 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,13 +22,13 @@ namespace Electronic_Store.Models
         }
     
         public int ProductID { get; set; }
-        [Required]
         public string Name { get; set; }
         public int BrandID { get; set; }
         public int CategoryID { get; set; }
         public Nullable<decimal> Price { get; set; }
-        [Required]
         public string ProductImg { get; set; }
+        public string Description { get; set; }
+        public Nullable<bool> Status { get; set; }
     
         public virtual Brand Brand { get; set; }
         public virtual Category Category { get; set; }
