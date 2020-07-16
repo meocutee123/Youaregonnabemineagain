@@ -1,4 +1,5 @@
 ﻿using Electronic_Store.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -11,7 +12,7 @@ namespace Electronic_Store.Controllers
     
     public class HomeController : Controller
     {
-        readonly ESDatabaseEntities db = new ESDatabaseEntities();
+        private readonly ESDatabaseEntities db = new ESDatabaseEntities();
         
         public ActionResult Index()
         {
@@ -21,8 +22,9 @@ namespace Electronic_Store.Controllers
 
             return View(dynamic);
         }
+
         public List<Product> Products()
-        {
+         {
             List<Product> lProducts = db.Products.ToList();
             return lProducts;
         }

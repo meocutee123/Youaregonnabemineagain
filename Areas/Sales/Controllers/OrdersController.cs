@@ -20,7 +20,6 @@ namespace Electronic_Store.Areas.Sales.Controllers
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Store).Include(o => o.Customer).Include(o => o.Staff).Include(d => d.OrderItems).ToList();
-            decimal totalbill = 0;
             foreach(var order in orders)
             {
                 decimal Total = 0;
@@ -34,7 +33,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
                 order.Total = Total;
 
             }
-            Session["Message"] = "Mèo méo meo";
+            Session["Message"] = "Mèo méo meo mèo meo";
             return View(orders);
         }
 
@@ -142,6 +141,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             Order order = db.Orders.Find(id);
             order.Status = false;
             db.SaveChanges();

@@ -1,234 +1,119 @@
-﻿<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Electronic Store a Ecommerce Online Shopping Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
-    <!-- for-mobile-apps -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Electronic Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-	SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript">
-        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-           function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- //for-mobile-apps -->
-    <script type="text/javascript"
-            src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <!-- Custom Theme files -->
-    @Styles.Render("~/Assets/css/css")
-    @RenderSection("styles", required: false)
 
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $(".scroll").click(function (event) {
-                event.preventDefault();
-                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
-            });
-        });
-    </script>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Heroic Features - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/Assets/css/heroic-features.css" rel="stylesheet">
 
 </head>
+
 <body>
 
-    <script type="text/javascript" src="/Assets/js/bootstrap-3.1.1.min.js"></script>
-
-    <!--header-->
-    <div class="header" id="home1">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-            <div class="w3l_login">
-                <a class="abc" href="~/Account/Login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <style>
-                    </style>
-                    <span style="top: 1.3em">Welcome: @User.Identity.Name</span>
-                    @Html.ActionLink("Logout", "Logout", "Account")
-                }
+            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    
+                </ul>
+                
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        
+                        <span class="Navbar-text ml-auto">Welcome: @User.Identity.Name</span>
+                        @Html.ActionLink("Logout", "Logout", "Account", new {@class="nav-link ml-3" })
+                    }
+               
 
-            </div>
-
-            <div class="w3l_logo">
-                <h1><a href="index.html">Electronic Store<span>Your stores. Your place.</span></a></h1>
-            </div>
-            <div class="search">
-                <input class="search_box" type="checkbox" id="search_box">
-                <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
-                <div class="search_form">
-                    <form action="#" method="post">
-                        <input type="text" name="Search" placeholder="Search...">
-                        <input type="submit" value="Send">
-                    </form>
-                </div>
-            </div>
-            <div class="cart cart box_1">
-                <form action="#" method="post" class="last">
-                    <input type="hidden" name="cmd" value="_cart" />
-                    <input type="hidden" name="display" value="1" />
-                    <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-                </form>
             </div>
         </div>
-    </div>
-    <!-- //header -->
-    <!-- navigation -->
-    <div class="navigation">
-        <div class="container">
-            <nav class="navbar navbar-default">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header nav_2">
-                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <!-- Mega Menu -->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
-                            <ul class="dropdown-menu multi-column columns-3">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Mobiles</h6>
-                                            <li><a href="products.html">Mobile Phones</a></li>
-                                            <li><a href="products.html">Mp3 Players <span>New</span></a></li>
-                                            <li><a href="products.html">Popular Models</a></li>
-                                            <li><a href="products.html">All Tablets<span>New</span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Accessories</h6>
-                                            <li><a href="products1.html">Laptop</a></li>
-                                            <li><a href="products1.html">Desktop</a></li>
-                                            <li><a href="products1.html">Wearables <span>New</span></a></li>
-                                            <li><a href="products1.html"><i>Summer Store</i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <ul class="multi-column-dropdown">
-                                            <h6>Home</h6>
-                                            <li><a href="products2.html">Tv</a></li>
-                                            <li><a href="products2.html">Camera</a></li>
-                                            <li><a href="products2.html">AC</a></li>
-                                            <li><a href="products2.html">Grinders</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="w3ls_products_pos">
-                                            <h4>30%<i>Off/-</i></h4>
-                                            <img src="images/1.jpg" alt=" " class="img-responsive" />
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </ul>
-                        </li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li class="w3pages">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="icons.html">Web Icons</a></li>
-                                <li><a href="codes.html">Short Codes</a></li>
-                            </ul>
-                        </li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
+    </nav>
 
-    @RenderBody()
-
-    <!-- footer -->
-    <div class="footer">
-        <div class="container">
-            <div class="w3_footer_grids">
-                <div class="col-md-3 w3_footer_grid">
-                    <h3>Contact</h3>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
-                    <ul class="address">
-                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-                        <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 w3_footer_grid">
-                    <h3>Information</h3>
-                    <ul class="info">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="mail.html">Contact Us</a></li>
-                        <li><a href="codes.html">Short Codes</a></li>
-                        <li><a href="faq.html">FAQ's</a></li>
-                        <li><a href="products.html">Special Products</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 w3_footer_grid">
-                    <h3>Category</h3>
-                    <ul class="info">
-                        <li><a href="products.html">Mobiles</a></li>
-                        <li><a href="products1.html">Laptops</a></li>
-                        <li><a href="products.html">Purifiers</a></li>
-                        <li><a href="products1.html">Wearables</a></li>
-                        <li><a href="products2.html">Kitchen</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 w3_footer_grid">
-                    <h3>Profile</h3>
-                    <ul class="info">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="products.html">Today's Deals</a></li>
-                    </ul>
-                    <h4>Follow Us</h4>
-                    <div class="agileits_social_button">
-                        <ul>
-                            <li><a href="#" class="facebook"> </a></li>
-                            <li><a href="#" class="twitter"> </a></li>
-                            <li><a href="#" class="google"> </a></li>
-                            <li><a href="#" class="pinterest"> </a></li>
-                        </ul>
+    <header>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                <div class="carousel-item active" style="background-image: url('/Assets/images/banner-1.png')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 class="display-4">First Slide</h3>
+                        <p class="lead">This is a description for the first slide.</p>
                     </div>
                 </div>
-                <div class="clearfix"> </div>
-            </div>
-        </div>
-        <div class="footer-copy">
-            <div class="footer-copy1">
-                <div class="footer-copy-pos">
-                    <a href="#home1" class="scroll"><img src="/Assets/images/arrow.png" alt=" " class="img-responsive" /></a>
+                <!-- Slide Two - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('/Assets/images/banner-2.jpg')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 class="display-4">Second Slide</h3>
+                        <p class="lead">This is a description for the second slide.</p>
+                    </div>
+                </div>
+                <!-- Slide Three - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('/Assets/images/banner-3.jpg')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 class="display-4">Third Slide</h3>
+                        <p class="lead">This is a description for the third slide.</p>
+                    </div>
                 </div>
             </div>
-            <div class="container">
-                <p>&copy; 2017 Electronic Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-    </div>
-    <script src="/Assets/js/minicart.js"></script>
-    <script>
-        w3ls.render();
+    </header>
 
-        w3ls.cart.on('w3sb_checkout', function (evt) {
-            var items, len, i;
+    <!-- Page Content -->
+    @RenderBody()
+    <!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+        </div>
+        <!-- /.container -->
+    </footer>
 
-            if (this.subtotal() > 0) {
-                items = this.items();
-
-                for (i = 0, len = items.length; i < len; i++) {
-                }
-            }
-        });
-    </script>
-    @RenderSection("Scripts", false)
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

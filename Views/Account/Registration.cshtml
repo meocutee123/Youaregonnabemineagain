@@ -1,0 +1,86 @@
+﻿@{ 
+    Layout = null; 
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Heroic Features - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Assets/vendor/bootstrap/css/all.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="~/Assets/css/registration.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card card-signin flex-row my-5">
+                    <div class="card-img-left d-none d-md-flex">
+                        <!-- Background image for card set in CSS! -->
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Register</h5>
+                        <form class="form-signin" action="@Url.Action("Registration", "Account")" method="post">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-label-group">
+                                <input type="text" id="inputFirstName" name="FirstName" class="form-control" placeholder="First name" required autofocus>
+                                <label for="inputFirstName">First name</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="text" id="inputLastName" name="LastName" class="form-control" placeholder="Last name" required>
+                                <label for="inputLastName">Last name</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email address" required>
+                                <label for="inputEmail">Email address</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="text" id="inputAddress" name="Address" class="form-control" placeholder="Address" required>
+                                <label for="inputAddress">Address</label>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-label-group">
+                                <input type="password" id="inputPassword" name="Password" class="form-control" placeholder="Password" required>
+                                <label for="inputPassword">Password</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="password" id="inputConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="Password" required>
+                                <label for="inputConfirmPassword">Confirm password</label>
+                            </div>
+
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+                            <a class="d-block text-center mt-2 small" href="#">Sign In</a>
+                            <hr class="my-4">
+                            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"> Sign up with Google</button>
+                            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"> Sign up with Facebook</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Assets/vendor/jquery/jquery.slim.min.js"></script>
+    <script src="~/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+<!-- Bootstrap core JavaScript -->
+
+</html>

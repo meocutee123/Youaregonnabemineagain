@@ -20,7 +20,7 @@
         <AssociationConnector Association="ESDatabaseModel.FK_OrderItems_Products" />
         <EntityTypeShape EntityType="ESDatabaseModel.Customer" Width="1.5" PointX="0.625" PointY="10" />
         <AssociationConnector Association="ESDatabaseModel.FK_Orders_Customers" />
-        <EntityTypeShape EntityType="ESDatabaseModel.Conntact" Width="1.5" PointX="7.375" PointY="0.875" />
+        <EntityTypeShape EntityType="ESDatabaseModel.Conntact" Width="1.5" PointX="0.625" PointY="1.5" />
         <EntityTypeShape EntityType="ESDatabaseModel.Stock" Width="1.5" PointX="4.875" PointY="5.125" />
         <AssociationConnector Association="ESDatabaseModel.FK_Stocks_ToTable_1" />
         <AssociationConnector Association="ESDatabaseModel.FK_Stocks_ToTable" />
