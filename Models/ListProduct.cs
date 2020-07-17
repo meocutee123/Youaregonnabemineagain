@@ -5,8 +5,21 @@ using System.Web;
 
 namespace Electronic_Store.Models
 {
+    
     public class ListProduct
     {
-        public IEnumerable<Product> lProduct { get; set; }
+        ESDatabaseEntities db = null;
+        public ListProduct()
+        {
+            db = new ESDatabaseEntities();
+        }
+        public List<Product> listNewProduct (int top)
+        {
+            return db.Products.Where(x=>x.Status == true).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+        }
+        public List<Product> listProduct()
+        {
+            return db.Products.Where(x => x.Status == true).ToList();
+        }
     }
 }

@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template -->
     <link href="~/Assets/css/heroic-features.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Assets/font-awesome-4.7.0/css/font-awesome.min.css">
 
 </head>
 
@@ -37,22 +38,31 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown09">
+                            @Html.ActionLink("Phone", "Index", "Home", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("House Ware", "Index", "Home", null, new { @class = "dropdown-item" })
+
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
-                    
+
                 </ul>
-                
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        
-                        <span class="Navbar-text ml-auto">Welcome: @User.Identity.Name</span>
-                        @Html.ActionLink("Logout", "Logout", "Account", new {@class="nav-link ml-3" })
-                    }
-               
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span class="Navbar-text ml-auto">Welcome: @User.Identity.Name</span>
+                    @Html.ActionLink("Logout", "Logout", "Account",null, new { @class = "nav-link ml-1" }) }
+                else
+                {
+                <span class="Navbar-text ml-auto" style="display: flex;">
+                    @Html.ActionLink("Login", "Login", "Account",null, new { @class = "nav-link ml-1" }) @Html.ActionLink("Sign-in", "Registration", "Account", null, new { @class = "nav-link ml-3" })
+                </span>
+                }
+
 
             </div>
         </div>

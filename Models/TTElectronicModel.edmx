@@ -107,6 +107,7 @@
           <Property Name="ProductImg" Type="varchar(max)" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Status" Type="bit" />
+          <Property Name="CreatedDate" Type="date" />
         </EntityType>
         <EntityType Name="Staffs">
           <Key>
@@ -530,6 +531,7 @@
           <NavigationProperty Name="Stocks" Relationship="ESDatabaseModel.FK_Stocks_ToTable_1" FromRole="Product" ToRole="Stock" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Store">
           <Key>
@@ -842,6 +844,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ESDatabaseModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ProductImg" ColumnName="ProductImg" />

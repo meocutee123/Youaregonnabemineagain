@@ -1,7 +1,11 @@
-﻿@using Electronic_Store.Models;
-@model dynamic
+﻿@model PagedList.IPagedList<Electronic_Store.Models.Product>
+@using PagedList.Mvc;
+
+
 @{
     ViewBag.Title = "Home Page";
+    var listNewProducts = (List<Electronic_Store.Models.Product>)ViewBag.NewProducts;
+    var Products = (List<Electronic_Store.Models.Product>)ViewBag.Products;
 }
 
 <div class="container">
@@ -13,23 +17,22 @@
         <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
     </header>
     <h1 class="my-4">
-        Products
+        New products
     </h1>
     <!-- Page Features -->
     <div class="row text-center">
-
-
-        @foreach (Product product in Model.listProduct)
+        @foreach (var item in listNewProducts)
         {
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="@Url.Content(product.ProductImg)" alt="" style=""></a>
+                    <a href="#"><img class="card-img-top" src="@Url.Content(item.ProductImg)" alt="" style=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">@product.Name </a>
+                            <a href="#">@item.Name</a>
+
                         </h4>
-                        <h5>@product.Price</h5>
-                        <p class="card-text">@product.Description</p>
+                        <h5>@item.Price</h5>
+                        <p class="card-text">@item.Description</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -43,7 +46,50 @@
 
     </div>
     <!-- /.row -->
+    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))*@
 
 </div>
+<style>
+    ul li {
+        margin-left: 10px;
+    }
+</style>
 
+<div class="container">
+
+    <!-- Jumbotron Header -->
+    
+    <h1 class="my-4">
+        Products
+    </h1>
+    <!-- Page Features -->
+    <div class="row text-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="@Url.Content(item.ProductImg)" alt="" style=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">@item.Name</a>
+
+                        </h4>
+                        <h5>@item.Price</h5>
+                        <p class="card-text">@item.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                        <a href="#" class="btn btn-md btn-outline-dark btn-primary">Buy now</a>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+
+    </div>
+    <!-- /.row -->
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+
+</div>
 <!-- /.container -->

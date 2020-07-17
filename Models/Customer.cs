@@ -11,8 +11,7 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,14 +19,19 @@ namespace Electronic_Store.Models
         {
             this.Orders = new HashSet<Order>();
         }
-    
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}", FirstName, LastName);
+            }
+        }
         public int CustomerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
         public string Password { get; set; }
-        [Compare("Password")]
         public string ConfirmPassword { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string ProfileImg { get; set; }

@@ -29,6 +29,7 @@ namespace Electronic_Store.Models
         public string ProductImg { get; set; }
         public string Description { get; set; }
         public Nullable<bool> Status { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
     
         public virtual Brand Brand { get; set; }
         public virtual Category Category { get; set; }
