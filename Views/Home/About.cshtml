@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Electronic_Store.Models.Staff>
+<header class="jumbotron my-4">
+    <h1 class="display-3">Welcome!</h1>
+    <p class="lead">We are a company specialized in doing various kinds of electronics,our price is wholesale price, and quality is perfect, we sells overseas,welcome buy from us~</p>
+</header>
+<!-- Header -->
+<header class="bg-primary text-center py-5 mb-4">
+    <div class="container">
+        <h1 class="font-weight-light text-white">Meet the Team</h1>
+    </div>
+</header>
+
+<!-- Page Content -->
+<div class="container">
+
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <!-- Team Member 1 -->
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="card border-0 shadow">
+                    @if (item.ProfileImg != null)
+                    {
+                        <img src="@Url.Content(item.ProfileImg)" class="card-img-top img-fluid" alt="...">
+                    }
+                    else
+                    {
+                        <img src="~/Assets/images/Staffs/anonymous.png" class="card-img-top img-fluid" alt="...">
+
+                    }
+
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-0">@item.FullName</h5>
+                        <div class="card-text text-black-50">@item.Role</div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->

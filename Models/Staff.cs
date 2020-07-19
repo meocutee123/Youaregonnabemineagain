@@ -20,7 +20,13 @@ namespace Electronic_Store.Models
             this.Divisions = new HashSet<Division>();
             this.Orders = new HashSet<Order>();
         }
-    
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}", FirstName, LastName);
+            }
+        }
         public int StaffID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

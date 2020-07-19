@@ -37,6 +37,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="250" />
           <Property Name="Message" Type="nvarchar(max)" />
           <Property Name="Email" Type="varchar" MaxLength="250" />
           <Property Name="DateSent" Type="date" />
@@ -653,6 +654,7 @@
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="DateSent" Type="DateTime" Precision="0" />
+          <Property Name="Subject" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -894,6 +896,7 @@
           <EntitySetMapping Name="Conntacts">
             <EntityTypeMapping TypeName="ESDatabaseModel.Conntact">
               <MappingFragment StoreEntitySet="Conntacts">
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="DateSent" ColumnName="DateSent" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Message" ColumnName="Message" />

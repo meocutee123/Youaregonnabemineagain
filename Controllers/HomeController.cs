@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,39 +20,45 @@ namespace Electronic_Store.Controllers
             List<Product> products = (from p in db.Products where (p.Status == true) select p).ToList();
             var listProduct = new ListProduct();
             ViewBag.NewProducts = listProduct.listNewProduct(4);
+            ViewBag.ListPhone = listProduct.listPhone();
+            ViewBag.ListHouseWare= listProduct.listHouseWare();
             PagedList<Product> model = new PagedList<Product>(products, page, pageSize);
             return View(model);
         }
-        //public ActionResult Index()
-        //{
-        //    dynamic dynamic = new ExpandoObject();
-        //    dynamic.listProduct = Products();
-        //    dynamic.listBrand = Brands();
-
-        //    return View(dynamic);
-        //}
-
-        //public List<Product> Products()
-        // {
-        //    List<Product> lProducts = db.Products.ToList();
-        //    return lProducts;
-        //}
-        //public List<Brand> Brands()
-        //{
-        //    List<Brand> lBrands = db.Brands.ToList();
-        //    return lBrands;
-        //}
-
+        public ActionResult ListPhone()
+        {
+            var listProduct = new ListProduct();
+            ViewBag.ListPhone = listProduct.listPhone();
+            return View();
+        }
+         public ActionResult ListHouseWare()
+        {
+            var listProduct = new ListProduct();
+            ViewBag.ListPhone = listProduct.listHouseWare();
+            return View();
+        }
+       
         public ActionResult About()
         {
-            var data = (from p in db.Staffs
-                        select p).Take(4);
+            var data = (from p in db.Staffs where p.Status == true
+                        select p).Take(8);
             return View(data.ToList());
         }
-
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
         public ActionResult Contact()
         {
-
             return View();
         }
         [HttpPost]
@@ -59,6 +66,7 @@ namespace Electronic_Store.Controllers
         {
             if (ModelState.IsValid)
             {
+                contact.DateSent = DateTime.Now;               
                 db.Conntacts.Add(contact);
                 db.SaveChanges();
             }

@@ -8,47 +8,85 @@
     var Products = (List<Electronic_Store.Models.Product>)ViewBag.Products;
 }
 
-<div class="container">
-
-    <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
-        <h1 class="display-3">A Warm Welcome!</h1>
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-        <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
-    </header>
-    <h1 class="my-4">
-        New products
-    </h1>
-    <!-- Page Features -->
-    <div class="row text-center">
-        @foreach (var item in listNewProducts)
-        {
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="@Url.Content(item.ProductImg)" alt="" style=""></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#">@item.Name</a>
-
-                        </h4>
-                        <h5>@item.Price</h5>
-                        <p class="card-text">@item.Description</p>
+    <div class="container">
+        <header>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <!-- Slide One - Set the background image for this slide in the line below -->
+                    <div class="carousel-item active" style="background-image: url('/Assets/images/banner-1.png')">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3 class="display-4">Tân Tân Electronics</h3>
+                            <p class="lead">Best product we've ever had</p>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <a href="#" class="btn btn-md btn-outline-dark btn-primary">Buy now</a>
+                    <!-- Slide Two - Set the background image for this slide in the line below -->
+                    <div class="carousel-item" style="background-image: url('/Assets/images/banner-2.jpg')">
+                        <div class="carousel-caption d-none d-md-block">
+                            
+                            <p class="lead">SamSung smart screen.</p>
+                        </div>
+                    </div>
+                    <!-- Slide Three - Set the background image for this slide in the line below -->
+                    <div class="carousel-item" style="background-image: url('/Assets/images/banner-3.jpg')">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3 class="display-4"></h3>
+                            <p class="lead">Sony 4k 288Hz.</p>
+                        </div>
                     </div>
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
+        </header>
+        <!-- Jumbotron Header -->
+        <header class="jumbotron my-4">
+            <h1 class="display-3">Welcome!</h1>
+            <p class="lead">Welcome to our website. In here we sold unique products that you can't find anywhere on earth, believe me!</p>
+            <a href="Home/About" class="btn btn-primary btn-lg">About</a>
+        </header>
+        <h1 class="my-4">
+            New products
+        </h1>
+        <!-- Page Features -->
+        <div class="row text-center">
+            @foreach (var item in listNewProducts)
+            {
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                       
+                        <a href="@Url.Action("Detail", new {id = item.ProductID })"><img class="card-img-top" src="@Url.Content(item.ProductImg)" alt="" ></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                @Html.ActionLink(item.Name, "Detail", new { id = item.ProductID })
+                            </h4>
+                            <h5>@item.Price</h5>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                            <a href="" class="btn btn-md btn-outline-dark btn-primary">Buy now</a>
+                        </div>
+                    </div>
+                </div>
 
-        }
+            }
 
+
+        </div>
+        <!-- /.row -->
+        @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))*@
 
     </div>
-    <!-- /.row -->
-    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))*@
-
-</div>
 <style>
     ul li {
         margin-left: 10px;
@@ -68,18 +106,17 @@
         {
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="@Url.Content(item.ProductImg)" alt="" style=""></a>
+                    <a href="@Url.Action("Detail", new {id = item.ProductID })"><img class="card-img-top" src="@Url.Content(item.ProductImg)" alt="" style=""></a>
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">@item.Name</a>
+                            @Html.ActionLink(item.Name, "Detail", new { id = item.ProductID })
 
                         </h4>
                         <h5>@item.Price</h5>
-                        <p class="card-text">@item.Description</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <a href="#" class="btn btn-md btn-outline-dark btn-primary">Buy now</a>
+                        <a href="" class="btn btn-md btn-outline-dark btn-primary">Buy now</a>
                     </div>
                 </div>
             </div>
