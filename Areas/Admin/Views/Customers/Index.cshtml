@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    
+
 }
 
 <h2>Customers</h2>
@@ -20,7 +20,7 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-           
+
         {
             <tr>
                 <td>@item.FirstName</td>
@@ -38,14 +38,19 @@
                 </td>
                 @if (item.Status != true)
                 {
-                    <td class="text-danger font-weight-bolder">Deleted | @Html.ActionLink("Details", "Details", new { id = item.CustomerID })</td>
+                    <td class="text-danger fa fa-minus-circle fa-2x mr-2"> @Html.ActionLink(" ", "Details", new { id = item.CustomerID }, new { @class = "fa fa-info-circle" })</td>
                 }
                 else
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.CustomerID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
+
+                        @Html.ActionLink(" ", "Edit", new { id = item.CustomerID }, new { @class = "fa fa-pencil fa-2x mr-2" }) 
+
+
+                        @Html.ActionLink(" ", "Details", new { id = item.CustomerID }, new { @class = "fa fa-info-circle fa-2x mr-2" }) 
+
+
+                        @Html.ActionLink(" ", "Delete", new { id = item.CustomerID }, new { @class = "fa fa-trash fa-2x" })
                     </td>
                 }
             </tr>

@@ -6,72 +6,65 @@
 }
 
 
-<div class="container col-md-7">
+<div class="container">
     @using (Html.BeginForm("Create", "Customers", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        <form class="form-horizontal">
-            <h2>Create customer</h2>
-            <div class="form-group">
-                <label for="firstName" class="col-sm-3 control-label">First Name</label>
-                <div class="col-sm-9">
-                    <input type="text" id="firstName" name="FirstName" placeholder="First Name" class="form-control" autofocus="">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lastName" class="col-sm-3 control-label">Last Name</label>
-                <div class="col-sm-9">
-                    <input type="text" id="lastName" name="LastName" placeholder="Last Name" class="form-control" autofocus="">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="email" class="col-sm-3 control-label">Email* </label>
-                <div class="col-sm-9">
-                    <input type="email" id="email" name="Email" placeholder="Email" class="form-control">
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
+        <h2>Create customer</h2>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-3 control-label">First Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="firstName" name="FirstName" placeholder="First Name" class="form-control" autofocus="">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="address" class="col-sm-3 control-label">Address* </label>
-                <div class="col-sm-9">
-                    <input type="text" id="address" name="Address" placeholder="Address" class="form-control">
+                <div class="form-group">
+                    <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="lastName" name="LastName" placeholder="Last Name" class="form-control" autofocus="">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-sm-3 control-label">Password*</label>
-                <div class="col-sm-9">
-                    <input type="password" id="password" name="Password" placeholder="Password" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-sm-3 control-label">Confirm Password*</label>
-                <div class="col-sm-9">
-                    <input type="password" id="password" name="ConfirmPassword" placeholder="Confirm Password" class="form-control">
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">Email* </label>
+                    <div class="col-sm-9">
+                        <input type="email" id="email" name="Email" placeholder="Email" class="form-control">
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @*<label class="control-label col-sm-3">Gender</label>
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="radio-inline">
-                                    <input type="radio" id="femaleRadio" value="Female">Female
-                                </label>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="radio-inline">
-                                    <input type="radio" id="maleRadio" value="Male">Male
-                                </label>
-                            </div>
-                        </div>
-                    </div>*@
-                <button type="submit" class="btn btn-primary btn-block col-sm-9">Create</button>
+                    </div>
+                </div>
             </div>
-            <!-- /.form-group -->
-        </form> <!-- /form -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="address" class="col-sm-3 control-label">Address* </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="address" name="Address" placeholder="Address" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">Password*</label>
+                    <div class="col-sm-9">
+                        <input type="password" id="password" name="Password" placeholder="Password" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-4 control-label">Confirm Password*</label>
+                    <div class="col-sm-9">
+                        <input type="password" id="password" name="ConfirmPassword" placeholder="Confirm Password" class="form-control">
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary ml-3">Create</button>
+            </div>
+        </div>
+
+
+
+
+        <!-- /.form-group -->
+
     }
 
 </div>

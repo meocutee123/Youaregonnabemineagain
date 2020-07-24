@@ -11,7 +11,8 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Staff
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,14 +29,25 @@ namespace Electronic_Store.Models
             }
         }
         public int StaffID { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [EmailAddress]
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Phone { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public int DivisionID { get; set; }
+        [Required]
         public string ProfileImg { get; set; }
         public int StoreID { get; set; }
         public Nullable<bool> Gender { get; set; }

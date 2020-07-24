@@ -62,7 +62,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                     ProductImg.SaveAs(path);
                     product.ProductImg = "/Assets/images/" + postedFileName;
 
-                    
+                    product.Status = true;
                     db.Products.Add(product);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -105,12 +105,12 @@ namespace Electronic_Store.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string postedFileName = Path.GetFileName(ProductImg.FileName);
+                try { string postedFileName = Path.GetFileName(ProductImg.FileName);
                 var path = Server.MapPath("/Assets/images/" + postedFileName);
                 ProductImg.SaveAs(path);
-                product.ProductImg = "/Assets/images/" + postedFileName;
+                product.ProductImg = "/Assets/images/" + postedFileName;}
+                catch { }
 
-                
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

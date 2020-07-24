@@ -20,28 +20,28 @@
         @foreach (var item in Model)
         {
 
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Price</td>
-                <td>@item.Brand.Name</td>
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td>@item.Brand.Name</td>
+            <td>
+                <img src="@Url.Content(item.ProductImg)" style="height: 50px" />
+            </td>
+
+            @if (item.Status != true)
+            {
+                <td class="text-danger fa fa-minus-circle fa-2x mr-2"> @Html.ActionLink(" ", "Details", new { id = item.ProductID }, new { @class = "fa fa-info-circle" })</td>
+            }
+            else
+            {
                 <td>
-                    <img src="@Url.Content(item.ProductImg)" style="height: 50px" />
+                    @Html.ActionLink(" ", "Edit", new { id = item.ProductID }, new { @class = "fa fa-pencil fa-2x mr-2" }) 
+                    @Html.ActionLink(" ", "Details", new { id = item.ProductID }, new { @class = "fa fa-info-circle fa-2x mr-2" }) 
+                    @Html.ActionLink(" ", "Delete", new { id = item.ProductID }, new { @class = "fa fa-trash fa-2x" })
                 </td>
+            }
 
-                @if (item.Status != true)
-                {
-                    <td class="text-danger font-weight-bolder">Deleted | @Html.ActionLink("Details", "Details", new { id = item.ProductID })</td>
-                }
-                else
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
-                    </td>
-                }
-
-            </tr>
+        </tr>
 
         }
 

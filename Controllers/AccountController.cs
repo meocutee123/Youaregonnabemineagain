@@ -45,7 +45,7 @@ namespace Electronic_Store.Controllers
                     dc.SaveChanges();
                 }
 
-                ViewBag.Message = "Account created successfully!";
+                ViewBag.Message = "Account created successfully, please log-in!";
             }
 
             return View("Login");

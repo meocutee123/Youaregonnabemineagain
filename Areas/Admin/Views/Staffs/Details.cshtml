@@ -45,10 +45,15 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.FirstName)
-                    @Html.DisplayFor(model => model.LastName)
+                    @Html.DisplayFor(model => model.FullName)
                 </dd>
+                <dt>
+                    Role 
+                </dt>
 
+                <dd>
+                    @Html.DisplayFor(model => model.Role)
+                </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.Email)
                 </dt>

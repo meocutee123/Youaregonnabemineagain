@@ -23,10 +23,10 @@
                 <td>
                     <img src="@Url.Content(item.BrandImg)" style="height: 50px" />
                 </td>
-                <td class="align-end">
-                    @Html.ActionLink("Edit", "Edit", new { id = item.BrandID }, new {@class = "btn btn-md btn-primary" }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.BrandID }, new { @class = "btn btn-md btn-success" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.BrandID }, new { @class = "btn btn-md btn-danger" })
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.BrandID }, new { @class = "fa fa-pencil fa-2x mr-2" })
+                    @Html.ActionLink(" ", "Details", new { id = item.BrandID }, new { @class = "fa fa-info-circle fa-2x mr-2" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.BrandID }, new { @class = "fa fa-trash fa-2x" })
                 </td>
             </tr>
 

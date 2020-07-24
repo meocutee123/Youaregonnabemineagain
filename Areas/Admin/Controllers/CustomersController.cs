@@ -52,8 +52,8 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // POST: Admin/Customers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,FirstName,LastName,Email" +
-            ",Address,Password, ConfirmPassword, CreatedDate, ProfileImg, Status")] Customer customer)
+        public ActionResult Create([Bind(Include = "CustomerID, FirstName, LastName, Email" +
+            ",Address, Password, ConfirmPassword, CreatedDate, ProfileImg, Status")] Customer customer)
         {
 
             if (ModelState.IsValid)
@@ -64,10 +64,34 @@ namespace Electronic_Store.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Email already exists");
                     return View(customer);
                 }
-                customer.Password = Crypto.Hash(customer.Password);
-                customer.ConfirmPassword = Crypto.Hash(customer.ConfirmPassword);
-                db.Customers.Add(customer);
-                db.SaveChanges();
+
+                try
+                {
+                    customer.Password = Crypto.Hash(customer.Password);
+                    customer.ConfirmPassword = Crypto.Hash(customer.ConfirmPassword);
+                    customer.CreatedDate = DateTime.Now;
+                    customer.Status = true;
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+                    // your code for insert here
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting  
+                            // the current instance as InnerException  
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
                 return RedirectToAction("Index");
             }
 

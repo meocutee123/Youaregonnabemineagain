@@ -21,42 +21,48 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.FirstName</td>
-                <td>@item.LastName</td>
-                @if (item.Gender != true)
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            @if (item.Gender != true)
+            {
+                <td>Nữ</td>
+            }
+            else
+            {
+                <td>Nam</td>
+            }
+            <td>@item.Address</td>
+            <td>
+                @if (item.ProfileImg != null)
                 {
-                    <td>Nữ</td>
+                    <img src="@Url.Content(item.ProfileImg)" alt="Emty" style="height: 50px" />
                 }
                 else
                 {
-                    <td>Nam</td>
+                    <img src="~/Assets/images/Staffs/anonymous.png" alt="Emty" style="height: 50px" />
                 }
-                <td>@item.Address</td>
+            </td>
+            @if (item.Status != true)
+            {
+                <td class="text-danger fa fa-minus-circle fa-2x mr-2"> 
+            @Html.ActionLink(" ", "Details", new { id = item.StaffID }, new { @class = "fa fa-info-circle" })</td>
+            }
+            else
+            {
                 <td>
-                    @if (item.ProfileImg != null)
-                    {
-                        <img src="@Url.Content(item.ProfileImg)" alt="Emty" style="height: 50px" />
-                    }
-                    else
-                    {
-                        <img src="~/Assets/images/Staffs/anonymous.png" alt="Emty" style="height: 50px" />
-                    }
+
+                    @Html.ActionLink(" ", "Edit", new { id = item.StaffID }, new { @class = "fa fa-pencil fa-2x mr-2" })
+
+
+                    @Html.ActionLink(" ", "Details", new { id = item.StaffID }, new { @class = "fa fa-info-circle fa-2x mr-2" })
+
+
+                    @Html.ActionLink(" ", "Delete", new { id = item.StaffID }, new { @class = "fa fa-trash fa-2x" })
+                    
                 </td>
-                @if (item.Status != true)
-                {
-                    <td class="text-danger font-weight-bolder">Deleted | @Html.ActionLink("Details", "Details", new { id = item.StaffID })</td>
-                }
-                else
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.StaffID })|
-                        @Html.ActionLink("Details", "Details", new { id = item.StaffID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.StaffID }) |
-                        @Html.ActionLink("Edit role", "EditRole", new { id = item.StaffID })
-                    </td>
-                }
-            </tr>
+            }
+        </tr>
 
         }
 

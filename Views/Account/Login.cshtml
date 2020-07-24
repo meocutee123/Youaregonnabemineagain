@@ -30,6 +30,7 @@
                 <div class="card card-signin my-5">
                     <div class="card-body">
                         <h5 class="card-title text-center">Sign In</h5>
+                        <h5 class="card-title text-center text-success"><b>@ViewBag.Message</b></h5>
                         <form class="form-signin" action="@Url.Action("Login", "Account")" method="post">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-label-group">

@@ -1,0 +1,46 @@
+﻿@model PagedList.IPagedList<Electronic_Store.Models.Product>
+@using PagedList.Mvc;
+
+<div class="container">
+
+    <!-- Jumbotron Header -->
+
+    <h1 class="my-4">
+        Products
+    </h1>
+    <!-- Page Features -->
+    <div class="row text-center">
+
+        <h2 style="color: red">@ViewBag.Message</h2>
+
+        @foreach (var item in Model)
+        {
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="@Url.Action("Detail", new { id = item.ProductID })"><img class="card-img-top" src="@Url.Content(item.ProductImg)" alt="" style=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            @Html.ActionLink(item.Name, "Detail", new { id = item.ProductID })
+
+                        </h4>
+                        <h5>@item.Price</h5>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                        <a href="" class="btn btn-md btn-outline-dark btn-primary">Buy now</a>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    </div>
+    <!-- /.row -->
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+    <style>
+        ul li {
+            margin-left: 10px;
+        }
+    </style>
+</div>

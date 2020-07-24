@@ -415,6 +415,7 @@
     <Content Include="Assets\vendor\bootstrap\js\bootstrap.js" />
     <Content Include="Assets\vendor\bootstrap\js\bootstrap.min.js" />
     <Content Include="Assets\vendor\bootstrap\js\jquery.slim.min.js" />
+    <Content Include="Assets\vendor\jquery\jquery.flexisel.js" />
     <Content Include="Assets\vendor\jquery\jquery.js" />
     <Content Include="Assets\vendor\jquery\jquery.min.js" />
     <Content Include="Assets\vendor\jquery\jquery.slim.js" />
@@ -758,6 +759,7 @@
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Home\ListPhone.cshtml" />
     <Content Include="Views\Home\ListHouseWare.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

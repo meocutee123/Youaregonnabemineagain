@@ -97,8 +97,8 @@ namespace Electronic_Store.Areas.Sales.Controllers
                 return HttpNotFound();
             }
             ViewBag.StoreID = new SelectList(db.Stores, "StoreID", "StoreName", order.StoreID);
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FirstName", order.CustomerID);
-            ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "FirstName", order.StaffID);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName", order.CustomerID);
+            ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "FullName", order.StaffID);
             return View(order);
         }
 

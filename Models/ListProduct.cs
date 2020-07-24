@@ -21,6 +21,10 @@ namespace Electronic_Store.Models
         {
             return db.Products.Where(x => x.Status == true).ToList();
         }
+        public List<Brand> listBrand()
+        {
+            return db.Brands.Where(x => x.Status == true).ToList();
+        }
         public List<Product> listPhone()
         {
             return db.Products.Where(x => x.Status == true && x.CategoryID == 1).ToList();
