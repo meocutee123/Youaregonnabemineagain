@@ -55,7 +55,6 @@
                         @Html.LabelFor(model => model.StoreID, "Store ID", htmlAttributes: new { @class = "control-label col-sm-3" })
                         <div class="col-sm-9">
                             @Html.DropDownList("StoreID", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.StoreID, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -63,7 +62,6 @@
                         @Html.LabelFor(model => model.DivisionID, "Division ID", htmlAttributes: new { @class = "control-label col-sm-3" })
                         <div class="col-sm-9">
                             @Html.DropDownList("DivisionID", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.DivisionID, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -92,7 +90,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Gender, "Gender", htmlAttributes: new { @class = "control-label col-sm-3" })
+                        @Html.LabelFor(model => model.ProfileImg, "Profile image", htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-sm-9">
                             <input type="file" name="ProfileImg" required class="form-control" />
                         </div>

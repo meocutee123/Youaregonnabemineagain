@@ -11,8 +11,7 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,17 +27,11 @@ namespace Electronic_Store.Models
             }
         }
         public int CustomerID { get; set; }
-        [Required]
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
-        [Required]
-        [EmailAddress]
         public string Email { get; set; }
         public string Address { get; set; }
-        [Required]
         public string Password { get; set; }
-        [Compare("Password")]
         public string ConfirmPassword { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string ProfileImg { get; set; }

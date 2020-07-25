@@ -50,8 +50,8 @@ namespace Electronic_Store.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password," +
-            " ConfirmPassword,CreatedDate,ManagerID," +
-            "ProfileImg,StoreID,Gender,Salary")] Staff staff, HttpPostedFileBase ProfileImg)
+            " ConfirmPassword,CreatedDate,DivisionID," +
+            "ProfileImg,StoreID,Gender,Salary,Role,Status")] Staff staff, HttpPostedFileBase ProfileImg)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,9 @@ namespace Electronic_Store.Areas.Admin.Controllers
                     db.Staffs.Add(staff);
                     db.SaveChanges();
                     return RedirectToAction("Index");
-                    
-                } else
+
+                }
+                else
                 {
                     ModelState.AddModelError("", "Email already exist");
                 }
@@ -96,7 +97,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditRole([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff)
+        public ActionResult EditRole([Bind(Include = "DivisionID,StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary,Status")] Staff staff)
         {
             if (ModelState.IsValid)
             {
@@ -135,17 +136,22 @@ namespace Electronic_Store.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary")] Staff staff, HttpPostedFileBase ProfileImg)
+        public ActionResult Edit([Bind(Include = "StaffID,FirstName,LastName,Email,Phone,Address,Password, ConfirmPassword,CreatedDate,ManagerID,ProfileImg,StoreID,Gender,Salary,Status")] Staff staff, HttpPostedFileBase ProfileImg)
         {
-            if (ModelState.IsValid)
+            try
             {
                 string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
                 //Lưu hình đại diện về Server
                 var path = Server.MapPath("~/Assets/images/Staffs/" + postedFileName);
                 ProfileImg.SaveAs(path);
                 staff.ProfileImg = "~/Assets/images/Staffs/" + postedFileName;
-
-                db.Entry(staff).State = EntityState.Modified;
+                staff.Password = Crypto.Hash(staff.Password);
+                staff.Password = Crypto.Hash(staff.ConfirmPassword);
+            }
+            catch { }
+            if (ModelState.IsValid)
+            {
+                db.Staffs.Add(staff);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
