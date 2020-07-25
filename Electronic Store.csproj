@@ -644,6 +644,7 @@
     <Content Include="Areas\Admin\Views\Conntacts\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Conntacts\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Conntacts\Index.cshtml" />
+    <Content Include="Areas\Sales\Views\Orders\Satisticals.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />

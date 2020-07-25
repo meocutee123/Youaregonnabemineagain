@@ -120,15 +120,20 @@ namespace Electronic_Store.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CustomerID,FirstName,LastName,Email,Address,Password, ConfirmPassword, CreatedDate, ProfileImg, Status")] Customer customer, HttpPostedFileBase ProfileImg)
         {
-            if (ModelState.IsValid)
+            try
             {
                 string postedFileName = System.IO.Path.GetFileName(ProfileImg.FileName);
                 //Lưu hình đại diện về Server
                 var path = Server.MapPath("~/Assets/images/Customers/" + postedFileName);
                 ProfileImg.SaveAs(path);
                 customer.ProfileImg = "~/Assets/images/Customers/" + postedFileName;
-
-                db.Entry(customer).State = EntityState.Modified;
+            }
+            catch { }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            if (ModelState.IsValid)
+            {
+                customer.Status = true;
+                db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -157,14 +162,39 @@ namespace Electronic_Store.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
 
-            var currentCustomer = db.Customers.FirstOrDefault(s => s.CustomerID == id);
-            if (currentCustomer == null)
+            try
             {
-                return HttpNotFound();
+                var currentCustomer = db.Customers.FirstOrDefault(s => s.CustomerID == id);
+                if (currentCustomer == null)
+                {
+                    return HttpNotFound();
+                }
+                
+                currentCustomer.Status = false;
+                db.Entry(currentCustomer).State = EntityState.Modified;
+                db.SaveChanges();
+
+                // your code for insert here
             }
-            currentCustomer.Status = false;
-            db.SaveChanges();
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)

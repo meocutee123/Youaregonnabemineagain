@@ -57,7 +57,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
                 var path = Server.MapPath("/Assets/images/" + postedFileName);
                 BrandImg.SaveAs(path);
                 brand.BrandImg = "/Assets/images/" + postedFileName;
-
+                brand.Status = true;
                 db.Brands.Add(brand);
                 db.SaveChanges();   
                 return RedirectToAction("Index");

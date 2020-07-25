@@ -32,7 +32,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
             return View(orderItem.ToList());
         }
 
-        
+
 
         // GET: Sales/OrderItems/Create
         public ActionResult Create()
@@ -49,14 +49,14 @@ namespace Electronic_Store.Areas.Sales.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OrderID,ProductID,Quanlity,Price")] OrderItem orderItem)
         {
-
+            var product = db.Products.Where(d => d.ProductID == orderItem.ProductID).FirstOrDefault();
+            var stock = db.Stocks.Where(d => d.ProductID == orderItem.ProductID).FirstOrDefault();
+            var maMax = db.Orders.ToList().Select(n => n.OrderID).Max();
+            orderItem.OrderID = maMax;
             if (ModelState.IsValid)
             {
-                var product = db.Products.Where(d => d.ProductID == orderItem.ProductID).FirstOrDefault();
-                var stock = db.Stocks.Where(d => d.ProductID == orderItem.ProductID).FirstOrDefault();
-                var maMax = db.Orders.ToList().Select(n => n.OrderID).Max();
-                orderItem.OrderID = maMax;
-                if(orderItem.Quanlity > stock.Quantity)
+
+                if (orderItem.Quanlity > stock.Quantity || orderItem.Quanlity <= 0)
                 {
                     ViewBag.Message = "This amount of product is not availble, there are only " + stock.Quantity + " left!";
                     ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderItem.OrderID);
@@ -66,6 +66,8 @@ namespace Electronic_Store.Areas.Sales.Controllers
                 orderItem.Price = product.Price;
                 db.OrderItems.Add(orderItem);
                 db.SaveChanges();
+
+
                 ViewBag.Message = "Added successfully!";
                 ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderItem.OrderID);
                 ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderItem.ProductID);

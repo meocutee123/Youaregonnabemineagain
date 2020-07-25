@@ -29,19 +29,27 @@ namespace Electronic_Store.Models
             }
         }
         public int StaffID { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
+        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Wrong mobile")]
         public string Phone { get; set; }
         public string Address { get; set; }
+        [Required]
+        [DataType("Password")]
         public string Password { get; set; }
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public int DivisionID { get; set; }
+        [Required]
         public string ProfileImg { get; set; }
         public int StoreID { get; set; }
         public Nullable<bool> Gender { get; set; }
+        [Required]
         public Nullable<decimal> Salary { get; set; }
         public string Role { get; set; }
         public Nullable<bool> Status { get; set; }

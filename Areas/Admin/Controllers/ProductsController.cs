@@ -51,6 +51,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         public ActionResult Create([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg, Description, Status")]
         Product product, HttpPostedFileBase ProductImg)
         {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
 
@@ -103,14 +104,16 @@ namespace Electronic_Store.Areas.Admin.Controllers
         public ActionResult Edit([Bind(Include = "ProductID,Name,BrandID,CategoryID,Price,ProductImg, Description, Status")]
         Product product, HttpPostedFileBase ProductImg)
         {
+
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
-                try { string postedFileName = Path.GetFileName(ProductImg.FileName);
+                string postedFileName = Path.GetFileName(ProductImg.FileName);
                 var path = Server.MapPath("/Assets/images/" + postedFileName);
                 ProductImg.SaveAs(path);
-                product.ProductImg = "/Assets/images/" + postedFileName;}
-                catch { }
+                product.ProductImg = "/Assets/images/" + postedFileName;
 
+                product.Status = true;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

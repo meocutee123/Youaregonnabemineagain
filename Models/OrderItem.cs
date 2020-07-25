@@ -11,11 +11,14 @@ namespace Electronic_Store.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class OrderItem
     {
         public int OrderID { get; set; }
         public int ProductID { get; set; }
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         public Nullable<long> Quanlity { get; set; }
         public Nullable<decimal> Price { get; set; }
     

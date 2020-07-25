@@ -52,6 +52,7 @@ namespace Electronic_Store.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.Status = true;
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");

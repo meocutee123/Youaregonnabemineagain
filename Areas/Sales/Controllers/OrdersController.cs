@@ -33,11 +33,27 @@ namespace Electronic_Store.Areas.Sales.Controllers
                 order.Total = Total;
 
             }
-            Session["Message"] = "Mèo méo meo mèo meo";
             return View(orders);
         }
+        [Authorize(Roles = "Admin, Moderator")]
+        public ActionResult Satisticals(DateTime? startdate, DateTime? enddate)
+        {
+            var nhanViens = db.Orders.SqlQuery("SELECT * FROM Orders WHERE OrderDate between '"+startdate+"'and'"+enddate+"'");
+            var orders = db.Orders.Include(o => o.Store).Include(o => o.Customer).Include(o => o.Staff).Include(d => d.OrderItems).ToList();
+            foreach (var order in orders)
+            {
+                decimal Total = 0;
+                foreach (var orderItem in order.OrderItems)
+                {
+                    decimal quantityDecimal = orderItem.Quanlity ?? 0;
+                    decimal priceDecimal = orderItem.Price ?? 0;
+                    Total += quantityDecimal * priceDecimal;
+                }
+                order.Total = Total;
 
-
+            }
+            return View(nhanViens.ToList());
+        }
         //GET: Sales/Orders/Details/5
         public ActionResult Details(int? id)
         {
@@ -72,6 +88,7 @@ namespace Electronic_Store.Areas.Sales.Controllers
             if (ModelState.IsValid)
             {
                 order.OrderDate = DateTime.Now;
+                order.Status = true;
                 db.Orders.Add(order);
                 db.SaveChanges();
                 

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Electronic_Store.Models.Order>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Search</h2>
+@using (Html.BeginForm("Satisticals", "Orders", FormMethod.Get))
+{
+    <label>Start date</label>
+    <input type="date" name="startdate" />
+    <label>End date</label>
+    <input type="date" name="enddate" />
+    <input type="submit" value="Search" class="btn btn-sm btn-secondary mb-1 mx-4" />
+}
+<h4 class="mt-3">Total bills: @Model.Sum(i => i.Total) vnd</h4>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <td scope="col">Order ID</td>
+            <td scope="col">Customer name</td>
+            <td scope="col">Order date</td>
+            <td scope="col">Total</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="6" style="color: red">Coundn't find anything!</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CustomerID</td>
+                    <td>@item.Customer.FullName</td>
+                    <td>@(item.OrderDate?.ToString("dd/MM/yyyy"))</td>
+                    <td>@item.Total</td>
+                    <td>
+                        @Html.ActionLink("Details", "Index", "OrderItems", new { id = item.CustomerID })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
