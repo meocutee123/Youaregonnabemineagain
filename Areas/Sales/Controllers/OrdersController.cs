@@ -111,7 +111,14 @@ namespace Electronic_Store.Areas.Sales.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
+                var currentStaff = db.Orders.FirstOrDefault(s => s.OrderID == order.OrderID);
+                if (currentStaff == null)
+                {
+                    return HttpNotFound();
+                }
+                currentStaff.StaffID = order.StaffID;
+                currentStaff.CustomerID = order.CustomerID;
+                order.OrderStatus = true;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

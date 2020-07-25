@@ -55,14 +55,7 @@
                     @Html.ActionLink("Division", "Index", "Divisions", new { area = "Admin" }, new { @class = "nav-link" })
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown09">
-                        @Html.ActionLink("Product", "TimKiemMH", "Admin", new { area = "Admin" }, new { @class = "dropdown-item" })
-                        @Html.ActionLink("Staffs", "TimKiemNC", "Admin", new { area = "Admin" }, new { @class = "dropdown-item" })
-
-                    </div>
-                </li>
+                
             </ul>
             @if (User.Identity.IsAuthenticated)
             {

@@ -53,8 +53,16 @@ namespace Electronic_Store.Areas.Sales.Controllers
             if (ModelState.IsValid)
             {
                 var product = db.Products.Where(d => d.ProductID == orderItem.ProductID).FirstOrDefault();
+                var stock = db.Stocks.Where(d => d.ProductID == orderItem.ProductID).FirstOrDefault();
                 var maMax = db.Orders.ToList().Select(n => n.OrderID).Max();
                 orderItem.OrderID = maMax;
+                if(orderItem.Quanlity > stock.Quantity)
+                {
+                    ViewBag.Message = "This amount of product is not availble, there are only " + stock.Quantity + " left!";
+                    ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderItem.OrderID);
+                    ViewBag.ProductID = new SelectList(db.Products, "ProductID", "Name", orderItem.ProductID);
+                    return View();
+                }
                 orderItem.Price = product.Price;
                 db.OrderItems.Add(orderItem);
                 db.SaveChanges();

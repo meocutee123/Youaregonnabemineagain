@@ -35,7 +35,7 @@ namespace Electronic_Store.Controllers
         public ActionResult ListHouseWare()
         {
             var listProduct = new ListProduct();
-            ViewBag.ListPhone = listProduct.listHouseWare();
+            ViewBag.ListHouseWare = listProduct.listHouseWare();
             return View();
         }
 

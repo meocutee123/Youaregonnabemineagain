@@ -20,49 +20,53 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@item.OrderID</td>
-            <td>
-                @item.Customer.FirstName
-                @item.Customer.LastName
-            </td>
-            <td>@(item.OrderDate?.ToString("dd/MM/yyyy"))</td>
-
-            @*@if (item.OrderStatus != true)
-        {
-            <td>Unpaid</td>
-        }
-        else
-        {
-            <td>Paid</td>
-        }*@
-
-            <td>@item.Total</td>
-            @if (item.Status != true)
-            {
-                <td class="text-danger fa fa-minus-circle fa-2x mr-2">
-                    @Html.ActionLink(" ", "Details", new { id = item.OrderID }, new { @class = "fa fa-info-circle" })
-                </td>
-            }
-            else
-            {
+            <tr>
+                <td>@item.OrderID</td>
                 <td>
-
-                    @Html.ActionLink(" ", "Edit", new { id = item.OrderID }, new { @class = "fa fa-pencil fa-2x mr-2" })
-
-
-                    @Html.ActionLink(" ", "Index","OrderItems", new { id = item.OrderID }, new { @class = "fa fa-info-circle fa-2x mr-2" })
-
-
-                    @Html.ActionLink(" ", "Delete", new { id = item.OrderID }, new { @class = "fa fa-trash fa-2x" })
-
+                    @item.Customer.FirstName
+                    @item.Customer.LastName
                 </td>
-            }
+                <td>@(item.OrderDate?.ToString("dd/MM/yyyy"))</td>
 
-        </tr>   
+                @*@if (item.OrderStatus != true)
+                    {
+                        <td>Unpaid</td>
+                    }
+                    else
+                    {
+                        <td>Paid</td>
+                    }*@
+
+                <td>@item.Total</td>
+                @if (item.Status != true)
+                {
+                    <td class="text-danger fa fa-minus-circle fa-2x mr-2">
+                        @Html.ActionLink(" ", "Index", "OrderItems", new { id = item.OrderID }, new { @class = "fa fa-info-circle" })
+                    </td>
+                }
+                else
+                {
+                    <td>
+
+                        @Html.ActionLink(" ", "Edit", new { id = item.OrderID }, new { @class = "fa fa-pencil fa-2x mr-2" })
+
+
+                        @Html.ActionLink(" ", "Index", "OrderItems", new { id = item.OrderID }, new { @class = "fa fa-info-circle fa-2x mr-2" })
+
+
+                        @Html.ActionLink(" ", "Delete", new { id = item.OrderID }, new { @class = "fa fa-trash fa-2x" })
+
+                    </td>
+                }
+
+            </tr>
+
+
 
         }
 
     </tbody>
 </table>
+
+<h2>Total bill: @Model.Sum(i => i.Total) Vnd</h2>
 
